@@ -23,26 +23,28 @@
     road = [SKSpriteNode spriteNodeWithTexture:roadTexture];
     road.size = CGSizeMake(frameX,frameY);
     road.position = CGPointMake(frameX/2,frameY/2);
+    
+    road.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:road.size];
+    road.physicsBody.affectedByGravity = NO;
+    road.physicsBody.collisionBitMask = 0;
+    road.physicsBody.categoryBitMask = 0;
+    road.physicsBody.contactTestBitMask = 0;
+    
+    
 }
 
 +(void)moveRoadFromPenguinPosition:(CGPoint)penguinPosition nodeSelf:(SKNode*)nodeSelf frame:(CGFloat)selfFrame{
-    
-    
-    CGPoint pt = [nodeSelf convertPoint:penguinPosition fromNode:road];
-    
-    NSLog(@"%@",NSStringFromCGPoint(pt));
-    //!!!:無理矢理処理
-    
-    NSLog(@"【前】道のポジション：%@",NSStringFromCGPoint(road.position));
-
-    
-    road.position = CGPointMake(selfFrame, road.position.y + pt.y - penguinPosition.y);
-    
-    NSLog(@"【後】道のポジション：%@",NSStringFromCGPoint(road.position));
-    
-    NSLog(@"ペンギンのポジション：%@",NSStringFromCGPoint(penguinPosition));
-
 }
 
++(void)setMoveRoadVectorY:(float)penguinVectorY{
+
+    //road.position = CGPointMake(160,road.position.y + accelate * zRotationY);
+    road.physicsBody.velocity = CGVectorMake(0, penguinVectorY);
+    NSLog(@"%f",road.position.y);
+}
+
++(void)removeRoad{
+    [road removeFromParent];
+}
 
 @end

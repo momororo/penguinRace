@@ -30,7 +30,11 @@ NSMutableArray *runPenguins;
 +(void)runAction;
 //プレイヤー(魚)ノードを追いかけて見えるよう、ペンギンの向きを変える
 +(void)setPenguinRotationFromPlayerPositionX:(float)positionX positionY:(float)positionY;
-+(void)movePenguin;
++(void)setMovePenguin;
++(void)setReducePenguin;
+
++(float)getVectorX;
++(float)getVectorY;
 
 
 //通常時のphysicsBody

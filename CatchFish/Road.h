@@ -21,7 +21,9 @@ SKTexture *roadTexture;
 +(void)initTexture;
 +(void)setRoadFrameX:(float)frameX frameY:(float)frameY;
 
-+(void)moveRoadFromPenguinPosition:(CGPoint)penguinPosition nodeSelf:(SKNode*)nodeSelf frame:(CGFloat)selfFrame;
++(void)setMoveRoadVectorY:(float)vectorY;
+
++(void)removeRoad;
 
 
 @end

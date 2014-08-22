@@ -36,7 +36,6 @@
 //プレイヤー(魚)ノードをタップ位置に移動させる
 +(void)movePlayerToX:(float)locationX moveToY:(float)locationY duration:(float)duration{
     [player runAction:[SKAction moveTo:CGPointMake(locationX,locationY) duration:duration]];
-    //MARK:NSLog(@"%@",NSStringFromCGPoint(player.position));
 }
 
 @end

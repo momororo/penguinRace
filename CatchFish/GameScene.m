@@ -14,6 +14,7 @@
     SKLabelNode *startLabel;
     BOOL touchBeganFlag;
     BOOL touchMoveFlag;
+    BOOL touchEndedFlag;
     
     BOOL gameStartFlag;
     
@@ -103,6 +104,7 @@
         [Player setPlayerPositionX:location.x positionY:location.y];
         [self addChild:[Player getPlayer]];
         touchBeganFlag = YES;
+        touchEndedFlag = NO;
    }
 }
 
@@ -141,6 +143,9 @@
         //タップ＆スワイプ時のフラグOFF
         touchBeganFlag = NO;
         touchMoveFlag = NO;
+        touchEndedFlag = YES;
+        
+        
     }
 
 }
@@ -148,7 +153,10 @@
 
 -(void)didSimulatePhysics{
     
-    
+    /*********************************
+     画面タッチ・スワイプのフラグがONの場合、
+     ペンギン・道を動かす
+    **********************************/
     //MARK: touchMoveFlag　なくても問題なし、場合によっては消す
     if (touchMoveFlag == YES || touchBeganFlag == YES) {
         
@@ -156,15 +164,33 @@
         [Penguin setPenguinRotationFromPlayerPositionX:([Player getPlayer].position.x) positionY:([Player getPlayer].position.y)];
         
         //ペンギンを動かす処理
-        [Penguin movePenguin];
-        
+        [Penguin setMovePenguin];
         
         //道を動かす処理
-        [Road moveRoadFromPenguinPosition:([Penguin getPenguin].position) nodeSelf:(self) frame:(CGRectGetMidX(self.frame))];
-        
-        
+        [Road setMoveRoadVectorY:([Penguin getVectorY])];
         
     }
+    
+    /*********************************
+     画面タッチ・スワイプのフラグがONの場合、
+     ペンギン・道を動かす
+     **********************************/
+    
+    if (touchEndedFlag == YES) {
+        [Penguin setReducePenguin];
+        [Road setMoveRoadVectorY:([Penguin getVectorY])];
+    }
+    
+    //道の消去
+    if ([Road getRoad].position.y == (self.frame.size.height + [Road getRoad].size.height/2)) {
+        [Road removeRoad];
+    }
+    
+    
+    
+    
+    
+    
 }
 
 

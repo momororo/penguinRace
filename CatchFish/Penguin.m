@@ -8,8 +8,12 @@
 
 #import "Penguin.h"
 
-
 CGFloat accelete;
+CGFloat zRotationX;
+CGFloat zRotationY;
+
+CGFloat penguinVectorX;
+CGFloat penguinVectorY;
 
 
 @implementation Penguin
@@ -82,19 +86,42 @@ CGFloat accelete;
     [penguin runAction:[SKAction rotateToAngle:radian duration:penguinRotationTime]];
 }
 
-+(void)movePenguin{
-    CGFloat x = sin(penguin.zRotation);
-    CGFloat y = cos(penguin.zRotation);
-    
-    //MARK:LOG
-    NSLog(@"ローテーションは = %f",penguin.zRotation);
+//ペンギンの加速設定
++(void)setMovePenguin{
+    zRotationX = sin(penguin.zRotation);
+    zRotationY = cos(penguin.zRotation);
     
     accelete += 1;
-    if (accelete > 500) {
+    if (accelete > 200) {
         accelete = 200;
     }
     
-    penguin.physicsBody.velocity = CGVectorMake(-(accelete * x), -(accelete * y));
+    penguinVectorX = (accelete * zRotationX);
+    penguinVectorY = (accelete * zRotationY);
+    //penguin.physicsBody.velocity = CGVectorMake((accelete * x), -(accelete * y));
+    penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, 0);
+
+}
+
+//ペンギンの減速設定
++(void)setReducePenguin{
+    
+    zRotationX = sin(penguin.zRotation);
+    zRotationY = cos(penguin.zRotation);
+    
+    accelete -= 1;
+    
+    if (accelete < 0) {
+        accelete = 0;
+    }
+    
+    penguinVectorX = (accelete * zRotationX);
+    penguinVectorY = (accelete * zRotationY);
+    //penguin.physicsBody.velocity = CGVectorMake((accelete * x), -(accelete * y));
+    penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, 0);
+
+
+
 }
 
 /* MARK:ペンギンの物理設定を分ける必要がある際に使う
@@ -103,5 +130,13 @@ CGFloat accelete;
     penguin.physicsBody.affectedByGravity = 0;
 }
 */
+
++(float)getVectorX{
+    return penguinVectorX;
+}
+
++(float)getVectorY{
+    return penguinVectorY;
+}
 
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A47EF8CC19A5F23B00BB73B7 /* runPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A47EF8CB19A5F23B00BB73B7 /* runPenguin.atlas */; };
+		A47EF8CF19A61B4100BB73B7 /* Road.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EF8CE19A61B4100BB73B7 /* Road.m */; };
 		A4B4667819A4B62500B72D7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667719A4B62500B72D7E /* Foundation.framework */; };
 		A4B4667A19A4B62500B72D7E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667919A4B62500B72D7E /* CoreGraphics.framework */; };
 		A4B4667C19A4B62500B72D7E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667B19A4B62500B72D7E /* UIKit.framework */; };
@@ -16,14 +18,19 @@
 		A4B4668A19A4B62500B72D7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B4668919A4B62500B72D7E /* AppDelegate.m */; };
 		A4B4668D19A4B62500B72D7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4B4668B19A4B62500B72D7E /* Main.storyboard */; };
 		A4B4669019A4B62500B72D7E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B4668F19A4B62500B72D7E /* ViewController.m */; };
-		A4B4669319A4B62500B72D7E /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B4669219A4B62500B72D7E /* MyScene.m */; };
-		A4B4669519A4B62500B72D7E /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = A4B4669419A4B62500B72D7E /* Spaceship.png */; };
 		A4B4669719A4B62500B72D7E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4B4669619A4B62500B72D7E /* Images.xcassets */; };
 		A4B4669E19A4B62500B72D7E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4669D19A4B62500B72D7E /* XCTest.framework */; };
 		A4B4669F19A4B62500B72D7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667719A4B62500B72D7E /* Foundation.framework */; };
 		A4B466A019A4B62500B72D7E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667B19A4B62500B72D7E /* UIKit.framework */; };
 		A4B466A819A4B62500B72D7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4B466A619A4B62500B72D7E /* InfoPlist.strings */; };
 		A4B466AA19A4B62500B72D7E /* CatchFishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466A919A4B62500B72D7E /* CatchFishTests.m */; };
+		A4B466B519A4B7CE00B72D7E /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466B419A4B7CE00B72D7E /* GameView.m */; };
+		A4B466B819A4B7F800B72D7E /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466B719A4B7F800B72D7E /* GameScene.m */; };
+		A4B466BB19A4B81E00B72D7E /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466BA19A4B81E00B72D7E /* TitleScene.m */; };
+		A4B466BE19A4B87400B72D7E /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466BD19A4B87400B72D7E /* SceneManager.m */; };
+		A4B466C119A4BBB800B72D7E /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466C019A4BBB800B72D7E /* Player.m */; };
+		A4B466C419A4BBCC00B72D7E /* Penguin.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466C319A4BBCC00B72D7E /* Penguin.m */; };
+		A4B466C719A4BBEB00B72D7E /* ObjectBitMask.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466C619A4BBEB00B72D7E /* ObjectBitMask.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A47EF8CB19A5F23B00BB73B7 /* runPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = runPenguin.atlas; sourceTree = "<group>"; };
+		A47EF8CD19A61B4100BB73B7 /* Road.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Road.h; sourceTree = "<group>"; };
+		A47EF8CE19A61B4100BB73B7 /* Road.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Road.m; sourceTree = "<group>"; };
 		A4B4667419A4B62500B72D7E /* CatchFish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatchFish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4B4667719A4B62500B72D7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4B4667919A4B62500B72D7E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -51,15 +61,26 @@
 		A4B4668C19A4B62500B72D7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A4B4668E19A4B62500B72D7E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		A4B4668F19A4B62500B72D7E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		A4B4669119A4B62500B72D7E /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
-		A4B4669219A4B62500B72D7E /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
-		A4B4669419A4B62500B72D7E /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		A4B4669619A4B62500B72D7E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A4B4669C19A4B62500B72D7E /* CatchFishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatchFishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4B4669D19A4B62500B72D7E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A4B466A519A4B62500B72D7E /* CatchFishTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CatchFishTests-Info.plist"; sourceTree = "<group>"; };
 		A4B466A719A4B62500B72D7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A4B466A919A4B62500B72D7E /* CatchFishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CatchFishTests.m; sourceTree = "<group>"; };
+		A4B466B319A4B7CE00B72D7E /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
+		A4B466B419A4B7CE00B72D7E /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
+		A4B466B619A4B7F800B72D7E /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		A4B466B719A4B7F800B72D7E /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		A4B466B919A4B81E00B72D7E /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = "<group>"; };
+		A4B466BA19A4B81E00B72D7E /* TitleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScene.m; sourceTree = "<group>"; };
+		A4B466BC19A4B87400B72D7E /* SceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneManager.h; sourceTree = "<group>"; };
+		A4B466BD19A4B87400B72D7E /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneManager.m; sourceTree = "<group>"; };
+		A4B466BF19A4BBB800B72D7E /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		A4B466C019A4BBB800B72D7E /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		A4B466C219A4BBCC00B72D7E /* Penguin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Penguin.h; sourceTree = "<group>"; };
+		A4B466C319A4BBCC00B72D7E /* Penguin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Penguin.m; sourceTree = "<group>"; };
+		A4B466C519A4BBEB00B72D7E /* ObjectBitMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBitMask.h; sourceTree = "<group>"; };
+		A4B466C619A4BBEB00B72D7E /* ObjectBitMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBitMask.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,11 +145,24 @@
 				A4B4668819A4B62500B72D7E /* AppDelegate.h */,
 				A4B4668919A4B62500B72D7E /* AppDelegate.m */,
 				A4B4668B19A4B62500B72D7E /* Main.storyboard */,
+				A4B466C219A4BBCC00B72D7E /* Penguin.h */,
+				A4B466C319A4BBCC00B72D7E /* Penguin.m */,
+				A4B466BF19A4BBB800B72D7E /* Player.h */,
+				A4B466C019A4BBB800B72D7E /* Player.m */,
+				A47EF8CD19A61B4100BB73B7 /* Road.h */,
+				A47EF8CE19A61B4100BB73B7 /* Road.m */,
+				A4B466C519A4BBEB00B72D7E /* ObjectBitMask.h */,
+				A4B466C619A4BBEB00B72D7E /* ObjectBitMask.m */,
+				A4B466B919A4B81E00B72D7E /* TitleScene.h */,
+				A4B466BA19A4B81E00B72D7E /* TitleScene.m */,
+				A4B466B619A4B7F800B72D7E /* GameScene.h */,
+				A4B466B719A4B7F800B72D7E /* GameScene.m */,
 				A4B4668E19A4B62500B72D7E /* ViewController.h */,
 				A4B4668F19A4B62500B72D7E /* ViewController.m */,
-				A4B4669119A4B62500B72D7E /* MyScene.h */,
-				A4B4669219A4B62500B72D7E /* MyScene.m */,
-				A4B4669419A4B62500B72D7E /* Spaceship.png */,
+				A4B466B319A4B7CE00B72D7E /* GameView.h */,
+				A4B466B419A4B7CE00B72D7E /* GameView.m */,
+				A4B466BC19A4B87400B72D7E /* SceneManager.h */,
+				A4B466BD19A4B87400B72D7E /* SceneManager.m */,
 				A4B4669619A4B62500B72D7E /* Images.xcassets */,
 				A4B4668019A4B62500B72D7E /* Supporting Files */,
 			);
@@ -138,6 +172,7 @@
 		A4B4668019A4B62500B72D7E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A47EF8CB19A5F23B00BB73B7 /* runPenguin.atlas */,
 				A4B4668119A4B62500B72D7E /* CatchFish-Info.plist */,
 				A4B4668219A4B62500B72D7E /* InfoPlist.strings */,
 				A4B4668519A4B62500B72D7E /* main.m */,
@@ -242,7 +277,7 @@
 			files = (
 				A4B4668419A4B62500B72D7E /* InfoPlist.strings in Resources */,
 				A4B4669719A4B62500B72D7E /* Images.xcassets in Resources */,
-				A4B4669519A4B62500B72D7E /* Spaceship.png in Resources */,
+				A47EF8CC19A5F23B00BB73B7 /* runPenguin.atlas in Resources */,
 				A4B4668D19A4B62500B72D7E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,10 +297,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4B4669319A4B62500B72D7E /* MyScene.m in Sources */,
+				A4B466C719A4BBEB00B72D7E /* ObjectBitMask.m in Sources */,
+				A4B466C119A4BBB800B72D7E /* Player.m in Sources */,
 				A4B4669019A4B62500B72D7E /* ViewController.m in Sources */,
 				A4B4668A19A4B62500B72D7E /* AppDelegate.m in Sources */,
+				A4B466C419A4BBCC00B72D7E /* Penguin.m in Sources */,
+				A4B466B819A4B7F800B72D7E /* GameScene.m in Sources */,
+				A47EF8CF19A61B4100BB73B7 /* Road.m in Sources */,
+				A4B466BB19A4B81E00B72D7E /* TitleScene.m in Sources */,
+				A4B466B519A4B7CE00B72D7E /* GameView.m in Sources */,
 				A4B4668619A4B62500B72D7E /* main.m in Sources */,
+				A4B466BE19A4B87400B72D7E /* SceneManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +514,7 @@
 				A4B466AF19A4B62500B72D7E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A4B466B019A4B62500B72D7E /* Build configuration list for PBXNativeTarget "CatchFishTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +523,7 @@
 				A4B466B219A4B62500B72D7E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

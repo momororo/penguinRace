@@ -1,0 +1,23 @@
+//
+//  GameView.h
+//  CatchFish
+//
+//  Created by 新井脩司 on 2014/08/20.
+//  Copyright (c) 2014年 sacrew. All rights reserved.
+//
+
+#import <SpriteKit/SpriteKit.h>
+
+@interface GameView : SKView
+
+-(void)setUpGameView;
+-(void)switchingTitleScene;
+-(void)switchingGameScene;
+
+@end
+
+@protocol SceneEscapeProtocol <NSObject>
+
+-(void)sceneEscape:(SKScene *)scene identifier:(NSString *)identifier;
+
+@end

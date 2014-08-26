@@ -12,6 +12,7 @@
 #import "Penguin.h"
 #import "Player.h"
 #import "Road.h"
+#import "Sabotage.h"
 
 @interface GameScene : SKScene <SKPhysicsContactDelegate>
 

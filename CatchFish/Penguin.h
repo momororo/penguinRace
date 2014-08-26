@@ -27,13 +27,26 @@ NSMutableArray *runPenguins;
 //ペンギンのテクスチャーを作成
 +(void)initTexture;
 //走るモーション設定を行う
-+(void)runAction;
++(void)runActionSpeed:(int)speed;
 //プレイヤー(魚)ノードを追いかけて見えるよう、ペンギンの向きを変える
 +(void)setPenguinRotationFromPlayerPositionX:(float)positionX positionY:(float)positionY;
-+(void)setMovePenguin;
-+(void)setReducePenguin;
++(void)resetPenguinRotationPositionX:(float)positionX positionY:(float)positionY;
 
+//ペンギンの加速,ベクトル設定
++(void)setAcceleratePenguin:(float)playerPositionY frameY:(float)frameY playerPositionX:(float)playerPositionX;
+//ペンギンの減速,ベクトル設定
++(void)setReducePenguin;
+//
++(void)setPenguinEatPlayer:(float)playerPositionY playerSize:(float)playerSize frameY:(float)frameY;
+
++(void)setPenguinDisapperPlayer:(float)frameY;
+
+//MARK:いまいち
+//ペンギンの加速力
++(float)getAccelerate;
+//ペンギンの方向ベクトルX
 +(float)getVectorX;
+//ペンギンの方向ベクトルY
 +(float)getVectorY;
 
 

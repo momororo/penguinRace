@@ -18,6 +18,10 @@
     
     BOOL gameStartFlag;
     
+    BOOL walkFlag;
+    BOOL runFlag;
+    BOOL fastRunFlag;
+    
 
 
 }
@@ -25,15 +29,17 @@
 
 -(id)initWithSize:(CGSize)size{
     
-    
     if (self == [super initWithSize:size]) {
+
 
 
         
         //走る道の設定
         [Road initTexture];
         [Road setRoadFrameX:self.frame.size.width frameY:self.frame.size.height];
-        [self addChild:[Road getRoad]];
+        [self addChild:[Road getNextRoad1]];
+        [self addChild:[Road getNextRoad2]];
+        [self addChild:[Road getNextRoad3]];
         
     
         //MARK:テスト用のスタートラベル、後々消去
@@ -55,14 +61,39 @@
         
         //プレイヤー(魚)の設定
         [Player initTexture];
-
+        
+        //障害物の設定
+        [Sabotage sabotageInitTexture];
+        
+        //障害物の作成
+        SKAction *makeSabotage = [SKAction sequence:
+                                  @[[SKAction performSelector:@selector(addSabotage) onTarget:self],
+                                    [SKAction waitForDuration:1.5 withRange:1.0]]];
+        [self runAction: [SKAction repeatActionForever:makeSabotage]];
         
     }
+    
     return self;
+
 }
+
+
+//障害物のランダム発生
+-(void)addSabotage{
+    //障害物の生成準備
+    [Sabotage addSabotage:self.frame];
+
+    NSMutableArray *sabotages = [Sabotage getSabotageInit];
+    [self addChild:sabotages[0]];
+    [self addChild:sabotages[1]];
+    
+}
+
+
 
 #pragma mark-
 #pragma mark ゲーム画面がタップされた際の処理
+//???:ダブルタップするとノードが残る
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     
     //タップ位置情報の取得
@@ -78,10 +109,10 @@
             //スタートラベルの削除
             [startLabel removeFromParent];
             
-            //MARAK:あとで消す
-            [Penguin runAction];
             //ゲームスタートフラグをON
             gameStartFlag = YES;
+            
+
         }
     }
     
@@ -100,12 +131,20 @@
      
      
      */
-    if (gameStartFlag == YES) {
-        [Player setPlayerPositionX:location.x positionY:location.y];
-        [self addChild:[Player getPlayer]];
-        touchBeganFlag = YES;
-        touchEndedFlag = NO;
-   }
+    
+    //ペンギンの位置よりもタップ位置が低い時の動作
+    if ([Penguin getPenguin].position.y - [Player getPlayer].size.height/2 > location.y) {
+    
+        if (gameStartFlag == YES) {
+            [Player setPlayerPositionX:location.x positionY:location.y];
+            [self addChild:[Player getPlayer]];
+            touchBeganFlag = YES;
+            touchEndedFlag = NO;
+            
+        }
+
+    }
+    
 }
 
 
@@ -121,14 +160,16 @@
         UITouch *touch = [touches anyObject];
         CGPoint location = [touch locationInNode:self];
         
-        //取得位置からプレイヤー(魚)ノードのポジションを変更
-        [Player movePlayerToX:location.x moveToY:location.y duration:0];
+        //ペンギンの位置よりもタップ位置が低い時の動作
+        if ([Penguin getPenguin].position.y - [Player getPlayer].size.height/2 > location.y) {
         
-        //動いている際のフラグON
-        touchMoveFlag = YES;
+            //取得位置からプレイヤー(魚)ノードのポジションを変更
+            [Player movePlayerToX:location.x moveToY:location.y duration:0];
         
+            //動いている際のフラグON
+            touchMoveFlag = YES;
+        }
     }
-
 }
 
 
@@ -153,6 +194,9 @@
 
 -(void)didSimulatePhysics{
     
+    
+    
+    
     /*********************************
      画面タッチ・スワイプのフラグがONの場合、
      ペンギン・道を動かす
@@ -163,33 +207,100 @@
         //プレーヤー(魚)ノードを追いかけて見えるよう、向きを変える処理
         [Penguin setPenguinRotationFromPlayerPositionX:([Player getPlayer].position.x) positionY:([Player getPlayer].position.y)];
         
-        //ペンギンを動かす処理
-        [Penguin setMovePenguin];
+        //ペンギンの加速設定
+        [Penguin setAcceleratePenguin:[Player getPlayer].position.y frameY:self.frame.size.height playerPositionX:[Player getPlayer].position.x];
+        
+        [Penguin setPenguinEatPlayer:[Player getPlayer].position.y playerSize:[Player getPlayer].size.height frameY:self.frame.size.height];
         
         //道を動かす処理
         [Road setMoveRoadVectorY:([Penguin getVectorY])];
         
+        //障害物を動かす処理
+        [Sabotage setSabotageVectorY:([Penguin getVectorY])];
+        
     }
     
     /*********************************
-     画面タッチ・スワイプのフラグがONの場合、
-     ペンギン・道を動かす
+     画面タップを終えた場合、
+     ペンギン・道を減速する
      **********************************/
     
     if (touchEndedFlag == YES) {
+        //ペンギンの減速設定
         [Penguin setReducePenguin];
+        [Penguin resetPenguinRotationPositionX:([Player getPlayer].position.x) positionY:([Player getPlayer].position.y)];
+        //道の減速
         [Road setMoveRoadVectorY:([Penguin getVectorY])];
+        [Penguin setPenguinDisapperPlayer:self.frame.size.height];
+        //障害物を動かす処理
+        [Sabotage setSabotageVectorY:([Penguin getVectorY])];
     }
     
     //道の消去
-    if ([Road getRoad].position.y == (self.frame.size.height + [Road getRoad].size.height/2)) {
+    if ([Road getNextRoad3].position.y >= (self.frame.size.height*3/2)) {
+        [Road setNextRoadframeX:self.frame.size.width frameY:self.frame.size.height];
         [Road removeRoad];
+        [self addChild:[Road getNextRoad1]];
+    }
+    
+    if ([Sabotage getSabotages1].position.y >= (self.frame.size.height)+[Sabotage getSabotages1].size.height/2) {
+        [Sabotage removeSabotage1];
+    }
+    
+    if ([Sabotage getSabotages1].position.y >= (self.frame.size.height)+[Sabotage getSabotages2].size.height/2) {
+        [Sabotage removeSabotage2];
     }
     
     
+    //MARK:ペンギンのテクスチャ動作(直せたらなおす)
+    /*if ([Penguin getAccelerate] == 1 || [Penguin getAccelerate] == 100) {
+        [Penguin runActionSpeed:1];
+        NSLog(@"SPEED:1");
+    }else if ([Penguin getAccelerate] == 101 || [Penguin getAccelerate] == 300){
+        [Penguin runActionSpeed:2];
+        NSLog(@"SPEED:2");
+    }else if ([Penguin getAccelerate] == 301){
+        [Penguin runActionSpeed:3];
+        NSLog(@"SPEED:3");
+    }
+    */
     
     
+    if ([Penguin getPenguin].position.y < self.frame.size.height *9 / 10 && [Penguin getPenguin].position.y > self.frame.size.height *2/3) {
+        
+        
+        if (walkFlag == YES) {
+            return;
+        }
+        
+        walkFlag = YES;
+        runFlag = NO;
+        fastRunFlag = NO;
+        [Penguin runActionSpeed:1];
+        
+    }else if ([Penguin getPenguin].position.y < self.frame.size.height *2/3 && [Penguin getPenguin].position.y > self.frame.size.height/2) {
+        
+        if (runFlag == YES) {
+            return;
+        }
+        
+        runFlag = YES;
+        walkFlag = NO;
+        fastRunFlag = NO;
+        [Penguin runActionSpeed:2];
     
+    }else if ([Penguin getPenguin].position.y <= self.frame.size.height / 2) {
+        
+        if (fastRunFlag == YES) {
+            return;
+        }
+        
+        fastRunFlag = YES;
+        walkFlag = NO;
+        fastRunFlag = NO;
+        [Penguin runActionSpeed:3];
+    
+    }
     
 }
 

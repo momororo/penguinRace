@@ -10,20 +10,31 @@
 #import <SpriteKit/SpriteKit.h>
 
 //道のノード
-SKSpriteNode *road;
+SKSpriteNode *nextRoad;
+
+NSMutableArray *roads;
+
+
 //道のテクスチャ
 SKTexture *roadTexture;
 
 
 @interface Road : NSObject
 
-+(SKSpriteNode *)getRoad;
++(SKSpriteNode *)getNextRoad1;
++(SKSpriteNode *)getNextRoad2;
++(SKSpriteNode *)getNextRoad3
+;
 +(void)initTexture;
+
 +(void)setRoadFrameX:(float)frameX frameY:(float)frameY;
 
 +(void)setMoveRoadVectorY:(float)vectorY;
 
 +(void)removeRoad;
+
++(void)setNextRoadframeX:(float)frameX frameY:(float)frameY;
+
 
 
 @end

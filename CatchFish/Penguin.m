@@ -8,7 +8,7 @@
 
 #import "Penguin.h"
 
-CGFloat accelete;
+CGFloat accelerate;
 CGFloat zRotationX;
 CGFloat zRotationY;
 
@@ -42,13 +42,14 @@ CGFloat penguinVectorY;
 //初期設定
 +(void)setPenguinPositionX:(float)positionX positionY:(float)positionY{
     
-    //プレイキャラの設定
+    //ペンギンの設定
     penguin = [SKSpriteNode spriteNodeWithTexture:stopPenguinTexture];
-    penguin.size = CGSizeMake(penguin.size.width/2,penguin.size.height/2);
+    penguin.size = CGSizeMake(penguin.size.width/2.5,penguin.size.height/2.5);
     penguin.name = @"kPenguin";
     penguin.position = CGPointMake(positionX, positionY);
+    penguin.zPosition = 50;
     
-    NSLog(@"初期位置：%f",penguin.position.y);
+    NSLog(@"%f",penguin.position.y);
     
     //physicsBodyの設定
     penguin.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:penguin.size];
@@ -57,24 +58,60 @@ CGFloat penguinVectorY;
 }
 
 //走るモーション設定
-+(void)runAction{
++(void)runActionSpeed:(int)speed{
     
     //if(playerStatus != walkStatus){
-        
+    
+    //SKAction *runPenguin;
+    
         //走るモーション
+    /*switch (speed) {
+        case 1:
+            
+            runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.2];
+            [penguin runAction:[SKAction repeatActionForever:runPenguin]];
+            
+            break;
+            
+        case 2:
+            
+            runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.1];
+            [penguin runAction:[SKAction repeatActionForever:runPenguin]];
+            
+            
+        case 3:
+            
+            runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.05];
+            [penguin runAction:[SKAction repeatActionForever:runPenguin]];
+            
+        default:
+            break;
+    }*/
+    
+    if (speed == 1) {
         SKAction *runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.2];
-         [penguin runAction:[SKAction repeatActionForever:runPenguin]];
-        
-        
-        //playerStatus = walkStatus;
+        [penguin runAction:[SKAction repeatActionForever:runPenguin]];
+        NSLog(@"スピード１が実装！");
+    }else if(speed == 2){
+        SKAction *runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.1];
+        [penguin runAction:[SKAction repeatActionForever:runPenguin]];
+        NSLog(@"スピード2が実装！");
+    }else if (speed == 3){
+        SKAction *runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.05];
+        [penguin runAction:[SKAction repeatActionForever:runPenguin]];
+        NSLog(@"スピード3が実装！");
+    }
+    
+    //NSLog(@"%f",(accelete*2/(1000+accelete)));
+       //playerStatus = walkStatus;
         
         //PhysicsBodyを通常時に
         //[self setNormalPhysicsBody];
-    //}
+    //}z
     
 }
 
-//プレイヤー(魚)ノードを追いかけて見えるよう、ペンギンの向きを変える
+//タップした時、プレイヤー(魚)ノードを追いかけて見えるよう、ペンギンの向きを変える
 +(void)setPenguinRotationFromPlayerPositionX:(float)positionX positionY:(float)positionY{
 
     CGFloat radian = (atan2f(-(penguin.position.x - positionX), (penguin.position.y - positionY)));
@@ -83,23 +120,56 @@ CGFloat penguinVectorY;
     
     NSTimeInterval penguinRotationTime = diff/10;
     
+    NSLog(@"%f",radian);
+    
     [penguin runAction:[SKAction rotateToAngle:radian duration:penguinRotationTime]];
 }
 
+//タッチアップした時、ペンギンを正面に向かせる処理
++(void)resetPenguinRotationPositionX:(float)positionX positionY:(float)positionY{
+    
+    CGFloat radian = (atan2f(-(penguin.position.x - positionX), (penguin.position.y - positionY)));
+    
+    CGFloat diff = fabsf(penguin.zRotation - radian);
+    
+    NSTimeInterval penguinRotationTime = diff/10;
+    
+    [penguin runAction:[SKAction rotateToAngle:radian duration:penguinRotationTime]];
+
+}
+
 //ペンギンの加速設定
-+(void)setMovePenguin{
++(void)setAcceleratePenguin:(float)playerPositionY frameY:(float)frameY playerPositionX:(float)playerPositionX{
     zRotationX = sin(penguin.zRotation);
     zRotationY = cos(penguin.zRotation);
     
-    accelete += 1;
-    if (accelete > 200) {
-        accelete = 200;
+    accelerate += 1;
+    
+    //速度制限(最大568)
+    if (accelerate > (frameY - playerPositionY)/2) {
+        //タップ位置がペンギンの初期位置(フレーム最奥)より遠ければ遠いほど加速する
+        accelerate = (frameY - playerPositionY)/2;
     }
     
-    penguinVectorX = (accelete * zRotationX);
-    penguinVectorY = (accelete * zRotationY);
+    
+    
+    float penguinPositionY = accelerate;
+    if (penguinPositionY < frameY * 9 / 10) {
+        penguinPositionY = frameY * 9 / 10;
+    }
+    
+    
+    
+    //NSLog(@"加速：%f",accelerate);
+    penguinVectorX = (accelerate * zRotationX);
+    penguinVectorY = (accelerate * zRotationY) * 3;
     //penguin.physicsBody.velocity = CGVectorMake((accelete * x), -(accelete * y));
-    penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, 0);
+    
+    //penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, 0);
+    
+    [penguin runAction:[SKAction moveToX:playerPositionX duration:0.1]];
+    
+    
 
 }
 
@@ -109,20 +179,43 @@ CGFloat penguinVectorY;
     zRotationX = sin(penguin.zRotation);
     zRotationY = cos(penguin.zRotation);
     
-    accelete -= 1;
+    accelerate -= 1;
     
-    if (accelete < 0) {
-        accelete = 0;
+    if (accelerate < 0) {
+        accelerate = 0;
     }
-    
-    penguinVectorX = (accelete * zRotationX);
-    penguinVectorY = (accelete * zRotationY);
+    //NSLog(@"減速%f",accelerate);
+
+    penguinVectorX = (accelerate * zRotationX);
+    penguinVectorY = (accelerate * zRotationY);
     //penguin.physicsBody.velocity = CGVectorMake((accelete * x), -(accelete * y));
     penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, 0);
 
 
-
 }
+
+//タップ位置に向かってペンギンが動く
++(void)setPenguinEatPlayer:(float)playerPositionY playerSize:(float)playerSize frameY:(float)frameY{
+    
+    if (playerPositionY < frameY/2) {
+        [penguin runAction:[SKAction moveToY:frameY/2 + playerSize duration:1]];
+    }
+    
+    if (playerPositionY > frameY/2 && playerPositionY < frameY*2/3) {
+        [penguin runAction:[SKAction moveToY: playerPositionY + playerSize duration:2]];
+    }
+}
+
+//タッチアップした際にペンギンが元の位置に戻る
++(void)setPenguinDisapperPlayer:(float)frameY{
+    [penguin runAction:[SKAction moveToY:frameY * 9 / 10 duration:1]];
+}
+
+
+
+
+
+
 
 /* MARK:ペンギンの物理設定を分ける必要がある際に使う
 +(void)setNormalPhysicsBody{
@@ -130,6 +223,10 @@ CGFloat penguinVectorY;
     penguin.physicsBody.affectedByGravity = 0;
 }
 */
+
++(float)getAccelerate{
+    return accelerate;
+}
 
 +(float)getVectorX{
     return penguinVectorX;

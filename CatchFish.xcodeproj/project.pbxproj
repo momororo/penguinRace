@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A47EF8CC19A5F23B00BB73B7 /* runPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A47EF8CB19A5F23B00BB73B7 /* runPenguin.atlas */; };
 		A47EF8CF19A61B4100BB73B7 /* Road.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EF8CE19A61B4100BB73B7 /* Road.m */; };
+		A47EF8DB19AB646800BB73B7 /* Sabotage.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EF8DA19AB646800BB73B7 /* Sabotage.m */; };
 		A4B4667819A4B62500B72D7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667719A4B62500B72D7E /* Foundation.framework */; };
 		A4B4667A19A4B62500B72D7E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667919A4B62500B72D7E /* CoreGraphics.framework */; };
 		A4B4667C19A4B62500B72D7E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667B19A4B62500B72D7E /* UIKit.framework */; };
@@ -47,6 +48,8 @@
 		A47EF8CB19A5F23B00BB73B7 /* runPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = runPenguin.atlas; sourceTree = "<group>"; };
 		A47EF8CD19A61B4100BB73B7 /* Road.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Road.h; sourceTree = "<group>"; };
 		A47EF8CE19A61B4100BB73B7 /* Road.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Road.m; sourceTree = "<group>"; };
+		A47EF8D919AB646700BB73B7 /* Sabotage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sabotage.h; sourceTree = "<group>"; };
+		A47EF8DA19AB646800BB73B7 /* Sabotage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sabotage.m; sourceTree = "<group>"; };
 		A4B4667419A4B62500B72D7E /* CatchFish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatchFish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4B4667719A4B62500B72D7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4B4667919A4B62500B72D7E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -153,6 +156,8 @@
 				A47EF8CE19A61B4100BB73B7 /* Road.m */,
 				A4B466C519A4BBEB00B72D7E /* ObjectBitMask.h */,
 				A4B466C619A4BBEB00B72D7E /* ObjectBitMask.m */,
+				A47EF8D919AB646700BB73B7 /* Sabotage.h */,
+				A47EF8DA19AB646800BB73B7 /* Sabotage.m */,
 				A4B466B919A4B81E00B72D7E /* TitleScene.h */,
 				A4B466BA19A4B81E00B72D7E /* TitleScene.m */,
 				A4B466B619A4B7F800B72D7E /* GameScene.h */,
@@ -304,6 +309,7 @@
 				A4B466C419A4BBCC00B72D7E /* Penguin.m in Sources */,
 				A4B466B819A4B7F800B72D7E /* GameScene.m in Sources */,
 				A47EF8CF19A61B4100BB73B7 /* Road.m in Sources */,
+				A47EF8DB19AB646800BB73B7 /* Sabotage.m in Sources */,
 				A4B466BB19A4B81E00B72D7E /* TitleScene.m in Sources */,
 				A4B466B519A4B7CE00B72D7E /* GameView.m in Sources */,
 				A4B4668619A4B62500B72D7E /* main.m in Sources */,

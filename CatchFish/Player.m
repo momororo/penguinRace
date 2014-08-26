@@ -26,6 +26,7 @@
     player = [SKSpriteNode spriteNodeWithTexture:fish];
     player.size = CGSizeMake(player.size.width, player.size.height);
     player.position = CGPointMake(positionX, positionY);
+    player.zPosition = 50;
 }
 
 //プレイヤー(魚)の削除

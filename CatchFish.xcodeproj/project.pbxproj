@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A47EF8CC19A5F23B00BB73B7 /* runPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A47EF8CB19A5F23B00BB73B7 /* runPenguin.atlas */; };
 		A47EF8CF19A61B4100BB73B7 /* Road.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EF8CE19A61B4100BB73B7 /* Road.m */; };
 		A47EF8DB19AB646800BB73B7 /* Sabotage.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EF8DA19AB646800BB73B7 /* Sabotage.m */; };
+		A47EF8E019AD71F600BB73B7 /* runPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A47EF8DF19AD71F600BB73B7 /* runPenguin.atlas */; };
 		A4B4667819A4B62500B72D7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667719A4B62500B72D7E /* Foundation.framework */; };
 		A4B4667A19A4B62500B72D7E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667919A4B62500B72D7E /* CoreGraphics.framework */; };
 		A4B4667C19A4B62500B72D7E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667B19A4B62500B72D7E /* UIKit.framework */; };
@@ -45,11 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A47EF8CB19A5F23B00BB73B7 /* runPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = runPenguin.atlas; sourceTree = "<group>"; };
 		A47EF8CD19A61B4100BB73B7 /* Road.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Road.h; sourceTree = "<group>"; };
 		A47EF8CE19A61B4100BB73B7 /* Road.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Road.m; sourceTree = "<group>"; };
 		A47EF8D919AB646700BB73B7 /* Sabotage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sabotage.h; sourceTree = "<group>"; };
 		A47EF8DA19AB646800BB73B7 /* Sabotage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sabotage.m; sourceTree = "<group>"; };
+		A47EF8DF19AD71F600BB73B7 /* runPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = runPenguin.atlas; sourceTree = "<group>"; };
 		A4B4667419A4B62500B72D7E /* CatchFish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatchFish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4B4667719A4B62500B72D7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4B4667919A4B62500B72D7E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -177,7 +177,7 @@
 		A4B4668019A4B62500B72D7E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A47EF8CB19A5F23B00BB73B7 /* runPenguin.atlas */,
+				A47EF8DF19AD71F600BB73B7 /* runPenguin.atlas */,
 				A4B4668119A4B62500B72D7E /* CatchFish-Info.plist */,
 				A4B4668219A4B62500B72D7E /* InfoPlist.strings */,
 				A4B4668519A4B62500B72D7E /* main.m */,
@@ -282,7 +282,7 @@
 			files = (
 				A4B4668419A4B62500B72D7E /* InfoPlist.strings in Resources */,
 				A4B4669719A4B62500B72D7E /* Images.xcassets in Resources */,
-				A47EF8CC19A5F23B00BB73B7 /* runPenguin.atlas in Resources */,
+				A47EF8E019AD71F600BB73B7 /* runPenguin.atlas in Resources */,
 				A4B4668D19A4B62500B72D7E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

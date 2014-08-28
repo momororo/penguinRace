@@ -47,7 +47,7 @@ CGFloat penguinVectorY;
     penguin.size = CGSizeMake(penguin.size.width/2.5,penguin.size.height/2.5);
     penguin.name = @"kPenguin";
     penguin.position = CGPointMake(positionX, positionY);
-    penguin.zPosition = 50;
+    penguin.zPosition = 1000;
     
     NSLog(@"%f",penguin.position.y);
     

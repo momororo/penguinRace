@@ -10,6 +10,7 @@
 
 @implementation Road
 
+
 +(SKSpriteNode *)getNextRoad1{
     return roads[roads.count-2];
     NSLog(@"%@",roads[-1]);
@@ -27,9 +28,13 @@
 
 +(void)setRoadFrameX:(float)frameX frameY:(float)frameY{
     
+    zPosition = 0;
+    
     SKSpriteNode *road1 = [SKSpriteNode spriteNodeWithTexture:roadTexture];
-    road1.size = CGSizeMake(frameX * 1.1,frameY * 1.1);
+    road1.size = CGSizeMake(frameX,frameY);
     road1.position = CGPointMake(frameX/2,frameY/2);
+    road1.zPosition = ++zPosition;
+
     
     road1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:road1.size];
     road1.physicsBody.affectedByGravity = NO;
@@ -40,8 +45,10 @@
     [roads addObject:road1];
     
     SKSpriteNode *road2 = [SKSpriteNode spriteNodeWithTexture:roadTexture];
-    road2.size = CGSizeMake(frameX * 1.1,frameY * 1.1);
+    road2.size = CGSizeMake(frameX,frameY);
     road2.position = CGPointMake(frameX/2,-frameY/2);
+    road2.zPosition = ++zPosition;
+
     
     road2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:road1.size];
     road2.physicsBody.affectedByGravity = NO;
@@ -78,6 +85,8 @@
     SKSpriteNode *nextRoad = roads[0];
     
     nextRoad.position =CGPointMake(frameX/2,-frameY/2);
+    nextRoad.zPosition = ++zPosition;
+
     
     [roads exchangeObjectAtIndex:0 withObjectAtIndex:1];
 }

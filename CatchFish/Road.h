@@ -14,6 +14,9 @@ SKSpriteNode *nextRoad;
 
 NSMutableArray *roads;
 
+//床ノード用のポジション番号
+int zPosition;
+
 
 //道のテクスチャ
 SKTexture *roadTexture;

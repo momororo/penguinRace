@@ -10,6 +10,7 @@
 
 @implementation Road
 
+
 +(SKSpriteNode *)getNextRoad1{
     return roads[roads.count-2];
     NSLog(@"%@",roads[-1]);
@@ -26,6 +27,8 @@
 }
 
 +(void)setRoadFrameX:(float)frameX frameY:(float)frameY{
+    
+    zPosition = 0;
     
     SKSpriteNode *road1 = [SKSpriteNode spriteNodeWithTexture:roadTexture];
     road1.size = CGSizeMake(frameX,frameY*5/4);

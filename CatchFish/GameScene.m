@@ -135,7 +135,7 @@
     //ペンギンの位置よりもタップ位置が低い時の動作
     if ([Penguin getPenguin].position.y - [Player getPlayer].size.height/2 > location.y) {
     
-        if (gameStartFlag == YES) {
+        if (gameStartFlag == YES && touchBeganFlag == NO) {
             [Player setPlayerPositionX:location.x positionY:location.y];
             [self addChild:[Player getPlayer]];
             touchBeganFlag = YES;

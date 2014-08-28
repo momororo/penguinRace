@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "gameSceneBkg.png"
+      "filename" : "goalRoad.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "gameSceneBkg@2x.png"
+      "filename" : "goalRoad@2x.png"
     }
   ],
   "info" : {

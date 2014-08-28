@@ -21,15 +21,15 @@
 }
 
 +(void)initTexture{
-    roadTexture = [SKTexture textureWithImageNamed:@"roadNode"];
+    roadTexture = [SKTexture textureWithImageNamed:@"road"];
     roads = [NSMutableArray new];
 }
 
 +(void)setRoadFrameX:(float)frameX frameY:(float)frameY{
     
     SKSpriteNode *road1 = [SKSpriteNode spriteNodeWithTexture:roadTexture];
-    road1.size = CGSizeMake(frameX * 1.1,frameY * 1.1);
-    road1.position = CGPointMake(frameX/2,frameY/2);
+    road1.size = CGSizeMake(frameX,frameY*5/4);
+    road1.position = CGPointMake(frameX/2,frameY/2-frameY/8);
     
     road1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:road1.size];
     road1.physicsBody.affectedByGravity = NO;
@@ -40,9 +40,9 @@
     [roads addObject:road1];
     
     SKSpriteNode *road2 = [SKSpriteNode spriteNodeWithTexture:roadTexture];
-    road2.size = CGSizeMake(frameX * 1.1,frameY * 1.1);
-    road2.position = CGPointMake(frameX/2,-frameY/2);
-    
+    road2.size = CGSizeMake(frameX, frameY *5/4);
+    road2.position = CGPointMake(frameX/2,-frameY/2-frameY/8);
+
     road2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:road1.size];
     road2.physicsBody.affectedByGravity = NO;
     road2.physicsBody.collisionBitMask = 0;
@@ -77,9 +77,10 @@
 
     SKSpriteNode *nextRoad = roads[0];
     
-    nextRoad.position =CGPointMake(frameX/2,-frameY/2);
+    nextRoad.position =CGPointMake(frameX/2,-frameY/2-frameY/8);
     
     [roads exchangeObjectAtIndex:0 withObjectAtIndex:1];
+    
 }
 
 

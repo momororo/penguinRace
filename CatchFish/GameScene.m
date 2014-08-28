@@ -236,7 +236,7 @@
     }
     
     //道の消去
-    if ([Road getNextRoad1].position.y - [Road getNextRoad1].size.height/2 >= (self.frame.size.height)) {
+    if ([Road getNextRoad1].position.y - [Road getNextRoad1].size.height/2+[Road getNextRoad1].size.height/8 >= (self.frame.size.height)) {
         [Road setNextRoadframeX:self.frame.size.width frameY:self.frame.size.height];
     }
     

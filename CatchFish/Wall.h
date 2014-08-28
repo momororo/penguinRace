@@ -16,6 +16,7 @@ SKSpriteNode *wallLeft;
 SKSpriteNode *wallRight;
 
 
+
 @interface Wall : NSObject
 
 +(SKSpriteNode *)getWallLeft;

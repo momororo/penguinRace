@@ -22,6 +22,10 @@
     BOOL runFlag;
     BOOL fastRunFlag;
     
+    //ゴール用のカウント
+    int goalCount;
+
+    
 
 
 }
@@ -68,12 +72,18 @@
         
         //障害物の設定
         [Sabotage sabotageInitTexture];
-        
+
+/*
         //障害物の作成
         SKAction *makeSabotage = [SKAction sequence:
                                   @[[SKAction performSelector:@selector(addSabotage) onTarget:self],
                                     [SKAction waitForDuration:1.5 withRange:1.0]]];
         [self runAction: [SKAction repeatActionForever:makeSabotage]];
+ 
+*/
+        
+        //ゴールのカウントの設定
+        goalCount = 20;
         
     }
     
@@ -82,16 +92,6 @@
 }
 
 
-//障害物のランダム発生
--(void)addSabotage{
-    //障害物の生成準備
-    [Sabotage addSabotage:self.frame];
-
-    NSMutableArray *sabotages = [Sabotage getSabotageInit];
-    [self addChild:sabotages[0]];
-    [self addChild:sabotages[1]];
-    
-}
 
 
 
@@ -242,7 +242,20 @@
     
     //道の消去
     if ([Road getNextRoad1].position.y - [Road getNextRoad1].size.height/2 >= (self.frame.size.height)) {
+        
+        //ゴールカウントの減算
+        goalCount--;
+        
+        //ゴールの際はゴール用の床を出すように変更
+        if(goalCount == 0){
+            
+            //ゴールの床を生成
+            [Road setGoalRoadframeX:self.frame.size.width frameY:self.frame.size.height];
+            [self addChild:[Road getGoalRoad]];
+            
+        }else{
         [Road setNextRoadframeX:self.frame.size.width frameY:self.frame.size.height];
+        }
     }
     
     if ([Sabotage getSabotages1].position.y >= (self.frame.size.height)+[Sabotage getSabotages1].size.height/2) {
@@ -305,6 +318,18 @@
     }
     
 }
+
+//障害物のランダム発生
+-(void)addSabotage{
+    //障害物の生成準備
+    [Sabotage addSabotage:self.frame];
+    
+    NSMutableArray *sabotages = [Sabotage getSabotageInit];
+    [self addChild:sabotages[0]];
+    [self addChild:sabotages[1]];
+    
+}
+
 
 
 

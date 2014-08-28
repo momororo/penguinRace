@@ -21,6 +21,11 @@
     NSLog(@"%@",roads[-0]);
 }
 
++(SKSpriteNode *)getGoalRoad{
+    return goalRoad;
+}
+
+
 +(void)initTexture{
     roadTexture = [SKTexture textureWithImageNamed:@"road"];
     roads = [NSMutableArray new];
@@ -55,6 +60,17 @@
     
     [roads addObject:road2];
     
+    goalRoad = [SKSpriteNode spriteNodeWithImageNamed:@"goalRoad"];
+    goalRoad.size = CGSizeMake(frameX, frameY + 10);
+
+    //後でフィジックボディをゴールラインのみになるように調整
+    goalRoad.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:goalRoad.size];
+    goalRoad.physicsBody.affectedByGravity = NO;
+    goalRoad.physicsBody.collisionBitMask = 0;
+    goalRoad.physicsBody.categoryBitMask = 0;
+    goalRoad.physicsBody.contactTestBitMask = 0;
+
+    
  
 }
 
@@ -64,6 +80,7 @@
     SKSpriteNode *road1 = roads[roads.count-1];
     road2.physicsBody.velocity = CGVectorMake(0, penguinVectorY);
     road1.physicsBody.velocity = CGVectorMake(0, penguinVectorY);
+    goalRoad.physicsBody.velocity = CGVectorMake(0, penguinVectorY);
 
     //NSLog(@"%f",road3.physicsBody.velocity.dy);
     //NSLog(@"%f",road2.physicsBody.velocity.dy);
@@ -87,6 +104,15 @@
     
     
     [roads exchangeObjectAtIndex:0 withObjectAtIndex:1];
+    
+}
+
++(void)setGoalRoadframeX:(float)frameX frameY:(float)frameY{
+    
+    SKSpriteNode *previousRoad = roads[1];
+    
+    goalRoad.position =CGPointMake(frameX/2,(previousRoad.position.y - (previousRoad.size.height/2)-(nextRoad.size.height/2)) + 5);
+    
     
 }
 

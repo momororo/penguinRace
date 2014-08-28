@@ -13,7 +13,7 @@
 SKSpriteNode *nextRoad;
 
 NSMutableArray *roads;
-
+SKSpriteNode *goalRoad;
 
 
 //道のテクスチャ
@@ -24,8 +24,8 @@ SKTexture *roadTexture;
 
 +(SKSpriteNode *)getNextRoad1;
 +(SKSpriteNode *)getNextRoad2;
++(SKSpriteNode *)getGoalRoad;
 //+(SKSpriteNode *)getNextRoad3
-;
 +(void)initTexture;
 
 +(void)setRoadFrameX:(float)frameX frameY:(float)frameY;
@@ -35,6 +35,8 @@ SKTexture *roadTexture;
 //+(void)removeRoad;
 
 +(void)setNextRoadframeX:(float)frameX frameY:(float)frameY;
+
++(void)setGoalRoadframeX:(float)frameX frameY:(float)frameY;
 
 
 

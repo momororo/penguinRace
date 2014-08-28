@@ -35,39 +35,39 @@
     
     
     SKSpriteNode *road1 = [SKSpriteNode spriteNodeWithTexture:roadTexture];
-    road1.size = CGSizeMake(frameX,frameY + 10);
+    road1.size = CGSizeMake(frameX,frameY);
     road1.position = CGPointMake(frameX/2,frameY/2);
 
     
     road1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:road1.size];
     road1.physicsBody.affectedByGravity = NO;
     road1.physicsBody.collisionBitMask = 0;
-    road1.physicsBody.categoryBitMask = 0;
+    road1.physicsBody.categoryBitMask = roadCategory;
     road1.physicsBody.contactTestBitMask = 0;
     
     [roads addObject:road1];
     
     SKSpriteNode *road2 = [SKSpriteNode spriteNodeWithTexture:roadTexture];
-    road2.size = CGSizeMake(frameX,frameY + 10);
+    road2.size = CGSizeMake(frameX,frameY);
     road2.position = CGPointMake(frameX/2,(road1.position.y - (road1.size.height/2) - (road2.size.height/2)) + 5);
 
     
     road2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:road1.size];
     road2.physicsBody.affectedByGravity = NO;
     road2.physicsBody.collisionBitMask = 0;
-    road2.physicsBody.categoryBitMask = 0;
+    road2.physicsBody.categoryBitMask = roadCategory;
     road2.physicsBody.contactTestBitMask = 0;
     
     [roads addObject:road2];
     
     goalRoad = [SKSpriteNode spriteNodeWithImageNamed:@"goalRoad"];
-    goalRoad.size = CGSizeMake(frameX, frameY + 10);
+    goalRoad.size = CGSizeMake(frameX, frameY);
 
     //後でフィジックボディをゴールラインのみになるように調整
     goalRoad.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:goalRoad.size];
     goalRoad.physicsBody.affectedByGravity = NO;
     goalRoad.physicsBody.collisionBitMask = 0;
-    goalRoad.physicsBody.categoryBitMask = 0;
+    goalRoad.physicsBody.categoryBitMask = goalRoadCategory;
     goalRoad.physicsBody.contactTestBitMask = 0;
 
     

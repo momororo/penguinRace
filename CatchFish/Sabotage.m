@@ -50,7 +50,7 @@
     stone.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(stone.size.width,stone.size.height)];
     stone.zPosition = 40;
     stone.physicsBody.affectedByGravity = NO;
-    stone.physicsBody.categoryBitMask = 0;
+    stone.physicsBody.categoryBitMask = sabotageCategory;
     stone.physicsBody.collisionBitMask = 0;
     stone.physicsBody.contactTestBitMask = 0;
     
@@ -63,7 +63,7 @@
     iceWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(iceWall.size.width + 10, iceWall.size.height/2)];
     iceWall.zPosition = 40;
     iceWall.physicsBody.affectedByGravity = NO;
-    iceWall.physicsBody.categoryBitMask = 0;
+    iceWall.physicsBody.categoryBitMask = sabotageCategory;
     iceWall.physicsBody.collisionBitMask = 0;
     iceWall.physicsBody.contactTestBitMask = 0;
     [sabotages addObject:iceWall];

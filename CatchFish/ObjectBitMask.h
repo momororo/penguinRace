@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+static const uint32_t roadCategory = 0x1 << 0;
+static const uint32_t penguinCategory = 0x1 << 1;
+static const uint32_t playerCategory = 0x1 << 2;
+static const uint32_t sabotageCategory   = 0x1 << 3;
+static const uint32_t goalRoadCategory   = 0x1 << 4;
+static const uint32_t wallCategory   = 0x1 << 5;
+
+
 @interface ObjectBitMask : NSObject
 
 @end

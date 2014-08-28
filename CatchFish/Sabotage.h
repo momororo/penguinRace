@@ -7,6 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "ObjectBitMask.h"
 
 //障害物の配列
 NSMutableArray *sabotages;

@@ -54,6 +54,9 @@ CGFloat penguinVectorY;
     //physicsBodyの設定
     penguin.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:penguin.size];
     penguin.physicsBody.affectedByGravity = 0;
+    penguin.physicsBody.categoryBitMask = penguinCategory;
+    penguin.physicsBody.collisionBitMask = wallCategory | sabotageCategory;
+    penguin.physicsBody.contactTestBitMask = goalRoadCategory;
     
 }
 

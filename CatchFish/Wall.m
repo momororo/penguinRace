@@ -28,13 +28,13 @@
     wallLeft.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:wallLeft.size];
     wallLeft.physicsBody.affectedByGravity = NO;
     wallLeft.physicsBody.collisionBitMask = 0;
-    wallLeft.physicsBody.categoryBitMask = 0;
+    wallLeft.physicsBody.categoryBitMask = wallCategory;
     wallLeft.physicsBody.contactTestBitMask = 0;
     
     wallRight.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:wallLeft.size];
     wallRight.physicsBody.affectedByGravity = NO;
     wallRight.physicsBody.collisionBitMask = 0;
-    wallRight.physicsBody.categoryBitMask = 0;
+    wallRight.physicsBody.categoryBitMask = wallCategory;
     wallRight.physicsBody.contactTestBitMask = 0;
 
     

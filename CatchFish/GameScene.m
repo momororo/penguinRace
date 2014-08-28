@@ -39,7 +39,6 @@
         [Road setRoadFrameX:self.frame.size.width frameY:self.frame.size.height];
         [self addChild:[Road getNextRoad1]];
         [self addChild:[Road getNextRoad2]];
-        [self addChild:[Road getNextRoad3]];
         
     
         //MARK:テスト用のスタートラベル、後々消去
@@ -237,10 +236,8 @@
     }
     
     //道の消去
-    if ([Road getNextRoad3].position.y >= (self.frame.size.height*3/2)) {
+    if ([Road getNextRoad1].position.y - [Road getNextRoad1].size.height/2 >= (self.frame.size.height)) {
         [Road setNextRoadframeX:self.frame.size.width frameY:self.frame.size.height];
-        [Road removeRoad];
-        [self addChild:[Road getNextRoad1]];
     }
     
     if ([Sabotage getSabotages1].position.y >= (self.frame.size.height)+[Sabotage getSabotages1].size.height/2) {

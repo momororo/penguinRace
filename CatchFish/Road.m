@@ -28,11 +28,11 @@
 
 +(void)setRoadFrameX:(float)frameX frameY:(float)frameY{
     
-    zPosition = 0;
     
     SKSpriteNode *road1 = [SKSpriteNode spriteNodeWithTexture:roadTexture];
-    road1.size = CGSizeMake(frameX,frameY*5/4);
-    road1.position = CGPointMake(frameX/2,frameY/2-frameY/8);
+    road1.size = CGSizeMake(frameX,frameY + 10);
+    road1.position = CGPointMake(frameX/2,frameY/2);
+
     
     road1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:road1.size];
     road1.physicsBody.affectedByGravity = NO;
@@ -43,9 +43,10 @@
     [roads addObject:road1];
     
     SKSpriteNode *road2 = [SKSpriteNode spriteNodeWithTexture:roadTexture];
-    road2.size = CGSizeMake(frameX, frameY *5/4);
-    road2.position = CGPointMake(frameX/2,-frameY/2-frameY/8);
+    road2.size = CGSizeMake(frameX,frameY + 10);
+    road2.position = CGPointMake(frameX/2,(road1.position.y - (road1.size.height/2) - (road2.size.height/2)) + 5);
 
+    
     road2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:road1.size];
     road2.physicsBody.affectedByGravity = NO;
     road2.physicsBody.collisionBitMask = 0;
@@ -79,8 +80,11 @@
 +(void)setNextRoadframeX:(float)frameX frameY:(float)frameY{
 
     SKSpriteNode *nextRoad = roads[0];
+    SKSpriteNode *previousRoad = roads[1];
     
-    nextRoad.position =CGPointMake(frameX/2,-frameY/2-frameY/8);
+    nextRoad.position =CGPointMake(frameX/2,(previousRoad.position.y - (previousRoad.size.height/2)-(nextRoad.size.height/2)) + 5);
+
+    
     
     [roads exchangeObjectAtIndex:0 withObjectAtIndex:1];
     

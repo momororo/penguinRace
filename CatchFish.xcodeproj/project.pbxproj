@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		049755CC19AD874C007F2A38 /* runPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 049755CB19AD874C007F2A38 /* runPenguin.atlas */; };
+		04F5850419AF3F1C00FD5A19 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5850319AF3F1C00FD5A19 /* Wall.m */; };
 		A47EF8CF19A61B4100BB73B7 /* Road.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EF8CE19A61B4100BB73B7 /* Road.m */; };
 		A47EF8DB19AB646800BB73B7 /* Sabotage.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EF8DA19AB646800BB73B7 /* Sabotage.m */; };
 		A4B4667819A4B62500B72D7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667719A4B62500B72D7E /* Foundation.framework */; };
@@ -46,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		049755CB19AD874C007F2A38 /* runPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = runPenguin.atlas; sourceTree = "<group>"; };
+		04F5850219AF3F1C00FD5A19 /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
+		04F5850319AF3F1C00FD5A19 /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
 		A47EF8CD19A61B4100BB73B7 /* Road.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Road.h; sourceTree = "<group>"; };
 		A47EF8CE19A61B4100BB73B7 /* Road.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Road.m; sourceTree = "<group>"; };
 		A47EF8D919AB646700BB73B7 /* Sabotage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sabotage.h; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				A4B4668B19A4B62500B72D7E /* Main.storyboard */,
 				A4B466C219A4BBCC00B72D7E /* Penguin.h */,
 				A4B466C319A4BBCC00B72D7E /* Penguin.m */,
+				04F5850219AF3F1C00FD5A19 /* Wall.h */,
+				04F5850319AF3F1C00FD5A19 /* Wall.m */,
 				A4B466BF19A4BBB800B72D7E /* Player.h */,
 				A4B466C019A4BBB800B72D7E /* Player.m */,
 				A47EF8CD19A61B4100BB73B7 /* Road.h */,
@@ -302,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04F5850419AF3F1C00FD5A19 /* Wall.m in Sources */,
 				A4B466C719A4BBEB00B72D7E /* ObjectBitMask.m in Sources */,
 				A4B466C119A4BBB800B72D7E /* Player.m in Sources */,
 				A4B4669019A4B62500B72D7E /* ViewController.m in Sources */,

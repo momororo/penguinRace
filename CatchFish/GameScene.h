@@ -13,6 +13,7 @@
 #import "Player.h"
 #import "Road.h"
 #import "Sabotage.h"
+#import "Wall.h"
 
 @interface GameScene : SKScene <SKPhysicsContactDelegate>
 

@@ -51,7 +51,7 @@ CGFloat penguinVectorY;
     
     
     //physicsBodyの設定
-    penguin.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:penguin.size];
+    penguin.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(penguin.size.width - 20, 1) center:CGPointMake(0, -(penguin.size.height/2))];
     penguin.physicsBody.affectedByGravity = 0;
     penguin.physicsBody.categoryBitMask = penguinCategory;
     penguin.physicsBody.collisionBitMask = wallCategory;

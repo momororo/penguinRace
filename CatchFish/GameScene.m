@@ -35,6 +35,7 @@
     
     
     BOOL gameStartFlag;
+    BOOL gameGoalFrag;
     
     
     
@@ -172,6 +173,10 @@
         
         self.physicsWorld.contactDelegate = self;
         
+        //ゲームスタート、ゴールフラグをNOに
+        gameStartFlag = NO;
+        gameGoalFrag = NO;
+        
         
         
     }
@@ -281,6 +286,11 @@
     if ([Penguin getPenguin].position.y - [Player getPlayer].size.height/2 > location.y) {
         
         
+        //ゴール時は処理をさせない
+        if(gameGoalFrag == YES){
+            return;
+        }
+
         
         if (gameStartFlag == YES && touchBeganFlag == NO) {
             
@@ -360,6 +370,11 @@
         
         if ([Penguin getPenguin].position.y - [Player getPlayer].size.height/2 > location.y) {
             
+            
+            //ゴール時は処理をさせない
+            if(gameGoalFrag == YES){
+                return;
+            }
             
             
             //画面端にムーブした場合、ロケーションの位置を修正する
@@ -460,6 +475,12 @@
         
     }
     
+    //ゴール時は処理せず終了
+    if(gameGoalFrag == YES){
+        return;
+    }
+
+    
     
     
     //ペンギンと障害物の衝突検知
@@ -483,7 +504,25 @@
     }
     //ゴールの処理
     if([ObjectBitMask penguinAndGoalRoad:contact]){
-        NSLog(@"ゴールしました");
+        
+    
+        gameGoalFrag = YES;
+        
+        
+        //タッチエンドの処理を走らせちゃう
+        [Player removePlayer];
+        
+        //タップ＆スワイプ時のフラグOFF
+        
+        touchBeganFlag = NO;
+        
+        touchMoveFlag = NO;
+        
+        touchEndedFlag = YES;
+
+
+    
+        
     }
     
 }
@@ -494,7 +533,18 @@
 
 -(void)didSimulatePhysics{
     
-    
+    //ゴール時は処理せず終了
+    if(gameGoalFrag == YES && [Penguin getAccelerate] != 0){
+        
+        [Penguin setReducePenguin];
+        
+        if([Penguin getAccelerate] == 0){
+            
+            //ゴールの処理へ
+            [self goalMethod];
+        }
+
+    }
     
     
     
@@ -805,6 +855,12 @@
     [self addChild:[Sabotage getLastSabotage]];
     
     
+    
+}
+
+#pragma mark -
+#pragma mark ゴール処理
+-(void)goalMethod{
     
 }
 

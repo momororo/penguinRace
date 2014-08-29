@@ -27,6 +27,7 @@ NSMutableArray *runPenguins;
 +(void)setPenguinPositionX:(float)positionX positionY:(float)positionY;
 //ペンギンのテクスチャーを作成
 +(void)initTexture;
+
 //走るモーション設定を行う
 +(void)runActionSpeed:(int)speed;
 //プレイヤー(魚)ノードを追いかけて見えるよう、ペンギンの向きを変える

@@ -21,6 +21,9 @@ static const uint32_t wallCategory   = 0x1 << 5;
 
 //ペンギンとと障害物の衝突判定をする
 +(BOOL)penguinAndSabotage:(SKPhysicsContact *)contact;
+//ペンギンととゴールの衝突判定をする
++(BOOL)penguinAndGoalRoad:(SKPhysicsContact *)contact;
+
 //障害物を帰す
 +(SKNode *)getSabotageFromContact:(SKPhysicsContact *)contact;
 

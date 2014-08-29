@@ -23,6 +23,18 @@
     
 }
 
++(BOOL)penguinAndGoalRoad:(SKPhysicsContact *)contact{
+
+    if((penguinCategory == contact.bodyA.categoryBitMask || penguinCategory == contact.bodyB.categoryBitMask) && (goalRoadCategory == contact.bodyA.categoryBitMask || goalRoadCategory == contact.bodyB.categoryBitMask)){
+        return YES;
+    }
+    
+    return NO;
+
+    
+}
+
+
 +(SKNode *)getSabotageFromContact:(SKPhysicsContact *)contact{
     
         if(sabotageCategory == contact.bodyA.categoryBitMask){

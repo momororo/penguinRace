@@ -49,7 +49,6 @@ CGFloat penguinVectorY;
     penguin.position = CGPointMake(positionX, positionY);
     penguin.zPosition = 1000;
     
-    NSLog(@"%f",penguin.position.y);
     
     //physicsBodyの設定
     penguin.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:penguin.size];
@@ -94,7 +93,6 @@ CGFloat penguinVectorY;
     if (speed == 1) {
         SKAction *runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.2];
         [penguin runAction:[SKAction repeatActionForever:runPenguin]];
-        NSLog(@"スピード１が実装！");
     }else if(speed == 2){
         SKAction *runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.1];
         [penguin runAction:[SKAction repeatActionForever:runPenguin]];
@@ -123,7 +121,6 @@ CGFloat penguinVectorY;
     
     NSTimeInterval penguinRotationTime = diff/10;
     
-    NSLog(@"%f",radian);
     
     [penguin runAction:[SKAction rotateToAngle:radian duration:penguinRotationTime]];
 }

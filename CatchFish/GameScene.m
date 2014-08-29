@@ -352,10 +352,6 @@
         
         
         
-        NSLog(@"タッチ位置%f",location.x);
-        
-        
-        
         
         
         
@@ -484,6 +480,10 @@
         
         
         
+    }
+    //ゴールの処理
+    if([ObjectBitMask penguinAndGoalRoad:contact]){
+        NSLog(@"ゴールしました");
     }
     
 }

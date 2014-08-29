@@ -64,7 +64,7 @@
     goalRoad.size = CGSizeMake(frameX, frameY);
 
     //後でフィジックボディをゴールラインのみになるように調整
-    goalRoad.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:goalRoad.size];
+    goalRoad.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:CGRectMake(-goalRoad.size.width/2, -goalRoad.size.height/2, goalRoad.size.width, goalRoad.size.height*0.13)];
     goalRoad.physicsBody.affectedByGravity = NO;
     goalRoad.physicsBody.collisionBitMask = 0;
     goalRoad.physicsBody.categoryBitMask = goalRoadCategory;

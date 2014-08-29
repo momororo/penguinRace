@@ -44,11 +44,17 @@
     if(sabotages == nil){
         sabotages = [NSMutableArray new];
     }
+
+    #pragma mark -
+    #pragma mark 出現位置を調整
+    CGPoint position = CGPointMake((arc4random_uniform(frame.size.width-60) + 30),(-(frame.size.height) + arc4random_uniform(frame.size.height)));;
+    #pragma mark -
+    
     
     if(arc4random_uniform(2) == 0){
         SKSpriteNode *stone = [SKSpriteNode spriteNodeWithTexture:sabotagesTexture[0]];
         stone.size = CGSizeMake(stone.size.width, stone.size.height);
-        stone.position = CGPointMake((arc4random_uniform(frame.size.width-60) + 30),(-(frame.size.height) + arc4random_uniform(frame.size.height)));
+        stone.position = position;
         stone.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(stone.size.width,stone.size.height)];
         stone.zPosition = 40;
         stone.physicsBody.affectedByGravity = NO;
@@ -62,7 +68,8 @@
         
         SKSpriteNode *iceWall = [SKSpriteNode spriteNodeWithTexture:sabotagesTexture[1]];
         iceWall.size = CGSizeMake(iceWall.size.width*2, iceWall.size.height*2);
-        iceWall.position = CGPointMake((arc4random_uniform(frame.size.width-60) + 30),(-(frame.size.height) + arc4random_uniform(frame.size.height)));
+
+        iceWall.position = position;
         iceWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(iceWall.size.width + 10, iceWall.size.height/2)];
         iceWall.zPosition = 40;
         iceWall.physicsBody.affectedByGravity = NO;

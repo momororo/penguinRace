@@ -255,15 +255,42 @@
             
         }else{
         [Road setNextRoadframeX:self.frame.size.width frameY:self.frame.size.height];
+
+#pragma mark -
+#pragma mark 障害物の難易度調整
+            /**
+             *  障害物の出現量の調整
+             */
+            
+            if(goalCount >= 18){
+                //なにもしない
+            }else if(goalCount >=15){
+                
+                [self addSabotage];
+                
+            }else if (goalCount >= 10){
+                [self addSabotage];
+                [self addSabotage];
+
+            }else if (goalCount >= 5){
+                [self addSabotage];
+                [self addSabotage];
+                [self addSabotage];
+
+            }else{
+                [self addSabotage];
+                [self addSabotage];
+                [self addSabotage];
+                [self addSabotage];
+
+            }
+#pragma mark -
+
         }
     }
     
-    if ([Sabotage getSabotages1].position.y >= (self.frame.size.height)+[Sabotage getSabotages1].size.height/2) {
-        [Sabotage removeSabotage1];
-    }
-    
-    if ([Sabotage getSabotages1].position.y >= (self.frame.size.height)+[Sabotage getSabotages2].size.height/2) {
-        [Sabotage removeSabotage2];
+    if ([Sabotage getFirstSavotage].position.y >= (self.frame.size.height)+[Sabotage getFirstSavotage].size.height/2) {
+        [Sabotage removeSabotage];
     }
     
     
@@ -324,9 +351,7 @@
     //障害物の生成準備
     [Sabotage addSabotage:self.frame];
     
-    NSMutableArray *sabotages = [Sabotage getSabotageInit];
-    [self addChild:sabotages[0]];
-    [self addChild:sabotages[1]];
+    [self addChild:[Sabotage getLastSabotage]];
     
 }
 

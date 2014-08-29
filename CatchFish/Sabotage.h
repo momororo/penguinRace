@@ -19,9 +19,8 @@ NSMutableArray *sabotagesTexture;
 
 +(NSMutableArray *)getSabotageInit;
 
-+(SKSpriteNode*)getSabotages1;
-+(SKSpriteNode*)getSabotages2;
-
++(SKSpriteNode *)getFirstSavotage;
++(SKSpriteNode *)getLastSabotage;
 +(void)sabotageInitTexture;
 
 
@@ -29,8 +28,7 @@ NSMutableArray *sabotagesTexture;
 
 +(void)setSabotageVectorY:(float)vectorY;
 
-+(void)removeSabotage1;
-+(void)removeSabotage2;
++(void)removeSabotage;
 
 
 

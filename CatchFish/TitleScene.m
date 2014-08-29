@@ -8,7 +8,9 @@
 
 #import "TitleScene.h"
 
-SKLabelNode *start;
+SKSpriteNode *startBt;
+SKSpriteNode *tutorialBt;
+SKSpriteNode *rankingBt;
 
 @implementation TitleScene
 
@@ -16,18 +18,39 @@ SKLabelNode *start;
     
     if (self == [super initWithSize:size]) {
         
-        SKSpriteNode *top = [SKSpriteNode spriteNodeWithColor:[SKColor whiteColor] size:CGSizeMake(self.frame.size.width, self.frame.size.height)];
-        top.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        [self addChild:top];
+        SKSpriteNode *titleBack = [SKSpriteNode spriteNodeWithImageNamed:@"titleBack"];
+        titleBack.size = CGSizeMake(self.frame.size.width, self.frame.size.height);
+        titleBack.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        [self addChild:titleBack];
         
-        //MARK:テスト用のスタートラベル、後々消去
-        start = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        start.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        start.fontColor = [SKColor blackColor];
-        start.text = @"Game Start";
-        start.fontSize = 18;
+        //スタートラベル作成
+        startBt = [SKSpriteNode spriteNodeWithImageNamed:@"starBt"];
+        startBt.size = CGSizeMake(startBt.size.width, startBt.size.height);
+        startBt.position = CGPointMake(CGRectGetMaxX(self.frame)*3/4, CGRectGetMidY(self.frame)/3);
+        [self addChild:startBt];
         
-        [self addChild:start];
+        //チュートリアル作成
+        startBt = [SKSpriteNode spriteNodeWithImageNamed:@"starBt"];
+        startBt.size = CGSizeMake(startBt.size.width, startBt.size.height);
+        startBt.position = CGPointMake(CGRectGetMaxX(self.frame)*3/4, CGRectGetMidY(self.frame)/3);
+        [self addChild:startBt];
+
+        //ランキングラベル作成
+        startBt = [SKSpriteNode spriteNodeWithImageNamed:@"starBt"];
+        startBt.size = CGSizeMake(startBt.size.width, startBt.size.height);
+        startBt.position = CGPointMake(CGRectGetMaxX(self.frame)*3/4, CGRectGetMidY(self.frame)/3);
+        [self addChild:startBt];
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     return self;
 }
@@ -39,10 +62,25 @@ SKLabelNode *start;
     CGPoint location = [touch locationInNode:self];
     
     //スタートノードをタップした時の命令
-    if ([start containsPoint:location]) {
+    if ([startBt containsPoint:location]) {
+        [startBt runAction:[SKAction moveToY:startBt.position.y-10 duration:0.1]];
+
+    }
+    
+    
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    
+    //スタートノードをタップした時の命令
+    if ([startBt containsPoint:location]) {
         if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
-                [_delegate sceneEscape:self identifier:nil];
+            [_delegate sceneEscape:self identifier:nil];
         }
     }
+
 }
 @end

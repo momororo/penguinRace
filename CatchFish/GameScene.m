@@ -85,6 +85,9 @@
         //ゴールのカウントの設定
         goalCount = 20;
         
+        //デリゲートの設定
+        self.physicsWorld.contactDelegate = self;
+        
     }
     
     return self;
@@ -193,6 +196,28 @@
         
     }
 
+}
+
+
+//オブジェクト同士が衝突した場合に動く処理
+- (void)didBeginContact:(SKPhysicsContact *)contact
+{
+    
+    //スタートラベルがある時は処理を飛ばす
+    if([self childNodeWithName:@"kStartLabel"] != nil){
+        return;
+    }
+    
+    //ペンギンと障害物の衝突検知
+    if([ObjectBitMask penguinAndSabotage:contact]){
+        
+        //ペンギンの減速処理
+        [Penguin setCollisionPenguin];
+        
+        //衝突した障害物を排除する
+        [Sabotage removeCollisionSabotage:[ObjectBitMask getSabotageFromContact:contact]];
+        
+    }
 }
 
 

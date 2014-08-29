@@ -96,9 +96,29 @@
 +(void)removeSabotage{
     
     [sabotages[0] removeFromParent];
+    [sabotages removeObjectAtIndex:0];
     
     if(sabotages.count == 0){
         sabotages = nil;
+    }
+}
+
+
++(void)removeCollisionSabotage:(SKNode *)CollisionSabotage{
+    
+    for(int i = 0; i < sabotages.count; i++){
+        
+        if(CollisionSabotage == sabotages[i]){
+            //親ノードから削除
+            [sabotages[i] removeFromParent];
+            //配列から削除
+            [sabotages removeObjectAtIndex:i];
+            //配列が0の場合はnilを代入
+            if(sabotages.count == 0){
+                sabotages = nil;
+            }
+            return;
+        }
     }
 }
 

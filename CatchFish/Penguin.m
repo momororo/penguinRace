@@ -55,8 +55,8 @@ CGFloat penguinVectorY;
     penguin.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:penguin.size];
     penguin.physicsBody.affectedByGravity = 0;
     penguin.physicsBody.categoryBitMask = penguinCategory;
-    penguin.physicsBody.collisionBitMask = wallCategory | sabotageCategory;
-    penguin.physicsBody.contactTestBitMask = goalRoadCategory;
+    penguin.physicsBody.collisionBitMask = wallCategory;
+    penguin.physicsBody.contactTestBitMask = sabotageCategory | goalRoadCategory;
     
 }
 
@@ -195,6 +195,27 @@ CGFloat penguinVectorY;
     penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, 0);
 
 
+}
+
+//ペンギンの衝突設定
++(void)setCollisionPenguin{
+    
+    zRotationX = sin(penguin.zRotation);
+    zRotationY = cos(penguin.zRotation);
+    
+    accelerate -= 50;
+    
+    if (accelerate < 0) {
+        accelerate = 0;
+    }
+    //NSLog(@"減速%f",accelerate);
+    
+    penguinVectorX = (accelerate * zRotationX);
+    penguinVectorY = (accelerate * zRotationY);
+    //penguin.physicsBody.velocity = CGVectorMake((accelete * x), -(accelete * y));
+    penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, 0);
+    
+    
 }
 
 //タップ位置に向かってペンギンが動く

@@ -42,6 +42,9 @@ NSMutableArray *runPenguins;
 
 +(void)setPenguinDisapperPlayer:(float)frameY;
 
++(void)setCollisionPenguin;
+
+
 //MARK:いまいち
 //ペンギンの加速力
 +(float)getAccelerate;

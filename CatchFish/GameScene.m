@@ -284,6 +284,26 @@
         
         if (gameStartFlag == YES && touchBeganFlag == NO) {
             
+            if (location.x >= (self.frame.size.width - self.frame.size.width/17)){
+                
+                
+                
+                location.x =(self.frame.size.width - self.frame.size.width/17);
+                
+            }
+            
+            
+            
+            if (location.x <= self.frame.size.width /17){
+                
+                
+                
+                location.x =(self.frame.size.width / 17);
+                
+                
+                
+            }
+            
             [Player setPlayerPositionX:location.x positionY:location.y];
             
             [self addChild:[Player getPlayer]];

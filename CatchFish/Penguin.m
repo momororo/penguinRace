@@ -219,7 +219,7 @@ CGFloat penguinVectorY;
 +(void)setPenguinEatPlayer:(float)playerPositionY playerSize:(float)playerSize frameY:(float)frameY{
     
     if (playerPositionY < frameY/2) {
-        [penguin runAction:[SKAction moveToY:frameY/2 + playerSize duration:1]];
+        [penguin runAction:[SKAction moveToY:frameY/2 + playerSize duration:2]];
     }
     
     if (playerPositionY > frameY/2 && playerPositionY < frameY*2/3) {
@@ -229,7 +229,7 @@ CGFloat penguinVectorY;
 
 //タッチアップした際にペンギンが元の位置に戻る
 +(void)setPenguinDisapperPlayer:(float)frameY{
-    [penguin runAction:[SKAction moveToY:frameY * 9 / 10 duration:1]];
+    [penguin runAction:[SKAction moveToY:frameY * 9 / 10 duration:0.5]];
 }
 
 

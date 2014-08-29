@@ -17,6 +17,8 @@
 #import "GameScene.h"
 
 
+//パーティクル（スパーク）
+SKEmitterNode *_particleSpark;
 
 @implementation GameScene{
     
@@ -202,8 +204,6 @@
 #pragma mark-
 
 #pragma mark ゲーム画面がタップされた際の処理
-
-//???:ダブルタップするとノードが残る
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     
@@ -405,8 +405,6 @@
             
             [Player movePlayerToX:location.x moveToY:location.y duration:0];
             
-            
-            
             //動いている際のフラグON
             
             touchMoveFlag = YES;
@@ -591,6 +589,11 @@
         //障害物を動かす処理
         
         [Sabotage setSabotageVectorY:([Penguin getVectorY])];
+        
+        
+
+        
+        
         
         
         
@@ -864,7 +867,20 @@
     
 }
 
+/***************** パーティクルの設定 *******************/
 
+//スパークパーティクルの作成
+-(void)makeSparkParticle:(CGPoint)point{
+    if (_particleSpark == nil) {
+        NSString *path = [[NSBundle mainBundle]pathForResource:@"Spark" ofType:@"sks"];
+        _particleSpark = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        _particleSpark.numParticlesToEmit = 50;
+        [self addChild:_particleSpark];
+    }else{
+        [_particleSpark resetSimulation];
+    }
+    _particleSpark.position = point;
+}
 
 
 

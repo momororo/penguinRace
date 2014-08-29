@@ -11,7 +11,7 @@
 #import "GameView.h"
 
 
-@interface TitleScene : SKScene
+@interface TitleScene : SKScene<GKGameCenterControllerDelegate>
 @property (weak, nonatomic)id delegate;
 
 @end

@@ -12,6 +12,8 @@ SKSpriteNode *startBt;
 SKSpriteNode *tutorialBt;
 SKSpriteNode *rankingBt;
 
+float score;
+
 @implementation TitleScene
 
 -(id)initWithSize:(CGSize)size{

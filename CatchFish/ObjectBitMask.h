@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SpriteKit/SpriteKit.h>
 
 static const uint32_t roadCategory = 0x1 << 0;
 static const uint32_t penguinCategory = 0x1 << 1;
@@ -17,5 +18,10 @@ static const uint32_t wallCategory   = 0x1 << 5;
 
 
 @interface ObjectBitMask : NSObject
+
+//ペンギンとと障害物の衝突判定をする
++(BOOL)penguinAndSabotage:(SKPhysicsContact *)contact;
+//障害物を帰す
++(SKNode *)getSabotageFromContact:(SKPhysicsContact *)contact;
 
 @end

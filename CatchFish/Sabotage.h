@@ -30,6 +30,8 @@ NSMutableArray *sabotagesTexture;
 
 +(void)removeSabotage;
 
++(void)removeCollisionSabotage:(SKNode *)CollisionSabotage;
+
 
 
 

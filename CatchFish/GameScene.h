@@ -14,6 +14,7 @@
 #import "Road.h"
 #import "Sabotage.h"
 #import "Wall.h"
+#import "ObjectBitMask.h"
 
 @interface GameScene : SKScene <SKPhysicsContactDelegate>
 

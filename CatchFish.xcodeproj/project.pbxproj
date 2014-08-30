@@ -38,6 +38,8 @@
 		A4B466C119A4BBB800B72D7E /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466C019A4BBB800B72D7E /* Player.m */; };
 		A4B466C419A4BBCC00B72D7E /* Penguin.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466C319A4BBCC00B72D7E /* Penguin.m */; };
 		A4B466C719A4BBEB00B72D7E /* ObjectBitMask.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466C619A4BBEB00B72D7E /* ObjectBitMask.m */; };
+		A4DF0E0719B0ED3D00D82497 /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = A4DF0E0519B0ED3D00D82497 /* Spark.sks */; };
+		A4DF0E0819B0ED3D00D82497 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A4DF0E0619B0ED3D00D82497 /* spark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,8 @@
 		A4B466C319A4BBCC00B72D7E /* Penguin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Penguin.m; sourceTree = "<group>"; };
 		A4B466C519A4BBEB00B72D7E /* ObjectBitMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBitMask.h; sourceTree = "<group>"; };
 		A4B466C619A4BBEB00B72D7E /* ObjectBitMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBitMask.m; sourceTree = "<group>"; };
+		A4DF0E0519B0ED3D00D82497 /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
+		A4DF0E0619B0ED3D00D82497 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +214,8 @@
 				A4B466B419A4B7CE00B72D7E /* GameView.m */,
 				A4B466BC19A4B87400B72D7E /* SceneManager.h */,
 				A4B466BD19A4B87400B72D7E /* SceneManager.m */,
+				A4DF0E0519B0ED3D00D82497 /* Spark.sks */,
+				A4DF0E0619B0ED3D00D82497 /* spark.png */,
 				A4B4669619A4B62500B72D7E /* Images.xcassets */,
 				A4B4668019A4B62500B72D7E /* Supporting Files */,
 			);
@@ -324,6 +330,8 @@
 			files = (
 				04FFE32919B1A54C0073844B /* NADView_readme.txt in Resources */,
 				A4B4668419A4B62500B72D7E /* InfoPlist.strings in Resources */,
+				A4DF0E0819B0ED3D00D82497 /* spark.png in Resources */,
+				A4DF0E0719B0ED3D00D82497 /* Spark.sks in Resources */,
 				A4B4669719A4B62500B72D7E /* Images.xcassets in Resources */,
 				049755CC19AD874C007F2A38 /* runPenguin.atlas in Resources */,
 				A4B4668D19A4B62500B72D7E /* Main.storyboard in Resources */,

@@ -55,8 +55,8 @@
         SKSpriteNode *stone = [SKSpriteNode spriteNodeWithTexture:sabotagesTexture[0]];
         stone.size = CGSizeMake(stone.size.width, stone.size.height);
         stone.position = position;
-        stone.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(stone.size.width,stone.size.height)];
-        stone.zPosition = 40;
+        stone.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(stone.size.width, 1) center:CGPointMake(0, -(stone.size.height/2))];
+        stone.zPosition = 10000;
         stone.physicsBody.affectedByGravity = NO;
         stone.physicsBody.categoryBitMask = sabotageCategory;
         stone.physicsBody.collisionBitMask = 0;
@@ -70,8 +70,8 @@
         iceWall.size = CGSizeMake(iceWall.size.width*2, iceWall.size.height*2);
 
         iceWall.position = position;
-        iceWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(iceWall.size.width + 10, iceWall.size.height/2)];
-        iceWall.zPosition = 40;
+        iceWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(iceWall.size.width-10, 1) center:CGPointMake(0, -(iceWall.size.height/2))];
+        iceWall.zPosition = 10000;
         iceWall.physicsBody.affectedByGravity = NO;
         iceWall.physicsBody.categoryBitMask = sabotageCategory;
         iceWall.physicsBody.collisionBitMask = 0;

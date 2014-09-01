@@ -25,8 +25,9 @@ SKEmitterNode *_particleSpark;
     
     
     
-    
-    SKLabelNode *startLabel;
+    SKSpriteNode *startLabel;
+    SKSpriteNode *goalLabel;
+    SKLabelNode  *startLabelLiteral;
     
     BOOL touchBeganFlag;
     
@@ -38,6 +39,7 @@ SKEmitterNode *_particleSpark;
     
     BOOL gameStartFlag;
     BOOL gameGoalFrag;
+    BOOL gameResultFlag;
     
     
     
@@ -52,6 +54,13 @@ SKEmitterNode *_particleSpark;
     //ゴール用のカウント
     
     int goalCount;
+    
+    //スタート時のカウントダウン
+    NSDate *countDate;
+    //カウントダウンフラグ
+    bool startCountFrag;
+    
+    
     
     
     
@@ -107,19 +116,43 @@ SKEmitterNode *_particleSpark;
         
         //MARK:テスト用のスタートラベル、後々消去
         
-        startLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        
-        startLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        
-        startLabel.text = @"テスト";
-        
-        startLabel.fontSize = 40;
-        
+        startLabel = [SKSpriteNode spriteNodeWithColor:[SKColor blackColor] size:CGSizeMake(self.frame.size.width, self.frame.size.height/8)];
+        startLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height/10*6);
         startLabel.name = @"kStartLabel";
         
-        startLabel.fontColor = [SKColor whiteColor];
-        
         [self addChild:startLabel];
+        
+        
+        startLabelLiteral = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        startLabelLiteral.fontSize = 40;
+        startLabelLiteral.name = @"kStartLabelLiteral";
+        startLabelLiteral.fontColor = [SKColor whiteColor];
+        startLabelLiteral.position = CGPointMake(0,0);
+        startLabelLiteral.text = @"START";
+        startLabelLiteral.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        startLabelLiteral.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        
+        [startLabel addChild:startLabelLiteral];
+        
+        
+        //ゴール用のラベルを作成しておく
+        goalLabel = [SKSpriteNode spriteNodeWithColor:[SKColor blackColor] size:CGSizeMake(self.frame.size.width, self.frame.size.height/8)];
+        goalLabel.position = CGPointMake(-self.frame.size.width, self.frame.size.height/10*6);
+        goalLabel.name = @"kGoalLabel";
+        goalLabel.zPosition = 20000;
+        [self addChild:goalLabel];
+
+        SKLabelNode *goalLabelLiteral = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        goalLabelLiteral.fontSize = 40;
+        goalLabelLiteral.fontColor = [SKColor whiteColor];
+        goalLabelLiteral.position = CGPointMake(0,0);
+        goalLabelLiteral.text = @"GOAL!!";
+        goalLabelLiteral.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        goalLabelLiteral.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        
+        [goalLabel addChild:goalLabelLiteral];
+    
+
         
         
         
@@ -166,8 +199,9 @@ SKEmitterNode *_particleSpark;
         
         
         //ゴールのカウントの設定
+#pragma mark ゴールカウント
+        goalCount = 5;
         
-        goalCount = 20;
         
         
         
@@ -178,6 +212,22 @@ SKEmitterNode *_particleSpark;
         //ゲームスタート、ゴールフラグをNOに
         gameStartFlag = NO;
         gameGoalFrag = NO;
+        gameResultFlag = NO;
+        
+        
+        /**
+         *  nend
+         */
+        //nadViewの生成
+        self.nadView = [[NADView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame) - 50 , 320, 50)];
+        //ログ出力の設定
+        self.nadView.isOutputLog = NO;
+        
+        //setapiKey
+        [self.nadView setNendApiKey:@"a6eca9dd074372c898dd1df549301f277c53f2b9"];
+        [self.nadView setNendSpotID:@"3172"];
+        [self.nadView setDelegate:self];
+        [self.nadView load];
         
         
         
@@ -224,20 +274,37 @@ SKEmitterNode *_particleSpark;
         
         
         //スタートラベルがタップされた時に行う処理
-        
+#pragma mark スタートのカウントダウン処理
         if ([startLabel containsPoint:location]) {
             
             
+            startCountFrag = YES;
+            
+            //カウントダウン用の変数
+            countDate = [NSDate date];
+            
+            /*
+            if(startCount != 0){
+                
+                startLabelLiteral.text = [NSString stringWithFormat:@"%d",startCount];
+                [NSThread sleepForTimeInterval:1.0f];
+                startCount --;
+                
+                return;
+
+            }
+                
             
             //スタートラベルの削除
             
-            [startLabel removeFromParent];
             
             
             
             //ゲームスタートフラグをON
             
             gameStartFlag = YES;
+             
+             */
             
             
             
@@ -458,7 +525,7 @@ SKEmitterNode *_particleSpark;
 
 
 //オブジェクト同士が衝突した場合に動く処理
-
+#pragma mark didBeginContact
 - (void)didBeginContact:(SKPhysicsContact *)contact
 
 {
@@ -506,6 +573,8 @@ SKEmitterNode *_particleSpark;
     
         gameGoalFrag = YES;
         
+        SKAction *goalAction = [SKAction moveToX:CGRectGetMidX(self.frame) duration:1];
+        [goalLabel runAction:goalAction];
         
         //タッチエンドの処理を走らせちゃう
         [Player removePlayer];
@@ -528,21 +597,61 @@ SKEmitterNode *_particleSpark;
 
 
 
-
+#pragma mark didSimulateメソッド
 -(void)didSimulatePhysics{
     
-    //ゴール時は処理せず終了
-    if(gameGoalFrag == YES && [Penguin getAccelerate] != 0){
+    //ゲームスタートのカウントダウン処理
+    if(startCountFrag == YES){
+        
+#pragma mark カウントダウンの処理をじっそうしようね
+        //カウントダウン処理
+        NSDate *nowDate = [NSDate date];
+        float intervalDate = [nowDate timeIntervalSinceDate:countDate];
+        
+        if(intervalDate <= 3){
+            
+            //ラベルの内容を変更
+            startLabelLiteral.text = [NSString stringWithFormat:@"%d",(int)(4 - intervalDate)];
+            
+        }else{
+            
+            //スタートラベルの削除
+            [startLabel removeFromParent];
+            //スタートのカウントダウン
+            gameStartFlag = YES;
+            
+            //カウントフラグをオフに
+            startCountFrag = NO;
+            
+        }
+        
+        return;
+        
+    }
+    
+    //ゴール時の処理
+    if(gameGoalFrag == YES && [Penguin getAccelerate]  != 0){
         
         [Penguin setReducePenguin];
         
-        if([Penguin getAccelerate] == 0){
+        if([Penguin getAccelerate] <= 30){
             
             //ゴールの処理へ
             [self goalMethod];
+            
+            //フラグの設定
+            gameStartFlag = NO;
+            gameGoalFrag = NO;
+            gameResultFlag = YES;
         }
-
+        //ここにreturnは入れない!!(以降の地面のスクロール処理がスキップされるため)
     }
+    
+    //これなんの処理だっけ、、、、
+    if(gameResultFlag == YES){
+        return;
+    }
+
     
     
     
@@ -865,6 +974,13 @@ SKEmitterNode *_particleSpark;
 #pragma mark ゴール処理
 -(void)goalMethod{
     
+    /**
+     *  nend
+     */
+    //nadViewの生成
+    [[NADInterstitial sharedInstance] showAd];
+
+    
 }
 
 /***************** パーティクルの設定 *******************/
@@ -884,7 +1000,17 @@ SKEmitterNode *_particleSpark;
 
 
 
-
+/**
+ *  nend デリゲートメソッド
+ */
+//広告受信成功後、viewに追加
+-(void)nadViewDidFinishLoad:(NADView *)adView{
+    [self.view addSubview:adView];
+}
+//広告非表示
+- (void) dismissInterstitialAdSample {
+    [[NADInterstitial sharedInstance] dismissAd];
+}
 
 
 

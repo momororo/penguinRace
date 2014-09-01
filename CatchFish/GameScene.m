@@ -29,6 +29,8 @@ SKEmitterNode *_particleSpark;
     SKSpriteNode *goalLabel;
     SKLabelNode  *startLabelLiteral;
     
+    SKLabelNode *scoreLabel;
+    
     BOOL touchBeganFlag;
     
     BOOL touchMoveFlag;
@@ -48,6 +50,12 @@ SKEmitterNode *_particleSpark;
     BOOL runFlag;
     
     BOOL fastRunFlag;
+    
+    SKSpriteNode *topButton;
+    SKLabelNode *topButtonLiteral;
+    
+    SKSpriteNode *retryButton;
+    SKLabelNode *retryButtonLiteral;
     
     
     
@@ -152,8 +160,17 @@ SKEmitterNode *_particleSpark;
         
         [goalLabel addChild:goalLabelLiteral];
     
-
         
+        //スコアラベルの設定
+        scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        scoreLabel.text = @"TIME :";
+        scoreLabel.position = CGPointMake(0, self.frame.size.height/10*9);
+        scoreLabel.fontColor = [SKColor blackColor];
+        scoreLabel.fontSize = 20;
+        scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        
+        [self addChild:scoreLabel];
         
         
         
@@ -282,33 +299,6 @@ SKEmitterNode *_particleSpark;
             
             //カウントダウン用の変数
             countDate = [NSDate date];
-            
-            /*
-            if(startCount != 0){
-                
-                startLabelLiteral.text = [NSString stringWithFormat:@"%d",startCount];
-                [NSThread sleepForTimeInterval:1.0f];
-                startCount --;
-                
-                return;
-
-            }
-                
-            
-            //スタートラベルの削除
-            
-            
-            
-            
-            //ゲームスタートフラグをON
-            
-            gameStartFlag = YES;
-             
-             */
-            
-            
-            
-            
             
         }
         
@@ -623,9 +613,19 @@ SKEmitterNode *_particleSpark;
             //カウントフラグをオフに
             startCountFrag = NO;
             
+            //ゲームレコード用に再利用
+            nowDate = [NSDate date];
+            
         }
         
         return;
+        
+    }
+    
+    if(gameStartFlag == YES){
+        
+        //ゲームレコードの更新(時間を変換しノードに反映すること)
+        //scoreLabel.text = [NSString stringWithFormat:@"%@ %"];
         
     }
     
@@ -636,13 +636,19 @@ SKEmitterNode *_particleSpark;
         
         if([Penguin getAccelerate] <= 30){
             
-            //ゴールの処理へ
-            [self goalMethod];
-            
             //フラグの設定
             gameStartFlag = NO;
             gameGoalFrag = NO;
             gameResultFlag = YES;
+            
+            //ペンギンの動きを止める
+            [[Penguin getPenguin] removeAllActions];
+
+            //ベクトルをなくす処理を入れること。
+            
+            //ゴールの処理へ
+            [self goalMethod];
+
         }
         //ここにreturnは入れない!!(以降の地面のスクロール処理がスキップされるため)
     }
@@ -979,6 +985,44 @@ SKEmitterNode *_particleSpark;
      */
     //nadViewの生成
     [[NADInterstitial sharedInstance] showAd];
+    
+    
+    //トップボタン作成
+    topButton = [SKSpriteNode spriteNodeWithColor:[SKColor blackColor] size:CGSizeMake(self.frame.size.width/3.5, self.frame.size.height/13)];
+    topButton.position = CGPointMake(self.frame.size.width/6*1, self.frame.size.height/10*1.5);
+    topButton.name = @"kTopButton";
+    topButton.zPosition = 20000;
+    [self addChild:topButton];
+    
+    topButtonLiteral = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    topButtonLiteral.fontSize = 10;
+    topButtonLiteral.fontColor = [SKColor whiteColor];
+    topButtonLiteral.position = CGPointMake(0,0);
+    topButtonLiteral.text = @"TOP";
+    topButtonLiteral.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    topButtonLiteral.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+    
+    [topButton addChild:topButtonLiteral];
+    
+    
+    //リトライボタン作成
+    retryButton = [SKSpriteNode spriteNodeWithColor:[SKColor blackColor] size:CGSizeMake(self.frame.size.width/3.5, self.frame.size.height/13)];
+    retryButton.position = CGPointMake(self.frame.size.width/6*5, self.frame.size.height/10*1.5);
+    retryButton.name = @"kRetryButton";
+    retryButton.zPosition = 20000;
+    [self addChild:retryButton];
+    
+    retryButtonLiteral = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    retryButtonLiteral.fontSize = 10;
+    retryButtonLiteral.fontColor = [SKColor whiteColor];
+    retryButtonLiteral.position = CGPointMake(0,0);
+    retryButtonLiteral.text = @"RETRY";
+    retryButtonLiteral.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    retryButtonLiteral.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+    
+    [retryButton addChild:retryButtonLiteral];
+
+
 
     
 }

@@ -60,9 +60,7 @@ SKEmitterNode *_particleSpark;
     
     
     //ゴール用のカウント
-    
     int goalCount;
-    
     //スタート時のカウントダウン
     NSDate *countDate;
     //カウントダウンフラグ
@@ -163,12 +161,13 @@ SKEmitterNode *_particleSpark;
         
         //スコアラベルの設定
         scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        scoreLabel.text = @"TIME :";
+        scoreLabel.text = @"TIME : ";
         scoreLabel.position = CGPointMake(0, self.frame.size.height/10*9);
         scoreLabel.fontColor = [SKColor blackColor];
         scoreLabel.fontSize = 20;
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        scoreLabel.zPosition = 1000000;
         
         [self addChild:scoreLabel];
         
@@ -576,6 +575,10 @@ SKEmitterNode *_particleSpark;
         touchMoveFlag = NO;
         
         touchEndedFlag = YES;
+        
+        //ゴール後のペンギンの挙動を綺麗にするために設定
+        [Penguin getPenguin].physicsBody.allowsRotation = NO;
+        [Penguin getPenguin].physicsBody.categoryBitMask = 0;
 
 
     
@@ -597,7 +600,7 @@ SKEmitterNode *_particleSpark;
         //カウントダウン処理
         NSDate *nowDate = [NSDate date];
         float intervalDate = [nowDate timeIntervalSinceDate:countDate];
-        
+                
         if(intervalDate <= 3){
             
             //ラベルの内容を変更
@@ -622,16 +625,37 @@ SKEmitterNode *_particleSpark;
         
     }
     
-    if(gameStartFlag == YES){
+    if(gameStartFlag == YES && gameGoalFrag == NO){
+        
+        NSDate *nowDate = [NSDate date];
+        float intervalDate = [nowDate timeIntervalSinceDate:countDate];
+        
+        int min = (float)intervalDate / 60;
+        int tenmin = (float)min / 10;
+        if(tenmin > 0){
+            min = min - tenmin * 10;
+        }
+        
+        int sec = ((float)intervalDate - min * 60) / 1;
+        int tensec = (float)sec / 10;
+        if(tensec > 0){
+            sec = sec - tensec * 10;
+        }
+        
+        int secdiv60 = ((float)intervalDate * 100 ) - (tenmin * 60 * 1000) - (min * 60 * 100) - (tensec * 1000) - (sec * 100);
+        int tensecdiv60 = (float)secdiv60 / 10;
+        if(tensecdiv60 > 0){
+            secdiv60 = secdiv60 - tensecdiv60 * 10;
+        }
         
         //ゲームレコードの更新(時間を変換しノードに反映すること)
-        //scoreLabel.text = [NSString stringWithFormat:@"%@ %"];
+        scoreLabel.text = [NSString stringWithFormat:@"TIME %d%d:%d%d:%d%d",tenmin,min,tensec,sec,tensecdiv60,secdiv60];
         
     }
     
     //ゴール時の処理
     if(gameGoalFrag == YES && [Penguin getAccelerate]  != 0){
-        
+
         [Penguin setReducePenguin];
         
         if([Penguin getAccelerate] <= 30){

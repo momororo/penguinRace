@@ -70,6 +70,9 @@
     BOOL topButtonFrag;
     //リトライボタンフラグ
     BOOL retryButtonFrag;
+    
+    //レコード保存よう
+    float score;
 }
 
 
@@ -146,6 +149,7 @@
         goalLabelLiteral.fontSize = 40;
         goalLabelLiteral.fontColor = [SKColor whiteColor];
         goalLabelLiteral.position = CGPointMake(0,0);
+        goalLabelLiteral.name = @"kGoalLabel";
         goalLabelLiteral.text = @"GOAL!!";
         goalLabelLiteral.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
         goalLabelLiteral.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
@@ -155,7 +159,7 @@
         
         //スコアラベルの設定
         scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        scoreLabel.text = @"TIME : ";
+        scoreLabel.text = @"TIME 00:00:00";
         scoreLabel.position = CGPointMake(0, self.frame.size.height/10*9);
         scoreLabel.fontColor = [SKColor blackColor];
         scoreLabel.fontSize = 20;
@@ -223,6 +227,7 @@
         gameStartFlag = NO;
         gameGoalFrag = NO;
         gameResultFlag = NO;
+        startCountFrag = NO;
         
         
         /**
@@ -332,7 +337,7 @@
     
     //ペンギンの位置よりもタップ位置が低い時の動作
     
-    if ([Penguin getPenguin].position.y - [Player getPlayer].size.height/2 > location.y) {
+    if (([Penguin getPenguin].position.y - [Player getPlayer].size.height/2 > location.y)) {
         
         
         //ゴール時は処理をさせない
@@ -445,6 +450,11 @@
             
             //ゴール時は処理をさせない
             if(gameGoalFrag == YES){
+                return;
+            }
+            
+            //スタートしていない時も処理させない
+            if(gameStartFlag == NO){
                 return;
             }
             
@@ -712,9 +722,13 @@
     }
     //ゴールの処理
     if([ObjectBitMask penguinAndGoalRoad:contact]){
-        
-    
+
+        //値をとっちゃう。
+        NSDate *nowDate = [NSDate date];
+        score = [nowDate timeIntervalSinceDate:countDate];
+
         gameGoalFrag = YES;
+
         
         SKAction *goalAction = [SKAction moveToX:CGRectGetMidX(self.frame) duration:1];
         [goalLabel runAction:goalAction];
@@ -1163,6 +1177,50 @@
      */
     //nadViewの生成
     [[NADInterstitial sharedInstance] showAd];
+    
+    //ハイスコアの登録
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+
+    score = score * 100;
+    score = (int)score ;
+    
+    //スコアの比較
+    
+    if([userDefaults integerForKey:@"score"] == 0){
+        [userDefaults setInteger:99999999 forKey:@"score"];
+
+    }
+    
+    if(score < [userDefaults integerForKey:@"score"]){
+        //ハイスコアの場合userDefaultに設定
+        [userDefaults setInteger:(int)score forKey:@"score"];
+        
+        //ハイスコアの場合、新記録と表示する
+        SKLabelNode *newRecord = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        newRecord.text = @"New record!!";
+        newRecord.fontSize = 40;
+        newRecord.fontColor = [SKColor whiteColor];
+        newRecord.position = CGPointMake(0, 0);
+        newRecord.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        newRecord.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        
+        [goalLabel removeAllChildren];
+        [goalLabel addChild:newRecord];
+        
+        
+        
+        NSArray *tenmetu = @[[SKAction fadeAlphaTo:0.0 duration:1], [SKAction fadeAlphaTo:1.0 duration:0.75]];
+        SKAction *action = [SKAction repeatActionForever:[SKAction sequence:tenmetu]];
+        [newRecord runAction:action];
+        
+        //ハイスコアをゲームセンターに送信
+        //[self sendScore:score];
+        
+    }
+
+    
+
     
     
     //トップボタン作成

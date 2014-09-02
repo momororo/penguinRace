@@ -52,10 +52,11 @@
     
     SKSpriteNode *topButton;
     SKLabelNode *topButtonLiteral;
+    SKSpriteNode *dummyTopButton;
     
     SKSpriteNode *retryButton;
     SKLabelNode *retryButtonLiteral;
-    
+    SKSpriteNode *dummyRetryButton;
     
     
     //ゴール用のカウント
@@ -65,16 +66,10 @@
     //カウントダウンフラグ
     bool startCountFrag;
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    //トップボタンフラグ
+    BOOL topButtonFrag;
+    //リトライボタンフラグ
+    BOOL retryButtonFrag;
 }
 
 
@@ -287,10 +282,9 @@
     if ([self childNodeWithName:@"kStartLabel"]) {
         
         
-        
         //スタートラベルがタップされた時に行う処理
 #pragma mark スタートのカウントダウン処理
-        if ([startLabel containsPoint:location]) {
+        if ([startLabel containsPoint:location] && startCountFrag == NO) {
             
             
             startCountFrag = YES;
@@ -384,11 +378,34 @@
         
         
     }
-    
+
+    if(gameResultFlag == YES){
+        
+        
+        if([dummyTopButton containsPoint:location]){
+            
+            
+            
+            [topButton runAction:[SKAction moveToY:topButton.position.y-10 duration:0]];
+            topButtonFrag = YES;
+            return;
+
+        }
+        
+        
+        if([dummyRetryButton containsPoint:location]){
+
+            [retryButton runAction:[SKAction moveToY:retryButton.position.y-10 duration:0]];
+            retryButtonFrag = YES;
+            return;
+            
+        }
+        
+        
+    }
     
     
 }
-
 
 
 
@@ -468,6 +485,46 @@
         
     }
     
+    
+    if(gameResultFlag == YES){
+        
+        //スワイプ時の位置の取得
+        UITouch *touch = [touches anyObject];
+        CGPoint location = [touch locationInNode:self];
+
+        
+        if(topButtonFrag == YES){
+            
+            if([dummyTopButton containsPoint:location]){
+            
+                return;
+         
+            }else{
+            
+                [topButton runAction:[SKAction moveToY:dummyTopButton.position.y duration:0]];
+                topButtonFrag = NO;
+                
+            }
+            
+        }
+        
+        if(retryButtonFrag == YES){
+
+            if([dummyRetryButton containsPoint:location]){
+            
+                return;
+           
+            }else{
+                
+                [retryButton runAction:[SKAction moveToY:dummyRetryButton.position.y duration:0]];
+                retryButtonFrag = NO;
+                
+            }
+            
+        }
+        
+    }
+    
 }
 
 
@@ -503,6 +560,99 @@
         
         
     }
+    
+    
+    if(gameResultFlag == YES){
+        
+        //スワイプ時の位置の取得
+        UITouch *touch = [touches anyObject];
+        CGPoint location = [touch locationInNode:self];
+        
+        
+        if(topButtonFrag == YES){
+            
+            if([dummyTopButton containsPoint:location]){
+
+                
+                [topButton runAction:[SKAction moveToY:dummyRetryButton.position.y duration:0]];
+
+                
+                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+                    
+                    /**
+                     *  nend終了(viewから削除するときは加えてremoveFromSuperViewも唱えよう)
+                     */
+                    [self.nadView setDelegate:nil];
+                    [self.nadView removeFromSuperview];
+                    self.nadView = nil;
+                    
+/*
+                    //アスタ終了
+                    [iconLoader removeIconCell:iconCell1];
+                    [iconLoader removeIconCell:iconCell2];
+                    [iconLoader removeIconCell:iconCell3];
+                    [iconLoader removeIconCell:iconCell4];
+                    [iconCell1 removeFromSuperview];
+                    [iconCell2 removeFromSuperview];
+                    [iconCell3 removeFromSuperview];
+                    [iconCell4 removeFromSuperview];
+ 
+ */
+                    
+                    [_delegate sceneEscape:self identifier:@"top"];
+                    
+                }
+
+                
+            }else{
+                
+                topButtonFrag = NO;
+                
+            }
+            
+        }
+        
+        if(retryButtonFrag == YES){
+            
+            if([dummyRetryButton containsPoint:location]){
+
+                [retryButton runAction:[SKAction moveToY:dummyRetryButton.position.y duration:0]];
+                
+                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+                    
+                    /**
+                     *  nend終了(viewから削除するときは加えてremoveFromSuperViewも唱えよう)
+                     */
+                    [self.nadView setDelegate:nil];
+                    [self.nadView removeFromSuperview];
+                    self.nadView = nil;
+                    
+/*
+                    //アスタ終了
+                    [iconLoader removeIconCell:iconCell1];
+                    [iconLoader removeIconCell:iconCell2];
+                    [iconLoader removeIconCell:iconCell3];
+                    [iconLoader removeIconCell:iconCell4];
+                    [iconCell1 removeFromSuperview];
+                    [iconCell2 removeFromSuperview];
+                    [iconCell3 removeFromSuperview];
+                    [iconCell4 removeFromSuperview];
+*/
+                    
+                    [_delegate sceneEscape:self identifier:@"retry"];
+                    
+                }
+                
+            }else{
+                
+                retryButtonFrag = NO;
+                
+            }
+            
+        }
+        
+    }
+
     
     
     
@@ -616,7 +766,7 @@
             startCountFrag = NO;
             
             //ゲームレコード用に再利用
-            nowDate = [NSDate date];
+            countDate = [NSDate date];
             
         }
         
@@ -1017,6 +1167,13 @@
     topButton.zPosition = 20000;
     [self addChild:topButton];
     
+    //ダミーのボタン作成
+    dummyTopButton = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(self.frame.size.width/3.5, self.frame.size.height/13)];
+    dummyTopButton.position = CGPointMake(self.frame.size.width/6*1, self.frame.size.height/10*1.5);
+    dummyTopButton.zPosition = 0;
+    [self addChild:dummyTopButton];
+
+    
     topButtonLiteral = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     topButtonLiteral.fontSize = 10;
     topButtonLiteral.fontColor = [SKColor whiteColor];
@@ -1034,6 +1191,12 @@
     retryButton.name = @"kRetryButton";
     retryButton.zPosition = 20000;
     [self addChild:retryButton];
+    
+    dummyRetryButton = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(self.frame.size.width/3.5, self.frame.size.height/13)];
+    dummyRetryButton.position = CGPointMake(self.frame.size.width/6*5, self.frame.size.height/10*1.5);
+    dummyRetryButton.zPosition = 0;
+    [self addChild:dummyRetryButton];
+
     
     retryButtonLiteral = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     retryButtonLiteral.fontSize = 10;

@@ -17,6 +17,7 @@
 #import "ObjectBitMask.h"
 #import "NADView.h"
 #import "NADInterstitial.h"
+#import "GameView.h"
 
 
 @interface GameScene : SKScene <SKPhysicsContactDelegate,NADViewDelegate>

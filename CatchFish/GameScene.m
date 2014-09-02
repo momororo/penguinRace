@@ -586,6 +586,8 @@
                     [self.nadView removeFromSuperview];
                     self.nadView = nil;
                     
+                    [[NADInterstitial sharedInstance] setDelegate:nil];
+                    
 /*
                     //アスタ終了
                     [iconLoader removeIconCell:iconCell1];
@@ -626,6 +628,9 @@
                     [self.nadView setDelegate:nil];
                     [self.nadView removeFromSuperview];
                     self.nadView = nil;
+                    
+                    [[NADInterstitial sharedInstance] setDelegate:nil];
+
                     
 /*
                     //アスタ終了

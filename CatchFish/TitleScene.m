@@ -246,6 +246,10 @@ BOOL showTutorialFlag;
         if ([kstartBt containsPoint:location]) {
         
             if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+                
+                [self.nadView setDelegate:nil];
+                [self.nadView removeFromSuperview];
+                self.nadView = nil;
             
                 [startBt runAction:[SKAction moveToY:kstartBt.position.y duration:0]];
                 [_delegate sceneEscape:self identifier:nil];

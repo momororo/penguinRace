@@ -9,9 +9,11 @@
 #import <SpriteKit/SpriteKit.h>
 #import <GameKit/GameKit.h>
 #import "GameView.h"
+#import "NADView.h"
 
 
-@interface TitleScene : SKScene<GKGameCenterControllerDelegate>
+@interface TitleScene : SKScene<GKGameCenterControllerDelegate,NADViewDelegate>
 @property (weak, nonatomic)id delegate;
+@property (retain, nonatomic)NADView *nadView;
 
 @end

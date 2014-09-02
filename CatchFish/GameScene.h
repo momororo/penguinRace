@@ -15,10 +15,13 @@
 #import "Sabotage.h"
 #import "Wall.h"
 #import "ObjectBitMask.h"
+#import "NADView.h"
+#import "NADInterstitial.h"
 
-@interface GameScene : SKScene <SKPhysicsContactDelegate>
+
+@interface GameScene : SKScene <SKPhysicsContactDelegate,NADViewDelegate>
 
 @property (weak,nonatomic)id delegate;
-
+@property (nonatomic, retain) NADView *nadView;
 
 @end

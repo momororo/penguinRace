@@ -92,6 +92,22 @@ BOOL showTutorialFlag;
         
     }
     
+    //ログ出力の設定
+    self.nadView.isOutputLog = YES;
+
+    
+    /**
+     *  nend
+     */
+    //nadViewの生成
+    self.nadView = [[NADView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame) - 50 , 320, 50)];
+    
+    //setapiKey
+    [self.nadView setNendApiKey:@"a6eca9dd074372c898dd1df549301f277c53f2b9"];
+    [self.nadView setNendSpotID:@"3172"];
+    [self.nadView setDelegate:self];
+    [self.nadView load];
+    
     return self;
 
 }
@@ -534,6 +550,16 @@ BOOL showTutorialFlag;
 // Leader Boardが閉じたとき呼ばれる
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController {
     [[[[[UIApplication sharedApplication] delegate] window] rootViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+//広告受信成功後、viewに追加
+-(void)nadViewDidFinishLoad:(NADView *)adView{
+    //デバッグ用、後で消す
+    [self.view addSubview:adView];
+}
+
+//広告受信失敗(あとで消す)
+-(void)nadViewDidFailToReceiveAd:(NADView *)adView{
 }
 
 #pragma mark-

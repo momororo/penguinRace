@@ -13,24 +13,35 @@ SKSpriteNode *startBt;
 SKSpriteNode *tutorialBt;
 SKSpriteNode *rankingBt;
 
+//各種ボタンのノード
+SKSpriteNode *kstartBt;
+SKSpriteNode *ktutorialBt;
+SKSpriteNode *krankingBt;
+
 //チュートリアルのノード
 SKSpriteNode *tutorial;
 SKSpriteNode *tutorialDelete;
 SKSpriteNode *tutorialBack;
 
+
 //ボタンフラグのノード
 BOOL startFlag;
 BOOL tutorialFlag;
 BOOL rankingFlag;
+BOOL showTutorialFlag;
+
 
 @implementation TitleScene{
     
     GKLocalPlayer *localPlayer;
+    
 }
 
 -(id)initWithSize:(CGSize)size{
     
     if (self == [super initWithSize:size]) {
+        
+        NSLog(@"%@",NSStringFromCGSize(self.frame.size));
         
         //背景の作成
         SKSpriteNode *titleBack = [SKSpriteNode spriteNodeWithImageNamed:@"titleBack"];
@@ -55,9 +66,25 @@ BOOL rankingFlag;
         rankingBt.size = CGSizeMake(rankingBt.size.width, rankingBt.size.height);
         rankingBt.position = CGPointMake(CGRectGetMidX(self.frame)*1/3, CGRectGetMidY(self.frame)/3);
         [self addChild:rankingBt];
-    
-
-        //ボタンのフラグの設定(タップ可能に)
+        
+        
+        
+        //仮スタートボタン作成
+        kstartBt = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:startBt.size];
+        kstartBt.position = CGPointMake(startBt.position.x, startBt.position.y);
+        [self addChild:kstartBt];
+        
+        //仮チュートリアルボタン作成
+        ktutorialBt = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:tutorialBt.size];
+        ktutorialBt.position = CGPointMake(tutorialBt.position.x,tutorialBt.position.y);
+        [self addChild:ktutorialBt];
+        
+        //仮ランキングボタン作成
+        krankingBt = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:rankingBt.size];
+        krankingBt.position = CGPointMake(rankingBt.position.x,rankingBt.position.y);
+        [self addChild:krankingBt];
+        
+        
         startFlag = YES;
         tutorialFlag = YES;
         rankingFlag = YES;
@@ -80,35 +107,55 @@ BOOL rankingFlag;
     CGPoint location = [touch locationInNode:self];
     
     //スタートボタンをタップした時の命令
-    if ([startBt containsPoint:location] && startFlag == YES) {
+    if (startFlag == YES) {
         
-        [startBt runAction:[SKAction moveToY:startBt.position.y-10 duration:0]];
-    
+        if ([kstartBt containsPoint:location]) {
+            
+            [startBt runAction:[SKAction moveToY:startBt.position.y-10 duration:0]];
+            
+            tutorialFlag = NO;
+            rankingFlag = NO;
+            
+        }
     }
     
-    //チュートリアルボタンをタップした時の命令
-    if ([tutorialBt containsPoint:location] && tutorialFlag == YES) {
+    if (tutorialFlag == YES) {
+        //チュートリアルボタンをタップした時の命令
+        if ([ktutorialBt containsPoint:location]) {
+            
+            [tutorialBt runAction:[SKAction moveToY:tutorialBt.position.y-10 duration:0]];
+            
+            /****************************
+             チュートリアル表示中に
+             スタートボタン・ランキングボタンが
+             タップできないようフラグOFF
+             ****************************/
+            startFlag = NO;
+            rankingFlag = NO;
+        }
         
-        [tutorialBt runAction:[SKAction moveToY:tutorialBt.position.y-10 duration:0]];
-        
-        /****************************
-         チュートリアル表示中に
-         スタートボタン・ランキングボタンが
-         タップできないようフラグOFF
-         ****************************/
-        startFlag = NO;
-        rankingFlag = NO;
+        return;
     
     }
     
     //ランキングボタンをタップした時の命令
-    if ([rankingBt containsPoint:location] && rankingFlag == YES) {
+    if (rankingFlag == YES) {
         
-        [rankingBt runAction:[SKAction moveToY:rankingBt.position.y - 10 duration:0]];
+        if ([krankingBt containsPoint:location]) {
+            
+            [rankingBt runAction:[SKAction moveToY:rankingBt.position.y - 10 duration:0]];
+            
+            startFlag = NO;
+            tutorialFlag = NO;
+            
+        }
+        
+        return;
     }
     
+    
     //チュートリアルが表示されている時の命令
-    if (tutorial) {
+    if (showTutorialFlag == YES) {
         
         //ポジション取得ノードを画面からチュートリアルノードに変更
         CGPoint location = [touch locationInNode:tutorial];
@@ -118,58 +165,184 @@ BOOL rankingFlag;
             
             [tutorial runAction:[SKAction moveToY:CGRectGetMidY(self.frame) - 10 duration:0]];
             
-
         }
+        
+        return;
+    }
+}
+
+#pragma mark-
+#pragma mark タッチムーブ
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+
+    if (startFlag == YES) {
+        if ([kstartBt containsPoint:location]) {
+                //何もしません
+        }else{
+            [startBt runAction:[SKAction moveToY:kstartBt.position.y duration:0]];
+            rankingFlag = YES;
+            tutorialFlag = YES;
+        }
+        return;
     }
     
+    if (tutorialFlag == YES) {
+        if ([ktutorialBt containsPoint:location]) {
+            
+            
+        }else{
+            [tutorialBt runAction:[SKAction moveToY:ktutorialBt.position.y duration:0]];
+            rankingFlag = YES;
+            startFlag = YES;
+            
+        }
+        return;
+    }
+    
+    
+    if (rankingFlag == YES) {
+        if ([krankingBt containsPoint:location]) {
+            //何もしません
+        }else{
+            [rankingBt runAction:[SKAction moveToY:krankingBt.position.y duration:0]];
+            startFlag = YES;
+            rankingFlag = YES;
+        }
+        return;
+    }
 }
+
+
 
 #pragma mark-
 #pragma mark タッチエンドの処理
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    //タッチアップした座標を取得する
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
 
     //スタートボタンをタップアップした時の命令
-    if (startBt.position.y <= CGRectGetMidY(self.frame)/3 - 10) {
-        if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+    
+    if (startFlag == YES) {
+    
+        if ([kstartBt containsPoint:location]) {
+        
+            if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
             
-            [startBt runAction:[SKAction moveToY:CGRectGetMidY(self.frame)/3 duration:0]];
-            //[_delegate sceneEscape:self identifier:nil];
+                [startBt runAction:[SKAction moveToY:kstartBt.position.y duration:0]];
+                [_delegate sceneEscape:self identifier:nil];
             
-            //画面遷移を遅延実行する
-            [self performSelector:@selector(delayStartMethod) withObject:nil afterDelay:0.1];
+                //画面遷移を遅延実行する
+               // [self performSelector:@selector(delayStartMethod) withObject:nil afterDelay:0.1];
+
+            }
+    
+        }else{
+        
+            [startBt runAction:[SKAction moveToY:kstartBt.position.y duration:0]];
+            
+            tutorialFlag = YES;
+            rankingFlag = YES;
         
         }
+        
+        return;
     }
+
+
+
     
     //チュートリアルボタンをタッチアップした時の命令
-    if (tutorialBt.position.y <= CGRectGetMidY(self.frame)/3 - 10) {
-
-        [tutorialBt runAction:[SKAction moveToY:CGRectGetMidY(self.frame)/3 duration:0]];
+    if (tutorialFlag == YES) {
         
-        //画面遷移を遅延実行する
-        [self performSelector:@selector(delayTutorialMethod) withObject:nil afterDelay:0.1];
+        if ([ktutorialBt containsPoint:location]) {
+            
+            showTutorialFlag = YES;
+            
+            [tutorialBt runAction:[SKAction moveToY:ktutorialBt.position.y duration:0]];
+            
+            [self showTutorial];
+            
+            //画面遷移を遅延実行する
+            //[self performSelector:@selector(delayTutorialMethod) withObject:nil afterDelay:0.1];
+            
+            startFlag = NO;
+            rankingFlag = NO;
+            
+            
+            
+            
+        }else{
+            
+            [tutorialBt runAction:[SKAction moveToY:ktutorialBt.position.y duration:0]];
+            
+            startFlag = YES;
+            
+            
+        }
+        
+        return;
     
     }
+    
+
     
     //ランキングボタンをタッチアップした時の命令
-    if (rankingBt.position.y <= CGRectGetMidY(self.frame)/3 - 10) {
+    if (rankingFlag == YES) {
         
-        [rankingBt runAction:[SKAction moveToY:CGRectGetMidY(self.frame)/3 duration:0]];
+        if ([krankingBt containsPoint:location]) {
+            
+            [rankingBt runAction:[SKAction moveToY:krankingBt.position.y duration:0]];
+            
+            [self showGameCenter];
+
+            
+            //画面遷移を遅延実行する
+            //[self performSelector:@selector(delayRankingMethod) withObject:nil afterDelay:0.1];
+            
+            rankingFlag = NO;
+            
+        }else{
+            
+            [rankingBt runAction:[SKAction moveToY:krankingBt.position.y duration:0]];
+            
+            rankingFlag = NO;
+            
+        }
         
-        //画面遷移を遅延実行する
-        [self performSelector:@selector(delayRankingMethod) withObject:nil afterDelay:0.1];
+        return;
     
     }
     
-    //チュートリアル削除ボタンをタッチアップした時の命令
-    if (tutorial.position.y <= CGRectGetMidY(self.frame) - 10) {
+    
+    
+    if (showTutorialFlag == YES) {
         
-        [tutorial runAction:[SKAction moveToY:CGRectGetMidY(self.frame)+10 duration:0]];
+        //チュートリアル削除ボタンをタッチアップした時の命令
+        if (tutorial.position.y <= CGRectGetMidY(self.frame) - 10) {
+            
+            [tutorial runAction:[SKAction moveToY:CGRectGetMidY(self.frame)+10 duration:0]];
+            
+            //画面遷移を遅延実行する
+            //[self performSelector:@selector(deleteTutorialMethod) withObject:nil afterDelay:0.1];
+            
+            //チュートリアル削除
+            [tutorial removeFromParent];
+            [tutorialBack removeFromParent];
+            showTutorialFlag = NO;
+            startFlag = YES;
+            tutorialFlag = YES;
+            rankingFlag = YES;
+            
+        }
         
-        //画面遷移を遅延実行する
-        [self performSelector:@selector(deleteTutorialMethod) withObject:nil afterDelay:0.1];
-
+        return;
     }
     
     
@@ -179,6 +352,7 @@ BOOL rankingFlag;
  *  画面遷移の遅延実行メソッド
  ****************************************************/
 
+/*
 //ゲーム画面へ遷移の遅行
 - (void)delayStartMethod{
     
@@ -192,7 +366,10 @@ BOOL rankingFlag;
     
     //チュートリアルに遷移
     [self showTutorial];
-    
+    showTutorialFlag = YES;
+    startFlag = NO;
+    tutorialFlag = NO;
+    rankingFlag = NO;
 }
 
 //ゲームセンターアクセスへ遷移の遅行
@@ -201,21 +378,32 @@ BOOL rankingFlag;
     //ゲームセンターに遷移
     [self showGameCenter];
     
+    
+    
 }
 
 //チュートリアル消去の遅行
 -(void)deleteTutorialMethod{
     
-    //チュートリアル削除
-    [tutorial removeFromParent];
-    [tutorialBack removeFromParent];
+    if (showTutorialFlag == YES) {
+        
+        //チュートリアル削除
+        [tutorial removeFromParent];
+        [tutorialBack removeFromParent];
+
+        
+    }
     
-    //ボタンフラグを元に戻す
+    showTutorialFlag = NO;
     startFlag = YES;
     tutorialFlag = YES;
     rankingFlag = YES;
+    
+    
+    
+    
 }
-
+*/
 
 
 /*****************************
@@ -223,25 +411,33 @@ BOOL rankingFlag;
  *****************************/
 -(void)showTutorial{
     
-    //遊び方説明ノードの設定
-    tutorial =[SKSpriteNode spriteNodeWithImageNamed:@"tutorial"];
-    tutorial.size = CGSizeMake(self.frame.size.width*3/4, self.frame.size.height*3/4);
-    tutorial.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    tutorial.zPosition = 1000;
-    [self addChild:tutorial];
-    
-    //遊び方説明の削除ボタンの設定
-    tutorialDelete = [SKSpriteNode spriteNodeWithImageNamed:@"tutorialDelete"];
-    tutorialDelete.size = CGSizeMake(tutorial.size.width/6, tutorial.size.height/10);
-    tutorialDelete.position = CGPointMake(10,-(tutorial.size.height/2)+tutorialDelete.size.height*2/3);
-    [tutorial addChild:tutorialDelete];
-    
-    //遊び方説明時に背景を暗くする
-    tutorialBack = [SKSpriteNode spriteNodeWithColor:[SKColor blackColor] size:CGSizeMake(self.frame.size.width, self.frame.size.height)];
-    tutorialBack.alpha = 0.5;
-    tutorialBack.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    [self addChild:tutorialBack];
+    if (showTutorialFlag == YES) {
+        
+        tutorialFlag = NO;
+        startFlag = NO;
+        rankingFlag = NO;
+        
+        //遊び方説明ノードの設定
+        tutorial =[SKSpriteNode spriteNodeWithImageNamed:@"tutorial"];
+        tutorial.size = CGSizeMake(self.frame.size.width*3/4, self.frame.size.height*3/4);
+        tutorial.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        tutorial.zPosition = 1000;
+        [self addChild:tutorial];
+        
+        //遊び方説明の削除ボタンの設定
+        tutorialDelete = [SKSpriteNode spriteNodeWithImageNamed:@"tutorialDelete"];
+        tutorialDelete.size = CGSizeMake(tutorial.size.width/6, tutorial.size.height/10);
+        tutorialDelete.position = CGPointMake(10,-(tutorial.size.height/2)+tutorialDelete.size.height*2/3);
+        [tutorial addChild:tutorialDelete];
+        
+        //遊び方説明時に背景を暗くする
+        tutorialBack = [SKSpriteNode spriteNodeWithColor:[SKColor blackColor] size:CGSizeMake(self.frame.size.width, self.frame.size.height)];
+        tutorialBack.alpha = 0.5;
+        tutorialBack.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        [self addChild:tutorialBack];
 
+    }
+    
 }
 
 

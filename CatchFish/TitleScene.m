@@ -132,6 +132,7 @@ BOOL showTutorialFlag;
             tutorialFlag = NO;
             rankingFlag = NO;
             
+            
         }
     }
     
@@ -149,9 +150,6 @@ BOOL showTutorialFlag;
             startFlag = NO;
             rankingFlag = NO;
         }
-        
-        return;
-    
     }
     
     //ランキングボタンをタップした時の命令
@@ -165,8 +163,6 @@ BOOL showTutorialFlag;
             tutorialFlag = NO;
             
         }
-        
-        return;
     }
     
     
@@ -322,13 +318,15 @@ BOOL showTutorialFlag;
             //画面遷移を遅延実行する
             //[self performSelector:@selector(delayRankingMethod) withObject:nil afterDelay:0.1];
             
-            rankingFlag = NO;
+            startFlag = YES;
+            tutorialFlag = YES;
             
         }else{
             
             [rankingBt runAction:[SKAction moveToY:krankingBt.position.y duration:0]];
             
-            rankingFlag = NO;
+            startFlag = YES;
+            tutorialFlag = YES;
             
         }
         
@@ -363,63 +361,6 @@ BOOL showTutorialFlag;
     
     
 }
-
-/****************************************************
- *  画面遷移の遅延実行メソッド
- ****************************************************/
-
-/*
-//ゲーム画面へ遷移の遅行
-- (void)delayStartMethod{
-    
-    //ゲーム画面に遷移
-    [_delegate sceneEscape:self identifier:nil];
-
-}
-
-//チュートリアルへ遷移の遅行
--(void)delayTutorialMethod{
-    
-    //チュートリアルに遷移
-    [self showTutorial];
-    showTutorialFlag = YES;
-    startFlag = NO;
-    tutorialFlag = NO;
-    rankingFlag = NO;
-}
-
-//ゲームセンターアクセスへ遷移の遅行
-- (void)delayRankingMethod{
-    
-    //ゲームセンターに遷移
-    [self showGameCenter];
-    
-    
-    
-}
-
-//チュートリアル消去の遅行
--(void)deleteTutorialMethod{
-    
-    if (showTutorialFlag == YES) {
-        
-        //チュートリアル削除
-        [tutorial removeFromParent];
-        [tutorialBack removeFromParent];
-
-        
-    }
-    
-    showTutorialFlag = NO;
-    startFlag = YES;
-    tutorialFlag = YES;
-    rankingFlag = YES;
-    
-    
-    
-    
-}
-*/
 
 
 /*****************************

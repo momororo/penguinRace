@@ -89,6 +89,29 @@ BOOL showTutorialFlag;
         tutorialFlag = YES;
         rankingFlag = YES;
         
+        //ハイスコア読込
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        float score = [userDefaults floatForKey:@"score"];
+        
+        int mm = (int)score / 6000;
+        int sec = ((int)score - mm * 6000) / 100;
+        int mmsec = (int)score % 100;
+        
+        
+        
+        SKLabelNode *scoreLabelValue;
+        scoreLabelValue = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
+        scoreLabelValue.text = [NSString stringWithFormat:@"%02d:%02d:%02d",mm,sec,mmsec];
+        scoreLabelValue.fontSize = 28;
+        scoreLabelValue.fontColor = [UIColor blackColor];
+        scoreLabelValue.position = CGPointMake(CGRectGetMaxX(self.frame)/6,CGRectGetMidY(self.frame)*2/5);
+        scoreLabelValue.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        scoreLabelValue.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        [self addChild:scoreLabelValue];
+        
+        
+        
+        
         
     }
     

@@ -723,10 +723,6 @@
     //ゴールの処理
     if([ObjectBitMask penguinAndGoalRoad:contact]){
 
-        //値をとっちゃう。
-        NSDate *nowDate = [NSDate date];
-        score = [nowDate timeIntervalSinceDate:countDate];
-
         gameGoalFrag = YES;
 
         
@@ -797,6 +793,8 @@
         
         NSDate *nowDate = [NSDate date];
         float intervalDate = [nowDate timeIntervalSinceDate:countDate];
+        //ゴールの時用に値を取る
+        score = intervalDate;
         
         int min = (float)intervalDate / 60;
         int tenmin = (float)min / 10;

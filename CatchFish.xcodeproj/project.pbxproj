@@ -40,6 +40,7 @@
 		A4B466C719A4BBEB00B72D7E /* ObjectBitMask.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466C619A4BBEB00B72D7E /* ObjectBitMask.m */; };
 		A4DF0E0719B0ED3D00D82497 /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = A4DF0E0519B0ED3D00D82497 /* Spark.sks */; };
 		A4DF0E0819B0ED3D00D82497 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A4DF0E0619B0ED3D00D82497 /* spark.png */; };
+		A4DF0E0A19B70C0B00D82497 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4DF0E0919B70C0B00D82497 /* Impact.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		A4B466C619A4BBEB00B72D7E /* ObjectBitMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBitMask.m; sourceTree = "<group>"; };
 		A4DF0E0519B0ED3D00D82497 /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
 		A4DF0E0619B0ED3D00D82497 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		A4DF0E0919B70C0B00D82497 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +229,7 @@
 			children = (
 				049755CB19AD874C007F2A38 /* runPenguin.atlas */,
 				A4B4668119A4B62500B72D7E /* CatchFish-Info.plist */,
+				A4DF0E0919B70C0B00D82497 /* Impact.ttf */,
 				A4B4668219A4B62500B72D7E /* InfoPlist.strings */,
 				A4B4668519A4B62500B72D7E /* main.m */,
 				A4B4668719A4B62500B72D7E /* CatchFish-Prefix.pch */,
@@ -335,6 +338,7 @@
 				A4B4668419A4B62500B72D7E /* InfoPlist.strings in Resources */,
 				A4DF0E0819B0ED3D00D82497 /* spark.png in Resources */,
 				A4DF0E0719B0ED3D00D82497 /* Spark.sks in Resources */,
+				A4DF0E0A19B70C0B00D82497 /* Impact.ttf in Resources */,
 				A4B4669719A4B62500B72D7E /* Images.xcassets in Resources */,
 				049755CC19AD874C007F2A38 /* runPenguin.atlas in Resources */,
 				A4B4668D19A4B62500B72D7E /* Main.storyboard in Resources */,

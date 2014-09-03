@@ -99,15 +99,29 @@ BOOL showTutorialFlag;
         
         
         
+        //ハイスコア表示
         SKLabelNode *scoreLabelValue;
         scoreLabelValue = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
-        scoreLabelValue.text = [NSString stringWithFormat:@"%02d:%02d:%02d",mm,sec,mmsec];
-        scoreLabelValue.fontSize = 28;
-        scoreLabelValue.fontColor = [UIColor blackColor];
-        scoreLabelValue.position = CGPointMake(CGRectGetMaxX(self.frame)/6,CGRectGetMidY(self.frame)*2/5);
+        scoreLabelValue.text = [NSString stringWithFormat:@"Best Time %02d:%02d:%02d",mm,sec,mmsec];
+        scoreLabelValue.fontSize = 30;
+        scoreLabelValue.zPosition = 10;
+        scoreLabelValue.fontColor = [UIColor blueColor];
+        scoreLabelValue.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)*3/5);
         scoreLabelValue.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
         scoreLabelValue.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
         [self addChild:scoreLabelValue];
+        
+        //ハイスコア表示
+        SKLabelNode *kscoreLabelValue;
+        kscoreLabelValue = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
+        kscoreLabelValue.text = [NSString stringWithFormat:@"Best Time %02d:%02d:%02d",mm,sec,mmsec];
+        kscoreLabelValue.fontSize = 30;
+        kscoreLabelValue.fontColor = [UIColor blackColor];
+        //kscoreLabelValue.alpha = 0.5;
+        kscoreLabelValue.position = CGPointMake(CGRectGetMidX(self.frame)+2,CGRectGetMidY(self.frame)*3/5-2);
+        kscoreLabelValue.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        kscoreLabelValue.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        [self addChild:kscoreLabelValue];
         
         
         //GameCenter認証

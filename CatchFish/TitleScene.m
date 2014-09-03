@@ -496,22 +496,26 @@ BOOL showTutorialFlag;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     int score = [userDefaults integerForKey:@"score"];
     
+    
     NSLog(@"%lld",(int64_t)score);
     
-    if ([GKLocalPlayer localPlayer].isAuthenticated) {
-        GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"testPenguinRace"];
-        sendScore.value = (int64_t)score;
-        [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
-            if (error) {
-                // エラーの場合
-                /**
-                 *  何もせず終了
-                 */
-                
-                NSLog(@"エラーでした、、、");
-                
-            }
-        }];
+    //スコアが0じゃない場合に限り送信
+    if(score != 0){
+        if ([GKLocalPlayer localPlayer].isAuthenticated) {
+            GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"testPenguinRace"];
+            sendScore.value = (int64_t)score;
+            [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
+                if (error) {
+                    // エラーの場合
+                    /**
+                     *  何もせず終了
+                     */
+                    
+                    NSLog(@"エラーでした、、、");
+                    
+                }
+            }];
+        }
     }
     
     GKGameCenterViewController* gameCenterController = [[GKGameCenterViewController alloc] init];

@@ -91,7 +91,7 @@ BOOL showTutorialFlag;
         
         //ハイスコア読込
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        float score = [userDefaults floatForKey:@"score"];
+        int score = [userDefaults integerForKey:@"score"];
         
         int mm = (int)score / 6000;
         int sec = ((int)score - mm * 6000) / 100;
@@ -472,18 +472,22 @@ BOOL showTutorialFlag;
 -(void)showAuthenticationDialogWhenReasonable:(UIViewController *)controller
 {
     [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentViewController:controller animated:YES completion:nil];
+    NSLog(@"成功");
+
 }
 
 // GameCenter認証OK
 -(void)authenticatedPlayer:(GKLocalPlayer *)player
 {
     player = localPlayer;
+    NSLog(@"成功");
+
 }
 
 // GameCenter認証NG
 -(void)disableGameCenter
 {
-    
+    NSLog(@"失敗");
 }
 
 // Leader Boardの表示
@@ -492,22 +496,26 @@ BOOL showTutorialFlag;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     int score = [userDefaults integerForKey:@"score"];
     
-    NSLog(@"%d",score);
     
-    if ([GKLocalPlayer localPlayer].isAuthenticated) {
-        GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"testPenguinRace"];
-        sendScore.value = score;
-        [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
-            if (error) {
-                // エラーの場合
-                /**
-                 *  何もせず終了
-                 */
-                
-                NSLog(@"エラーでした、、、");
-                
-            }
-        }];
+    NSLog(@"%lld",(int64_t)score);
+    
+    //スコアが0じゃない場合に限り送信
+    if(score != 0){
+        if ([GKLocalPlayer localPlayer].isAuthenticated) {
+            GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"testPenguinRace"];
+            sendScore.value = (int64_t)score;
+            [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
+                if (error) {
+                    // エラーの場合
+                    /**
+                     *  何もせず終了
+                     */
+                    
+                    NSLog(@"エラーでした、、、");
+                    
+                }
+            }];
+        }
     }
     
     GKGameCenterViewController* gameCenterController = [[GKGameCenterViewController alloc] init];

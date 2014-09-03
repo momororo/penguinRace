@@ -124,7 +124,7 @@
         [self addChild:startLabel];
         
         
-        startLabelLiteral = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        startLabelLiteral = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
         startLabelLiteral.fontSize = 40;
         startLabelLiteral.name = @"kStartLabelLiteral";
         startLabelLiteral.fontColor = [SKColor whiteColor];
@@ -143,7 +143,7 @@
         goalLabel.zPosition = 20000;
         [self addChild:goalLabel];
 
-        SKLabelNode *goalLabelLiteral = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        SKLabelNode *goalLabelLiteral = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
         goalLabelLiteral.fontSize = 40;
         goalLabelLiteral.fontColor = [SKColor whiteColor];
         goalLabelLiteral.position = CGPointMake(0,0);
@@ -156,7 +156,7 @@
     
         
         //スコアラベルの設定
-        scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
         scoreLabel.text = @"TIME 00:00:00";
         scoreLabel.position = CGPointMake(0, self.frame.size.height/10*9);
         scoreLabel.fontColor = [SKColor blackColor];
@@ -1173,7 +1173,7 @@
         [userDefaults setInteger:(int)score forKey:@"score"];
         
         //ハイスコアの場合、新記録と表示する
-        SKLabelNode *newRecord = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        SKLabelNode *newRecord = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
         newRecord.text = @"New record!!";
         newRecord.fontSize = 40;
         newRecord.fontColor = [SKColor whiteColor];
@@ -1213,7 +1213,7 @@
     [self addChild:dummyTopButton];
 
     
-    topButtonLiteral = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    topButtonLiteral = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
     topButtonLiteral.fontSize = 10;
     topButtonLiteral.fontColor = [SKColor whiteColor];
     topButtonLiteral.position = CGPointMake(0,0);
@@ -1237,7 +1237,7 @@
     [self addChild:dummyRetryButton];
 
     
-    retryButtonLiteral = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    retryButtonLiteral = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
     retryButtonLiteral.fontSize = 10;
     retryButtonLiteral.fontColor = [SKColor whiteColor];
     retryButtonLiteral.position = CGPointMake(0,0);

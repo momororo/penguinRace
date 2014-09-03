@@ -87,9 +87,7 @@
         
         
         
-        
-        
-        
+
         
         
         
@@ -789,25 +787,13 @@
         score = [nowDate timeIntervalSinceDate:countDate];
         
         int min = (float)score / 60;
-        int tenmin = (float)min / 10;
-        if(tenmin > 0){
-            min = min - tenmin * 10;
-        }
         
         int sec = ((float)score - min * 60) / 1;
-        int tensec = (float)sec / 10;
-        if(tensec > 0){
-            sec = sec - tensec * 10;
-        }
         
-        int secdiv60 = ((float)score * 100 ) - (tenmin * 60 * 1000) - (min * 60 * 100) - (tensec * 1000) - (sec * 100);
-        int tensecdiv60 = (float)secdiv60 / 10;
-        if(tensecdiv60 > 0){
-            secdiv60 = secdiv60 - tensecdiv60 * 10;
-        }
+        int secdiv60 = (int)((float)score * 100) % 100;
         
         //ゲームレコードの更新(時間を変換しノードに反映すること)
-        scoreLabel.text = [NSString stringWithFormat:@"TIME %d%d:%d%d:%d%d",tenmin,min,tensec,sec,tensecdiv60,secdiv60];
+        scoreLabel.text = [NSString stringWithFormat:@"TIME %02d:%02d:%02d",min,sec,secdiv60];
         
     }
     

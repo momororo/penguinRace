@@ -110,6 +110,8 @@ BOOL showTutorialFlag;
         [self addChild:scoreLabelValue];
         
         
+        //GameCenter認証
+        [self authenticateLocalPlayer];
         
         
         
@@ -488,17 +490,22 @@ BOOL showTutorialFlag;
 -(void)showGameCenter{
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    float score = [userDefaults floatForKey:@"score"];
+    int score = [userDefaults integerForKey:@"score"];
+    
+    NSLog(@"%d",score);
     
     if ([GKLocalPlayer localPlayer].isAuthenticated) {
-        GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin"];
-        sendScore.value = score * 10;
+        GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"testPenguinRace"];
+        sendScore.value = score;
         [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
             if (error) {
                 // エラーの場合
                 /**
                  *  何もせず終了
                  */
+                
+                NSLog(@"エラーでした、、、");
+                
             }
         }];
     }

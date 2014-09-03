@@ -792,23 +792,21 @@
     if(gameStartFlag == YES && gameGoalFrag == NO){
         
         NSDate *nowDate = [NSDate date];
-        float intervalDate = [nowDate timeIntervalSinceDate:countDate];
-        //ゴールの時用に値を取る
-        score = intervalDate;
+        score = [nowDate timeIntervalSinceDate:countDate];
         
-        int min = (float)intervalDate / 60;
+        int min = (float)score / 60;
         int tenmin = (float)min / 10;
         if(tenmin > 0){
             min = min - tenmin * 10;
         }
         
-        int sec = ((float)intervalDate - min * 60) / 1;
+        int sec = ((float)score - min * 60) / 1;
         int tensec = (float)sec / 10;
         if(tensec > 0){
             sec = sec - tensec * 10;
         }
         
-        int secdiv60 = ((float)intervalDate * 100 ) - (tenmin * 60 * 1000) - (min * 60 * 100) - (tensec * 1000) - (sec * 100);
+        int secdiv60 = ((float)score * 100 ) - (tenmin * 60 * 1000) - (min * 60 * 100) - (tensec * 1000) - (sec * 100);
         int tensecdiv60 = (float)secdiv60 / 10;
         if(tensecdiv60 > 0){
             secdiv60 = secdiv60 - tensecdiv60 * 10;

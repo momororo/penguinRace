@@ -87,9 +87,7 @@
         
         
         
-        
-        
-        
+
         
         
         
@@ -179,6 +177,10 @@
         [Penguin setPenguinPositionX:CGRectGetMidX(self.frame) positionY:CGRectGetMaxY(self.frame)*9/10];
         
         [self addChild:[Penguin getPenguin]];
+        
+        //初期のペンギンの設定を細工
+        [Penguin getPenguin].physicsBody.dynamic = NO;
+        [Penguin getPenguin].physicsBody.categoryBitMask = 0;
         
         
         
@@ -282,6 +284,33 @@
     
     
     
+    if(gameResultFlag == YES){
+        
+        
+        if([dummyTopButton containsPoint:location]){
+            
+            
+            
+            [topButton runAction:[SKAction moveToY:topButton.position.y-10 duration:0]];
+            topButtonFrag = YES;
+            return;
+            
+        }
+        
+        
+        if([dummyRetryButton containsPoint:location]){
+            
+            [retryButton runAction:[SKAction moveToY:retryButton.position.y-10 duration:0]];
+            retryButtonFrag = YES;
+            return;
+            
+        }
+        
+        
+    }
+    
+    
+    
     //スタートラベルが表示されている時のみ入る処理
     
     if ([self childNodeWithName:@"kStartLabel"]) {
@@ -297,41 +326,12 @@
             //カウントダウン用の変数
             countDate = [NSDate date];
             
+            
         }
         
+        return;
+        
     }
-    
-    
-    
-    /*      MARK:ゲームオーバー処理
-     
-     
-     
-     if([self childNodeWtihName:@"gameOver"]){
-     
-     
-     
-     }
-     
-     */
-    
-    
-    
-    /*      MARK:ゲームクリア処理
-     
-     
-     
-     if([self childNodeWtihName:@"gameClear"]){
-     
-     
-     
-     }
-     
-     
-     
-     
-     
-     */
     
     
     
@@ -342,6 +342,11 @@
         
         //ゴール時は処理をさせない
         if(gameGoalFrag == YES){
+            return;
+        }
+        
+        //スタート前は処理させない
+        if(gameStartFlag == NO){
             return;
         }
 
@@ -383,31 +388,6 @@
         
         
     }
-
-    if(gameResultFlag == YES){
-        
-        
-        if([dummyTopButton containsPoint:location]){
-            
-            
-            
-            [topButton runAction:[SKAction moveToY:topButton.position.y-10 duration:0]];
-            topButtonFrag = YES;
-            return;
-
-        }
-        
-        
-        if([dummyRetryButton containsPoint:location]){
-
-            [retryButton runAction:[SKAction moveToY:retryButton.position.y-10 duration:0]];
-            retryButtonFrag = YES;
-            return;
-            
-        }
-        
-        
-    }
     
     
 }
@@ -424,6 +404,47 @@
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     
     
+    
+    
+    if(gameResultFlag == YES){
+        
+        //スワイプ時の位置の取得
+        UITouch *touch = [touches anyObject];
+        CGPoint location = [touch locationInNode:self];
+        
+        
+        if(topButtonFrag == YES){
+            
+            if([dummyTopButton containsPoint:location]){
+                
+                return;
+                
+            }else{
+                
+                [topButton runAction:[SKAction moveToY:dummyTopButton.position.y duration:0]];
+                topButtonFrag = NO;
+                
+            }
+            
+        }
+        
+        if(retryButtonFrag == YES){
+            
+            if([dummyRetryButton containsPoint:location]){
+                
+                return;
+                
+            }else{
+                
+                [retryButton runAction:[SKAction moveToY:dummyRetryButton.position.y duration:0]];
+                retryButtonFrag = NO;
+                
+            }
+            
+        }
+        
+    }
+
     
     //プレイヤーがある場合
     
@@ -494,47 +515,6 @@
         }
         
     }
-    
-    
-    if(gameResultFlag == YES){
-        
-        //スワイプ時の位置の取得
-        UITouch *touch = [touches anyObject];
-        CGPoint location = [touch locationInNode:self];
-
-        
-        if(topButtonFrag == YES){
-            
-            if([dummyTopButton containsPoint:location]){
-            
-                return;
-         
-            }else{
-            
-                [topButton runAction:[SKAction moveToY:dummyTopButton.position.y duration:0]];
-                topButtonFrag = NO;
-                
-            }
-            
-        }
-        
-        if(retryButtonFrag == YES){
-
-            if([dummyRetryButton containsPoint:location]){
-            
-                return;
-           
-            }else{
-                
-                [retryButton runAction:[SKAction moveToY:dummyRetryButton.position.y duration:0]];
-                retryButtonFrag = NO;
-                
-            }
-            
-        }
-        
-    }
-    
 }
 
 
@@ -549,6 +529,109 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     
+
+
+    if(gameResultFlag == YES){
+        
+        //スワイプ時の位置の取得
+        UITouch *touch = [touches anyObject];
+        CGPoint location = [touch locationInNode:self];
+        
+        
+        if(topButtonFrag == YES){
+            
+            if([dummyTopButton containsPoint:location]){
+                
+                
+                [topButton runAction:[SKAction moveToY:dummyRetryButton.position.y duration:0]];
+                
+                
+                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+                    
+                    /**
+                     *  nend終了(viewから削除するときは加えてremoveFromSuperViewも唱えよう)
+                     */
+                    [self.nadView setDelegate:nil];
+                    [self.nadView removeFromSuperview];
+                    self.nadView = nil;
+                    
+                    [[NADInterstitial sharedInstance] setDelegate:nil];
+                    
+                    /*
+                     //アスタ終了
+                     [iconLoader removeIconCell:iconCell1];
+                     [iconLoader removeIconCell:iconCell2];
+                     [iconLoader removeIconCell:iconCell3];
+                     [iconLoader removeIconCell:iconCell4];
+                     [iconCell1 removeFromSuperview];
+                     [iconCell2 removeFromSuperview];
+                     [iconCell3 removeFromSuperview];
+                     [iconCell4 removeFromSuperview];
+                     
+                     */
+                    
+                    [_delegate sceneEscape:self identifier:@"top"];
+                    
+                }
+                
+                
+            }else{
+                
+                topButtonFrag = NO;
+                
+            }
+            
+        }
+        
+        if(retryButtonFrag == YES){
+            
+            if([dummyRetryButton containsPoint:location]){
+                
+                [retryButton runAction:[SKAction moveToY:dummyRetryButton.position.y duration:0]];
+                
+                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+                    
+                    /**
+                     *  nend終了(viewから削除するときは加えてremoveFromSuperViewも唱えよう)
+                     */
+                    [self.nadView setDelegate:nil];
+                    [self.nadView removeFromSuperview];
+                    self.nadView = nil;
+                    
+                    [[NADInterstitial sharedInstance] setDelegate:nil];
+                    
+                    
+                    /*
+                     //アスタ終了
+                     [iconLoader removeIconCell:iconCell1];
+                     [iconLoader removeIconCell:iconCell2];
+                     [iconLoader removeIconCell:iconCell3];
+                     [iconLoader removeIconCell:iconCell4];
+                     [iconCell1 removeFromSuperview];
+                     [iconCell2 removeFromSuperview];
+                     [iconCell3 removeFromSuperview];
+                     [iconCell4 removeFromSuperview];
+                     */
+                    
+                    [_delegate sceneEscape:self identifier:@"retry"];
+                    
+                }
+                
+            }else{
+                
+                retryButtonFrag = NO;
+                
+            }
+            
+        }
+        
+    }
+
+    if(gameStartFlag == NO){
+        
+        return;
+    }
+
     
     
     //プレイヤーノードの削除
@@ -572,101 +655,6 @@
     }
     
     
-    if(gameResultFlag == YES){
-        
-        //スワイプ時の位置の取得
-        UITouch *touch = [touches anyObject];
-        CGPoint location = [touch locationInNode:self];
-        
-        
-        if(topButtonFrag == YES){
-            
-            if([dummyTopButton containsPoint:location]){
-
-                
-                [topButton runAction:[SKAction moveToY:dummyRetryButton.position.y duration:0]];
-
-                
-                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
-                    
-                    /**
-                     *  nend終了(viewから削除するときは加えてremoveFromSuperViewも唱えよう)
-                     */
-                    [self.nadView setDelegate:nil];
-                    [self.nadView removeFromSuperview];
-                    self.nadView = nil;
-                    
-                    [[NADInterstitial sharedInstance] setDelegate:nil];
-                    
-/*
-                    //アスタ終了
-                    [iconLoader removeIconCell:iconCell1];
-                    [iconLoader removeIconCell:iconCell2];
-                    [iconLoader removeIconCell:iconCell3];
-                    [iconLoader removeIconCell:iconCell4];
-                    [iconCell1 removeFromSuperview];
-                    [iconCell2 removeFromSuperview];
-                    [iconCell3 removeFromSuperview];
-                    [iconCell4 removeFromSuperview];
- 
- */
-                    
-                    [_delegate sceneEscape:self identifier:@"top"];
-                    
-                }
-
-                
-            }else{
-                
-                topButtonFrag = NO;
-                
-            }
-            
-        }
-        
-        if(retryButtonFrag == YES){
-            
-            if([dummyRetryButton containsPoint:location]){
-
-                [retryButton runAction:[SKAction moveToY:dummyRetryButton.position.y duration:0]];
-                
-                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
-                    
-                    /**
-                     *  nend終了(viewから削除するときは加えてremoveFromSuperViewも唱えよう)
-                     */
-                    [self.nadView setDelegate:nil];
-                    [self.nadView removeFromSuperview];
-                    self.nadView = nil;
-                    
-                    [[NADInterstitial sharedInstance] setDelegate:nil];
-
-                    
-/*
-                    //アスタ終了
-                    [iconLoader removeIconCell:iconCell1];
-                    [iconLoader removeIconCell:iconCell2];
-                    [iconLoader removeIconCell:iconCell3];
-                    [iconLoader removeIconCell:iconCell4];
-                    [iconCell1 removeFromSuperview];
-                    [iconCell2 removeFromSuperview];
-                    [iconCell3 removeFromSuperview];
-                    [iconCell4 removeFromSuperview];
-*/
-                    
-                    [_delegate sceneEscape:self identifier:@"retry"];
-                    
-                }
-                
-            }else{
-                
-                retryButtonFrag = NO;
-                
-            }
-            
-        }
-        
-    }
 
     
     
@@ -783,6 +771,10 @@
             //ゲームレコード用に再利用
             countDate = [NSDate date];
             
+            //ペンギンの設定を小細工
+            [Penguin getPenguin].physicsBody.dynamic = YES;
+            [Penguin getPenguin].physicsBody.categoryBitMask = penguinCategory;
+            
         }
         
         return;
@@ -795,25 +787,13 @@
         score = [nowDate timeIntervalSinceDate:countDate];
         
         int min = (float)score / 60;
-        int tenmin = (float)min / 10;
-        if(tenmin > 0){
-            min = min - tenmin * 10;
-        }
         
         int sec = ((float)score - min * 60) / 1;
-        int tensec = (float)sec / 10;
-        if(tensec > 0){
-            sec = sec - tensec * 10;
-        }
         
-        int secdiv60 = ((float)score * 100 ) - (tenmin * 60 * 1000) - (min * 60 * 100) - (tensec * 1000) - (sec * 100);
-        int tensecdiv60 = (float)secdiv60 / 10;
-        if(tensecdiv60 > 0){
-            secdiv60 = secdiv60 - tensecdiv60 * 10;
-        }
+        int secdiv60 = (int)((float)score * 100) % 100;
         
         //ゲームレコードの更新(時間を変換しノードに反映すること)
-        scoreLabel.text = [NSString stringWithFormat:@"TIME %d%d:%d%d:%d%d",tenmin,min,tensec,sec,tensecdiv60,secdiv60];
+        scoreLabel.text = [NSString stringWithFormat:@"TIME %02d:%02d:%02d",min,sec,secdiv60];
         
     }
     

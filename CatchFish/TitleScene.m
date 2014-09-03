@@ -91,7 +91,7 @@ BOOL showTutorialFlag;
         
         //ハイスコア読込
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        float score = [userDefaults floatForKey:@"score"];
+        int score = [userDefaults integerForKey:@"score"];
         
         int mm = (int)score / 6000;
         int sec = ((int)score - mm * 6000) / 100;

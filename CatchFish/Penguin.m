@@ -63,34 +63,7 @@ BOOL collisionFlag;
 
 //走るモーション設定
 +(void)runActionSpeed:(int)speed{
-    
-    //if(playerStatus != walkStatus){
-    
-    //SKAction *runPenguin;
-    
-        //走るモーション
-    /*switch (speed) {
-        case 1:
-            
-            runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.2];
-            [penguin runAction:[SKAction repeatActionForever:runPenguin]];
-            
-            break;
-            
-        case 2:
-            
-            runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.1];
-            [penguin runAction:[SKAction repeatActionForever:runPenguin]];
-            
-            
-        case 3:
-            
-            runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.05];
-            [penguin runAction:[SKAction repeatActionForever:runPenguin]];
-            
-        default:
-            break;
-    }*/
+
     
     if (speed == 1) {
         SKAction *runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.2];
@@ -104,13 +77,6 @@ BOOL collisionFlag;
         [penguin runAction:[SKAction repeatActionForever:runPenguin]];
         NSLog(@"スピード3が実装！");
     }
-    
-    //NSLog(@"%f",(accelete*2/(1000+accelete)));
-       //playerStatus = walkStatus;
-        
-        //PhysicsBodyを通常時に
-        //[self setNormalPhysicsBody];
-    //}z
     
 }
 
@@ -174,11 +140,10 @@ BOOL collisionFlag;
     if (accelerate < 0) {
         accelerate = 0;
     }
-    //NSLog(@"減速%f",accelerate);
 
     penguinVectorX = (accelerate * zRotationX);
     penguinVectorY = (accelerate * zRotationY);
-    //penguin.physicsBody.velocity = CGVectorMake((accelete * x), -(accelete * y));
+
     penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, 0);
 
 
@@ -240,16 +205,6 @@ BOOL collisionFlag;
 
 
 
-
-
-
-
-/* MARK:ペンギンの物理設定を分ける必要がある際に使う
-+(void)setNormalPhysicsBody{
-    penguin.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:penguin.size];
-    penguin.physicsBody.affectedByGravity = 0;
-}
-*/
 
 +(float)getAccelerate{
     return accelerate;

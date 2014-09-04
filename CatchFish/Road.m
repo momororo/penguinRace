@@ -82,17 +82,9 @@
     road1.physicsBody.velocity = CGVectorMake(0, penguinVectorY);
     goalRoad.physicsBody.velocity = CGVectorMake(0, penguinVectorY);
 
-    //NSLog(@"%f",road3.physicsBody.velocity.dy);
-    //NSLog(@"%f",road2.physicsBody.velocity.dy);
-    //NSLog(@"%f",road1.physicsBody.velocity.dy);
-}
-/*
-+(void)removeRoad{
     
-    //NSLog(@"%f",([Road getNextRoad3].position.y));
-    [roads[roads.count-2] removeFromParent];
 }
- */
+
 
 +(void)setNextRoadframeX:(float)frameX frameY:(float)frameY{
 

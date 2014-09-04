@@ -55,8 +55,4 @@ NSMutableArray *runPenguins;
 +(float)getVectorY;
 
 
-//通常時のphysicsBody
-//MARK:+(void)setNormalPhysicsBody;
-
-
 @end

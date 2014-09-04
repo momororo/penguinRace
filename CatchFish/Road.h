@@ -26,14 +26,12 @@ SKTexture *roadTexture;
 +(SKSpriteNode *)getNextRoad1;
 +(SKSpriteNode *)getNextRoad2;
 +(SKSpriteNode *)getGoalRoad;
-//+(SKSpriteNode *)getNextRoad3
 +(void)initTexture;
 
 +(void)setRoadFrameX:(float)frameX frameY:(float)frameY;
 
 +(void)setMoveRoadVectorY:(float)vectorY;
 
-//+(void)removeRoad;
 
 +(void)setNextRoadframeX:(float)frameX frameY:(float)frameY;
 

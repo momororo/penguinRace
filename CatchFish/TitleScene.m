@@ -516,7 +516,7 @@ BOOL showTutorialFlag;
     //スコアが0じゃない場合に限り送信
     if(score != 0){
         if ([GKLocalPlayer localPlayer].isAuthenticated) {
-            GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"testPenguinRace"];
+            GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"PenguinRace"];
             sendScore.value = (int64_t)score;
             [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
                 if (error) {

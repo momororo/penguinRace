@@ -18,6 +18,8 @@
 		04FFE32F19B1A5A90073844B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FFE32E19B1A5A90073844B /* Security.framework */; };
 		A47EF8CF19A61B4100BB73B7 /* Road.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EF8CE19A61B4100BB73B7 /* Road.m */; };
 		A47EF8DB19AB646800BB73B7 /* Sabotage.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EF8DA19AB646800BB73B7 /* Sabotage.m */; };
+		A4A2BC2A19B8705200D8D9F4 /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = A4A2BC2819B8705200D8D9F4 /* Spark.sks */; };
+		A4A2BC2B19B8705200D8D9F4 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A2BC2919B8705200D8D9F4 /* spark.png */; };
 		A4B4667819A4B62500B72D7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667719A4B62500B72D7E /* Foundation.framework */; };
 		A4B4667A19A4B62500B72D7E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667919A4B62500B72D7E /* CoreGraphics.framework */; };
 		A4B4667C19A4B62500B72D7E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B4667B19A4B62500B72D7E /* UIKit.framework */; };
@@ -40,8 +42,6 @@
 		A4B466C119A4BBB800B72D7E /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466C019A4BBB800B72D7E /* Player.m */; };
 		A4B466C419A4BBCC00B72D7E /* Penguin.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466C319A4BBCC00B72D7E /* Penguin.m */; };
 		A4B466C719A4BBEB00B72D7E /* ObjectBitMask.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B466C619A4BBEB00B72D7E /* ObjectBitMask.m */; };
-		A4DF0E0719B0ED3D00D82497 /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = A4DF0E0519B0ED3D00D82497 /* Spark.sks */; };
-		A4DF0E0819B0ED3D00D82497 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A4DF0E0619B0ED3D00D82497 /* spark.png */; };
 		A4DF0E0A19B70C0B00D82497 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4DF0E0919B70C0B00D82497 /* Impact.ttf */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +75,8 @@
 		A47EF8CE19A61B4100BB73B7 /* Road.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Road.m; sourceTree = "<group>"; };
 		A47EF8D919AB646700BB73B7 /* Sabotage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sabotage.h; sourceTree = "<group>"; };
 		A47EF8DA19AB646800BB73B7 /* Sabotage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sabotage.m; sourceTree = "<group>"; };
+		A4A2BC2819B8705200D8D9F4 /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
+		A4A2BC2919B8705200D8D9F4 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		A4B4667419A4B62500B72D7E /* CatchFish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatchFish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4B4667719A4B62500B72D7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4B4667919A4B62500B72D7E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -109,8 +111,6 @@
 		A4B466C319A4BBCC00B72D7E /* Penguin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Penguin.m; sourceTree = "<group>"; };
 		A4B466C519A4BBEB00B72D7E /* ObjectBitMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBitMask.h; sourceTree = "<group>"; };
 		A4B466C619A4BBEB00B72D7E /* ObjectBitMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBitMask.m; sourceTree = "<group>"; };
-		A4DF0E0519B0ED3D00D82497 /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
-		A4DF0E0619B0ED3D00D82497 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		A4DF0E0919B70C0B00D82497 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -224,8 +224,8 @@
 				A4B466B419A4B7CE00B72D7E /* GameView.m */,
 				A4B466BC19A4B87400B72D7E /* SceneManager.h */,
 				A4B466BD19A4B87400B72D7E /* SceneManager.m */,
-				A4DF0E0519B0ED3D00D82497 /* Spark.sks */,
-				A4DF0E0619B0ED3D00D82497 /* spark.png */,
+				A4A2BC2819B8705200D8D9F4 /* Spark.sks */,
+				A4A2BC2919B8705200D8D9F4 /* spark.png */,
 				A4B4669619A4B62500B72D7E /* Images.xcassets */,
 				A4B4668019A4B62500B72D7E /* Supporting Files */,
 			);
@@ -349,10 +349,10 @@
 			files = (
 				04FFE32919B1A54C0073844B /* NADView_readme.txt in Resources */,
 				A4B4668419A4B62500B72D7E /* InfoPlist.strings in Resources */,
-				A4DF0E0819B0ED3D00D82497 /* spark.png in Resources */,
-				A4DF0E0719B0ED3D00D82497 /* Spark.sks in Resources */,
 				A4DF0E0A19B70C0B00D82497 /* Impact.ttf in Resources */,
+				A4A2BC2A19B8705200D8D9F4 /* Spark.sks in Resources */,
 				A4B4669719A4B62500B72D7E /* Images.xcassets in Resources */,
+				A4A2BC2B19B8705200D8D9F4 /* spark.png in Resources */,
 				049755CC19AD874C007F2A38 /* runPenguin.atlas in Resources */,
 				A4B4668D19A4B62500B72D7E /* Main.storyboard in Resources */,
 			);

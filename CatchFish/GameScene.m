@@ -64,6 +64,9 @@
     SKLabelNode *retryButtonLiteral;
     SKSpriteNode *dummyRetryButton;
     
+    //パーティクル（スパーク）
+    SKEmitterNode *_particleSpark;
+    
     
     //ゴール用のカウント
     int goalCount;
@@ -817,6 +820,8 @@
 {
     
     
+    [self makeSparkParticle:contact.contactPoint];
+
     
     //スタートラベルがある時は処理を飛ばす
     
@@ -1199,11 +1204,97 @@
     
     
     
+    if ([Penguin getAccelerate] > 0 && [Penguin getAccelerate] <= 100 ) {
+        
+        
+        if (walkFlag == YES) {
+            
+            return;
+            
+        }
+        
+        
+        
+        walkFlag = YES;
+        
+        runFlag = NO;
+        
+        fastRunFlag = NO;
+        
+        [Penguin runActionSpeed:1];
+        
+        
+        
+    }else if ([Penguin getAccelerate] > 100 && [Penguin getAccelerate] <= 200) {
+        
+        
+        
+        if (runFlag == YES) {
+            
+            return;
+            
+        }
+        
+        
+        
+        runFlag = YES;
+        
+        walkFlag = NO;
+        
+        fastRunFlag = NO;
+        
+        [Penguin runActionSpeed:2];
+        
+        
+        
+    }else if ([Penguin getAccelerate] > 200){
+        
+        
+        
+        if (fastRunFlag == YES) {
+            
+            return;
+            
+        }
+        
+        
+        
+        fastRunFlag = YES;
+        
+        walkFlag = NO;
+        
+        runFlag = NO;
+        
+        [Penguin runActionSpeed:3];
+        
+        
+        
+    }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
     if ([Penguin getPenguin].position.y < self.frame.size.height *9 / 10 && [Penguin getPenguin].position.y > self.frame.size.height *2/3) {
-        
-        
-        
         
         
         if (walkFlag == YES) {
@@ -1268,7 +1359,7 @@
         
         
         
-    }
+    }*/
     
     
     
@@ -1435,6 +1526,19 @@
     
 }
 
+
+//スパークパーティクルの作成
+-(void)makeSparkParticle:(CGPoint)point{
+    if (_particleSpark == nil) {
+        NSString *path = [[NSBundle mainBundle]pathForResource:@"Spark" ofType:@"sks"];
+        _particleSpark = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        _particleSpark.numParticlesToEmit = 50;
+        [self addChild:_particleSpark];
+    }else{
+        [_particleSpark resetSimulation];
+    }
+    _particleSpark.position = point;
+}
 
 
 

@@ -59,7 +59,6 @@ BOOL collisionFlag;
     penguin.physicsBody.collisionBitMask = wallCategory;
     penguin.physicsBody.contactTestBitMask = sabotageCategory | goalRoadCategory;
     
-    NSLog(@"penguin: %f",penguin.physicsBody.mass);
 }
 
 //走るモーション設定

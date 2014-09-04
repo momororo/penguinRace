@@ -16,6 +16,12 @@
 
 #import "GameScene.h"
 
+#if __has_feature(objc_arc)
+#  define IF_NO_ARC(x)
+#else
+#  define IF_NO_ARC(x) x
+#endif
+
 
 
 
@@ -73,6 +79,18 @@
     
     //レコード保存よう
     float score;
+    
+    //アスタ関係
+    MrdIconLoader *iconLoader;
+    MrdIconCell *iconCell1;
+    MrdIconCell *iconCell2;
+    MrdIconCell *iconCell3;
+    MrdIconCell *iconCell4;
+    MrdIconCell *iconCell5;
+    MrdIconCell *iconCell6;
+    MrdIconCell *iconCell7;
+    MrdIconCell *iconCell8;
+
 }
 
 
@@ -216,8 +234,8 @@
         
         //ゴールのカウントの設定
 #pragma mark ゴールカウント
-        goalCount = 45;
-        
+//        goalCount = 45;
+            goalCount = 5;
         
         
         
@@ -231,24 +249,133 @@
         gameResultFlag = NO;
         startCountFrag = NO;
         
+
         
-        /**
-         *  nend
-         */
-        //nadViewの生成
-        self.nadView = [[NADView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame) - 50 , 320, 50)];
-        //ログ出力の設定
-        self.nadView.isOutputLog = NO;
         
-        //setapiKey
-        [self.nadView setNendApiKey:@"a6eca9dd074372c898dd1df549301f277c53f2b9"];
-        [self.nadView setNendSpotID:@"3172"];
-        [self.nadView setDelegate:self];
-        [self.nadView load];
         
         
         
     }
+    
+    /**
+     *  nend
+     */
+    //nadViewの生成
+    self.nadView = [[NADView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame) - 50 , 320, 50)];
+    //ログ出力の設定
+    self.nadView.isOutputLog = NO;
+    
+    //setapiKey
+    [self.nadView setNendApiKey:@"a6eca9dd074372c898dd1df549301f277c53f2b9"];
+    [self.nadView setNendSpotID:@"3172"];
+    [self.nadView setDelegate:self];
+    [self.nadView load];
+    
+    /**
+     *  アスタ
+     */
+    iconLoader = [[MrdIconLoader alloc]init];
+    
+
+    
+    
+    //アイコン1つめ
+    CGRect frame1 = CGRectMake(self.frame.size.width/4 - 75, self.frame.size.height/6*1, 75, 75);
+    iconCell1 = [[MrdIconCell alloc]initWithFrame:frame1];
+    iconCell1.titleTextColor =[UIColor blackColor];
+    
+    //アイコン2つめ
+    CGRect frame2 = CGRectMake(frame1.origin.x + frame1.size.width, self.frame.size.height/6*1, 75, 75);
+    iconCell2 = [[MrdIconCell alloc]initWithFrame:frame2];
+    iconCell2.titleTextColor =[UIColor blackColor];
+
+    
+    //アイコン3つめ
+    CGRect frame3 = CGRectMake(frame2.origin.x + frame2.size.width, self.frame.size.height/6*1, 75, 75);
+    iconCell3 = [[MrdIconCell alloc]initWithFrame:frame3];
+    iconCell3.titleTextColor =[UIColor blackColor];
+    
+    //アイコン4つめ
+    CGRect frame4 = CGRectMake(frame3.origin.x + frame3.size.width, self.frame.size.height/6*1, 75, 75);
+    iconCell4 = [[MrdIconCell alloc]initWithFrame:frame4];
+    iconCell4.titleTextColor =[UIColor blackColor];
+    
+    
+    //アイコン5つめ
+    CGRect frame5 = CGRectMake(self.frame.size.width/4 - 75, self.frame.size.height/6*4, 75, 75);
+    iconCell5 = [[MrdIconCell alloc]initWithFrame:frame5];
+    iconCell5.titleTextColor =[UIColor blackColor];
+    
+    //アイコン6つめ
+    CGRect frame6 = CGRectMake(frame5.origin.x + frame1.size.width, self.frame.size.height/6*4, 75, 75);
+    iconCell6 = [[MrdIconCell alloc]initWithFrame:frame6];
+    iconCell6.titleTextColor =[UIColor blackColor];
+    
+    //アイコン7つめ
+    CGRect frame7 = CGRectMake(frame6.origin.x + frame2.size.width, self.frame.size.height/6*4, 75, 75);
+    iconCell7 = [[MrdIconCell alloc]initWithFrame:frame7];
+    iconCell7.titleTextColor =[UIColor blackColor];
+    
+    //アイコン8つめ
+    CGRect frame8 = CGRectMake(frame7.origin.x + frame3.size.width, self.frame.size.height/6*4, 75, 75);
+    iconCell8 = [[MrdIconCell alloc]initWithFrame:frame8];
+    iconCell8.titleTextColor =[UIColor blackColor];
+    
+/*
+    
+    //アイコン1つめ
+    CGRect frame1 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
+    iconCell1 = [[MrdIconCell alloc]initWithFrame:frame1];
+    iconCell1.titleTextColor =[UIColor blackColor];
+    
+    //アイコン2つめ
+    CGRect frame2 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
+    iconCell2 = [[MrdIconCell alloc]initWithFrame:frame2];
+    iconCell2.titleTextColor =[UIColor blackColor];
+    
+    //アイコン3つめ
+    CGRect frame3 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
+    iconCell3 = [[MrdIconCell alloc]initWithFrame:frame3];
+    iconCell3.titleTextColor =[UIColor blackColor];
+    
+    //アイコン4つめ
+    CGRect frame4 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
+    iconCell4 = [[MrdIconCell alloc]initWithFrame:frame4];
+    iconCell4.titleTextColor =[UIColor blackColor];
+    
+    
+    //アイコン5つめ
+    CGRect frame5 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
+    iconCell5 = [[MrdIconCell alloc]initWithFrame:frame5];
+    iconCell5.titleTextColor =[UIColor blackColor];
+    
+    //アイコン6つめ
+    CGRect frame6 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
+    iconCell6 = [[MrdIconCell alloc]initWithFrame:frame6];
+    iconCell6.titleTextColor =[UIColor blackColor];
+    
+    //アイコン7つめ
+    CGRect frame7 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
+    iconCell7 = [[MrdIconCell alloc]initWithFrame:frame7];
+    iconCell7.titleTextColor =[UIColor blackColor];
+    
+    //アイコン8つめ
+    CGRect frame8 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
+    iconCell8 = [[MrdIconCell alloc]initWithFrame:frame8];
+    iconCell8.titleTextColor =[UIColor blackColor];
+*/
+    
+    //アイコンの追加
+    [iconLoader addIconCell:iconCell1];
+    [iconLoader addIconCell:iconCell2];
+    [iconLoader addIconCell:iconCell3];
+    [iconLoader addIconCell:iconCell4];
+    [iconLoader addIconCell:iconCell5];
+    [iconLoader addIconCell:iconCell6];
+    [iconLoader addIconCell:iconCell7];
+    [iconLoader addIconCell:iconCell8];
+    
+
     
     
     
@@ -557,18 +684,27 @@
                     
                     [[NADInterstitial sharedInstance] setDelegate:nil];
                     
-                    /*
+                    
                      //アスタ終了
                      [iconLoader removeIconCell:iconCell1];
                      [iconLoader removeIconCell:iconCell2];
                      [iconLoader removeIconCell:iconCell3];
                      [iconLoader removeIconCell:iconCell4];
+                     [iconLoader removeIconCell:iconCell5];
+                     [iconLoader removeIconCell:iconCell6];
+                     [iconLoader removeIconCell:iconCell7];
+                     [iconLoader removeIconCell:iconCell8];
+
                      [iconCell1 removeFromSuperview];
                      [iconCell2 removeFromSuperview];
                      [iconCell3 removeFromSuperview];
                      [iconCell4 removeFromSuperview];
-                     
-                     */
+                     [iconCell5 removeFromSuperview];
+                     [iconCell6 removeFromSuperview];
+                     [iconCell7 removeFromSuperview];
+                     [iconCell8 removeFromSuperview];
+                    
+                    
                     
                     [_delegate sceneEscape:self identifier:@"top"];
                     
@@ -601,17 +737,26 @@
                     [[NADInterstitial sharedInstance] setDelegate:nil];
                     
                     
-                    /*
-                     //アスタ終了
-                     [iconLoader removeIconCell:iconCell1];
-                     [iconLoader removeIconCell:iconCell2];
-                     [iconLoader removeIconCell:iconCell3];
-                     [iconLoader removeIconCell:iconCell4];
-                     [iconCell1 removeFromSuperview];
-                     [iconCell2 removeFromSuperview];
-                     [iconCell3 removeFromSuperview];
-                     [iconCell4 removeFromSuperview];
-                     */
+                    
+                    //アスタ終了
+                    [iconLoader removeIconCell:iconCell1];
+                    [iconLoader removeIconCell:iconCell2];
+                    [iconLoader removeIconCell:iconCell3];
+                    [iconLoader removeIconCell:iconCell4];
+                    [iconLoader removeIconCell:iconCell5];
+                    [iconLoader removeIconCell:iconCell6];
+                    [iconLoader removeIconCell:iconCell7];
+                    [iconLoader removeIconCell:iconCell8];
+                    
+                    [iconCell1 removeFromSuperview];
+                    [iconCell2 removeFromSuperview];
+                    [iconCell3 removeFromSuperview];
+                    [iconCell4 removeFromSuperview];
+                    [iconCell5 removeFromSuperview];
+                    [iconCell6 removeFromSuperview];
+                    [iconCell7 removeFromSuperview];
+                    [iconCell8 removeFromSuperview];
+                    
                     
                     [_delegate sceneEscape:self identifier:@"retry"];
                     
@@ -732,7 +877,6 @@
         [Penguin getPenguin].physicsBody.allowsRotation = NO;
         [Penguin getPenguin].physicsBody.categoryBitMask = 0;
 
-
     
         
     }
@@ -816,6 +960,8 @@
             
             //ゴールの処理へ
             [self goalMethod];
+            
+
 
         }
         //ここにreturnは入れない!!(以降の地面のスクロール処理がスキップされるため)
@@ -1149,6 +1295,26 @@
 #pragma mark -
 #pragma mark ゴール処理
 -(void)goalMethod{
+
+    
+    //広告取得開始
+//    iconLoader.refreshInterval = 500;
+    
+    //アスタの表示
+    [self.view addSubview:iconCell1];
+    [self.view addSubview:iconCell2];
+    [self.view addSubview:iconCell3];
+    [self.view addSubview:iconCell4];
+    [self.view addSubview:iconCell5];
+    [self.view addSubview:iconCell6];
+    [self.view addSubview:iconCell7];
+    [self.view addSubview:iconCell8];
+    
+
+    
+    [iconLoader startLoadWithMediaCode:@"ast01828j7ybvgg4xdgc"];
+
+    
     
     /**
      *  nend
@@ -1216,7 +1382,7 @@
 
     
     topButtonLiteral = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
-    topButtonLiteral.fontSize = 10;
+    topButtonLiteral.fontSize = 25;
     topButtonLiteral.fontColor = [SKColor whiteColor];
     topButtonLiteral.position = CGPointMake(0,0);
     topButtonLiteral.text = @"TOP";
@@ -1240,7 +1406,7 @@
 
     
     retryButtonLiteral = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
-    retryButtonLiteral.fontSize = 10;
+    retryButtonLiteral.fontSize = 25;
     retryButtonLiteral.fontColor = [SKColor whiteColor];
     retryButtonLiteral.position = CGPointMake(0,0);
     retryButtonLiteral.text = @"RETRY";
@@ -1266,6 +1432,7 @@
 //広告非表示
 - (void) dismissInterstitialAdSample {
     [[NADInterstitial sharedInstance] dismissAd];
+    
 }
 
 

@@ -15,11 +15,6 @@ CGFloat zRotationY;
 CGFloat penguinVectorX;
 CGFloat penguinVectorY;
 
-//衝突時のフラグ
-BOOL collisionFlag;
-//衝突時の時間を計測
-NSDate *collisionDate;
-
 
 @implementation Penguin
 
@@ -124,11 +119,6 @@ NSDate *collisionDate;
 
 //タップした時、プレイヤー(魚)ノードを追いかけて見えるよう、ペンギンの向きを変える
 +(void)setPenguinRotationFromPlayerPositionX:(float)positionX positionY:(float)positionY{
-    
-    if([self collision] == NO){
-        return;
-    }
-
 
     CGFloat radian = (atan2f(-(penguin.position.x - positionX), (penguin.position.y - positionY)));
     
@@ -143,11 +133,6 @@ NSDate *collisionDate;
 //タッチアップした時、ペンギンを正面に向かせる処理
 +(void)resetPenguinRotationPositionX:(float)positionX positionY:(float)positionY{
     
-    if([self collision] == NO){
-        return;
-    }
-
-    
     CGFloat radian = (atan2f(-(penguin.position.x - positionX), (penguin.position.y - positionY)));
     
     CGFloat diff = fabsf(penguin.zRotation - radian);
@@ -160,13 +145,6 @@ NSDate *collisionDate;
 
 //ペンギンの加速設定
 +(void)setAcceleratePenguin:(float)playerPositionY frameY:(float)frameY playerPositionX:(float)playerPositionX{
-    
-    
-    if([self collision] == NO){
-        return;
-    }
-
-    
     zRotationX = sin(penguin.zRotation);
     zRotationY = cos(penguin.zRotation);
     
@@ -191,11 +169,6 @@ NSDate *collisionDate;
 //ペンギンの減速設定
 +(void)setReducePenguin{
     
-    if([self collision] == NO){
-        return;
-    }
-
-
     zRotationX = sin(penguin.zRotation);
     zRotationY = cos(penguin.zRotation);
     
@@ -231,28 +204,19 @@ NSDate *collisionDate;
     penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, penguinVectorY);
     
     
-    //衝突フラグをONに
-    collisionFlag = YES;
-    //衝突時間を計測開始
-    collisionDate = [NSDate date];
-    
-    [penguin removeAllActions];
-    [penguin runAction:[SKAction moveToY:penguin.position.y + 50 duration:0.2]];
-
-    
     
 }
 
 //タップ位置に向かってペンギンが動く
 +(void)setPenguinEatPlayer:(float)playerPositionY playerSize:(float)playerSize frameY:(float)frameY{
     
-    if([self collision] == NO){
-        return;
-    }
+    float positionY = frameY - accelerate;
     
-    if (playerPositionY < frameY/2) {
-        [penguin runAction:[SKAction moveToY:frameY/2 + playerSize duration:2]];
-    }
+    if (positionY > frameY*9/10) {
+        positionY = frameY *9/10;
+    }else{
+        
+        [penguin runAction:[SKAction moveToY:frameY - accelerate duration:0.1]];
     
     }
     
@@ -285,30 +249,6 @@ NSDate *collisionDate;
     penguin.physicsBody.affectedByGravity = 0;
 }
 */
-
-+(BOOL)collision{
-
-    //現在時刻を取得
-    NSDate *nowDate = [NSDate date];
-    
-    //衝突中か判定
-    if(collisionFlag == YES){
-        
-        //衝突制限時刻の判定
-        if([nowDate timeIntervalSinceDate:collisionDate] >= 0.25){
-            collisionFlag = NO;
-            [self runActionSpeed:1];
-            return YES;
-        }else{
-            return NO;
-        }
-        
-    }
-    
-    return YES;
-}
-
-
 
 +(float)getAccelerate{
     return accelerate;

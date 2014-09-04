@@ -105,7 +105,7 @@ BOOL showTutorialFlag;
         scoreLabelValue.text = [NSString stringWithFormat:@"Best Time %02d:%02d:%02d",mm,sec,mmsec];
         scoreLabelValue.fontSize = 30;
         scoreLabelValue.zPosition = 10;
-        scoreLabelValue.fontColor = [UIColor blueColor];
+        scoreLabelValue.fontColor = [UIColor orangeColor];
         scoreLabelValue.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)*3/5);
         scoreLabelValue.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
         scoreLabelValue.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;

@@ -237,8 +237,7 @@
         
         //ゴールのカウントの設定
 #pragma mark ゴールカウント
-//        goalCount = 45;
-            goalCount = 5;
+        goalCount = 35;
         
         
         

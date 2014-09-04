@@ -18,6 +18,7 @@
 #import "NADView.h"
 #import "NADInterstitial.h"
 #import "GameView.h"
+#import <MrdIconSDK/MrdIconSDK.h>
 
 
 @interface GameScene : SKScene <SKPhysicsContactDelegate,NADViewDelegate>

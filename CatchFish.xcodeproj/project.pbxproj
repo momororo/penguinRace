@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		049755CC19AD874C007F2A38 /* runPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 049755CB19AD874C007F2A38 /* runPenguin.atlas */; };
 		04BD935619B72E2600FC761D /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BD935519B72E2600FC761D /* GameKit.framework */; };
+		04BD935A19B845CA00FC761D /* MrdIconSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BD935919B845CA00FC761D /* MrdIconSDK.framework */; };
 		04F5850419AF3F1C00FD5A19 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5850319AF3F1C00FD5A19 /* Wall.m */; };
 		04FFE32819B1A54C0073844B /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FFE32119B1A54C0073844B /* libNendAd.a */; };
 		04FFE32919B1A54C0073844B /* NADView_readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04FFE32719B1A54C0073844B /* NADView_readme.txt */; };
@@ -57,6 +58,7 @@
 /* Begin PBXFileReference section */
 		049755CB19AD874C007F2A38 /* runPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = runPenguin.atlas; sourceTree = "<group>"; };
 		04BD935519B72E2600FC761D /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		04BD935919B845CA00FC761D /* MrdIconSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MrdIconSDK.framework; sourceTree = "<group>"; };
 		04F5850219AF3F1C00FD5A19 /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
 		04F5850319AF3F1C00FD5A19 /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
 		04FFE32119B1A54C0073844B /* libNendAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNendAd.a; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				A4B4667C19A4B62500B72D7E /* UIKit.framework in Frameworks */,
 				04FFE32819B1A54C0073844B /* libNendAd.a in Frameworks */,
 				A4B4667E19A4B62500B72D7E /* SpriteKit.framework in Frameworks */,
+				04BD935A19B845CA00FC761D /* MrdIconSDK.framework in Frameworks */,
 				A4B4667819A4B62500B72D7E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,6 +182,7 @@
 		A4B4667619A4B62500B72D7E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04BD935919B845CA00FC761D /* MrdIconSDK.framework */,
 				04BD935519B72E2600FC761D /* GameKit.framework */,
 				04FFE32E19B1A5A90073844B /* Security.framework */,
 				04FFE32C19B1A59D0073844B /* AdSupport.framework */,
@@ -512,6 +516,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 浩樹 安友 (V292ELV67P)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CatchFish/CatchFish-Prefix.pch";
 				INFOPLIST_FILE = "CatchFish/CatchFish-Info.plist";
@@ -533,6 +541,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 浩樹 安友 (V292ELV67P)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CatchFish/CatchFish-Prefix.pch";
 				INFOPLIST_FILE = "CatchFish/CatchFish-Info.plist";

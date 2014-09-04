@@ -105,7 +105,8 @@
 
 
 +(void)removeCollisionSabotage:(SKNode *)CollisionSabotage{
-    
+ 
+    /*
     for(int i = 0; i < sabotages.count; i++){
         
         if(CollisionSabotage == sabotages[i]){
@@ -120,6 +121,7 @@
             return;
         }
     }
+     */
 }
 
 

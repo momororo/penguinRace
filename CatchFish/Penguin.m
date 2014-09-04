@@ -106,6 +106,11 @@ NSDate *collisionDate;
         SKAction *runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.05];
         [penguin runAction:[SKAction repeatActionForever:runPenguin]];
         NSLog(@"スピード3が実装！");
+    }else if (speed == 4){
+        
+        penguin = [SKSpriteNode spriteNodeWithTexture:stopPenguinTexture];
+
+    
     }
     
     //NSLog(@"%f",(accelete*2/(1000+accelete)));
@@ -173,22 +178,10 @@ NSDate *collisionDate;
         accelerate = (frameY - playerPositionY)/2;
     }
     
-    
-    
-    float penguinPositionY = accelerate;
-    if (penguinPositionY < frameY * 9 / 10) {
-        penguinPositionY = frameY * 9 / 10;
-    }
-    
-    
-    
-    //NSLog(@"加速：%f",accelerate);
     penguinVectorX = (accelerate * zRotationX);
     penguinVectorY = (accelerate * zRotationY) * 3;
-    //penguin.physicsBody.velocity = CGVectorMake((accelete * x), -(accelete * y));
     
-    //penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, 0);
-    
+
     [penguin runAction:[SKAction moveToX:playerPositionX duration:0.1]];
     
     
@@ -232,12 +225,11 @@ NSDate *collisionDate;
     if (accelerate < 0) {
         accelerate = 0;
     }
-    //NSLog(@"減速%f",accelerate);
     
     penguinVectorX = (accelerate * zRotationX);
     penguinVectorY = (accelerate * zRotationY);
-    //penguin.physicsBody.velocity = CGVectorMake((accelete * x), -(accelete * y));
-    penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, 0);
+    penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, penguinVectorY);
+    
     
     //衝突フラグをONに
     collisionFlag = YES;
@@ -262,14 +254,23 @@ NSDate *collisionDate;
         [penguin runAction:[SKAction moveToY:frameY/2 + playerSize duration:2]];
     }
     
-    if (playerPositionY > frameY/2 && playerPositionY < frameY*2/3) {
-        [penguin runAction:[SKAction moveToY: playerPositionY + playerSize duration:2]];
     }
+    
+
 }
 
 //タッチアップした際にペンギンが元の位置に戻る
 +(void)setPenguinDisapperPlayer:(float)frameY{
-    [penguin runAction:[SKAction moveToY:frameY * 9 / 10 duration:0.5]];
+    
+    float positionY = frameY - accelerate;
+    
+    if (positionY > frameY*9/10) {
+        positionY = frameY *9/10;
+    }else{
+        
+        [penguin runAction:[SKAction moveToY:frameY - accelerate duration:0.1]];
+        
+    }
 }
 
 

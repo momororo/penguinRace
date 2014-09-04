@@ -91,7 +91,7 @@ BOOL showTutorialFlag;
         
         //ハイスコア読込
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        int score = [userDefaults integerForKey:@"score"];
+        float score = [userDefaults integerForKey:@"score"];
         
         int mm = (int)score / 6000;
         int sec = ((int)score - mm * 6000) / 100;
@@ -508,7 +508,7 @@ BOOL showTutorialFlag;
 -(void)showGameCenter{
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    int score = [userDefaults integerForKey:@"score"];
+    float score = [userDefaults integerForKey:@"score"];
     
     
     NSLog(@"%lld",(int64_t)score);

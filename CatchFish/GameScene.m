@@ -216,7 +216,7 @@
         
         //ゴールのカウントの設定
 #pragma mark ゴールカウント
-        goalCount = 5;
+        goalCount = 45;
         
         
         
@@ -960,27 +960,27 @@
             
             
             
-            if(goalCount >= 18){
+            if(goalCount >= 40){
                 
                 //なにもしない
                 
-            }else if(goalCount >=15){
+            }else if(goalCount >=30){
                 
                 
+                
+                [self addSabotage];
+                
+                
+                
+            }else if (goalCount >= 20){
+                
+                [self addSabotage];
                 
                 [self addSabotage];
                 
                 
                 
             }else if (goalCount >= 10){
-                
-                [self addSabotage];
-                
-                [self addSabotage];
-                
-                
-                
-            }else if (goalCount >= 5){
                 
                 [self addSabotage];
                 
@@ -1025,28 +1025,30 @@
     
     
     //MARK:ペンギンのテクスチャ動作(直せたらなおす)
-    
-    /*if ([Penguin getAccelerate] == 1 || [Penguin getAccelerate] == 100) {
+    /*
+    if ([Penguin getAccelerate] == 1 || [Penguin getAccelerate] == 100) {
      
      [Penguin runActionSpeed:1];
      
      NSLog(@"SPEED:1");
      
-     }else if ([Penguin getAccelerate] == 101 || [Penguin getAccelerate] == 300){
+     }else if ([Penguin getAccelerate] == 101 || [Penguin getAccelerate] == 249){
      
      [Penguin runActionSpeed:2];
      
      NSLog(@"SPEED:2");
      
-     }else if ([Penguin getAccelerate] == 301){
+     }else if ([Penguin getAccelerate] == 250){
      
      [Penguin runActionSpeed:3];
      
      NSLog(@"SPEED:3");
      
+     }else if ([Penguin getAccelerate] == 0 ){
+         [Penguin runActionSpeed:4];
      }
-     
-     */
+    */
+    
     
     
     

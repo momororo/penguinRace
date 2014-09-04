@@ -53,14 +53,21 @@
     
     if(arc4random_uniform(2) == 0){
         SKSpriteNode *stone = [SKSpriteNode spriteNodeWithTexture:sabotagesTexture[0]];
+        
+        
         stone.size = CGSizeMake(stone.size.width, stone.size.height);
         stone.position = position;
-        stone.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(stone.size.width, 1) center:CGPointMake(0, -(stone.size.height/2))];
+        stone.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(stone.size.width, 3) center:CGPointMake(0, -(stone.size.height/2))];
+        
+        
+        
         stone.zPosition = 10000;
         stone.physicsBody.affectedByGravity = NO;
         stone.physicsBody.categoryBitMask = sabotageCategory;
         stone.physicsBody.collisionBitMask = 0;
         stone.physicsBody.contactTestBitMask = 0;
+        
+        NSLog(@"stone:%f",stone.physicsBody.mass);
     
         [sabotages addObject:stone];
     
@@ -70,13 +77,16 @@
         iceWall.size = CGSizeMake(iceWall.size.width*2, iceWall.size.height*2);
 
         iceWall.position = position;
-        iceWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(iceWall.size.width-10, 1) center:CGPointMake(0, -(iceWall.size.height/2))];
+        iceWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(iceWall.size.width-10, 5) center:CGPointMake(0, -(iceWall.size.height/2))];
         iceWall.zPosition = 10000;
         iceWall.physicsBody.affectedByGravity = NO;
         iceWall.physicsBody.categoryBitMask = sabotageCategory;
         iceWall.physicsBody.collisionBitMask = 0;
         iceWall.physicsBody.contactTestBitMask = 0;
         [sabotages addObject:iceWall];
+        
+        NSLog(@"iceWall%f",iceWall.physicsBody.mass);
+        
     }
 
 }
@@ -106,7 +116,7 @@
 
 +(void)removeCollisionSabotage:(SKNode *)CollisionSabotage{
  
-    /*
+    
     for(int i = 0; i < sabotages.count; i++){
         
         if(CollisionSabotage == sabotages[i]){
@@ -121,7 +131,7 @@
             return;
         }
     }
-     */
+    
 }
 
 

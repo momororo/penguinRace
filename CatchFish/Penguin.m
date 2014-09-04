@@ -15,6 +15,8 @@ CGFloat zRotationY;
 CGFloat penguinVectorX;
 CGFloat penguinVectorY;
 
+BOOL collisionFlag;
+
 
 @implementation Penguin
 
@@ -51,12 +53,13 @@ CGFloat penguinVectorY;
     
     
     //physicsBodyの設定
-    penguin.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(penguin.size.width - 20, 1) center:CGPointMake(0, -(penguin.size.height/2))];
+    penguin.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(penguin.size.width/2, penguin.size.height) center:CGPointMake(0, -(penguin.size.height/2))];
     penguin.physicsBody.affectedByGravity = 0;
     penguin.physicsBody.categoryBitMask = penguinCategory;
     penguin.physicsBody.collisionBitMask = wallCategory;
     penguin.physicsBody.contactTestBitMask = sabotageCategory | goalRoadCategory;
     
+    NSLog(@"penguin: %f",penguin.physicsBody.mass);
 }
 
 //走るモーション設定
@@ -188,7 +191,7 @@ CGFloat penguinVectorY;
     zRotationX = sin(penguin.zRotation);
     zRotationY = cos(penguin.zRotation);
     
-    accelerate -= 40;
+    accelerate -= 50;
     
     if (accelerate < 0) {
         accelerate = 0;
@@ -197,6 +200,10 @@ CGFloat penguinVectorY;
     penguinVectorX = (accelerate * zRotationX);
     penguinVectorY = (accelerate * zRotationY);
     penguin.physicsBody.velocity = CGVectorMake(penguinVectorX, penguinVectorY);
+    
+    collisionFlag = YES;
+    
+    
     
     
     
@@ -210,7 +217,7 @@ CGFloat penguinVectorY;
     if (positionY > frameY*9/10) {
         positionY = frameY *9/10;
     }else{
-        
+      
         [penguin runAction:[SKAction moveToY:frameY - accelerate duration:0.1]];
     
     }
@@ -226,7 +233,7 @@ CGFloat penguinVectorY;
     if (positionY > frameY*9/10) {
         positionY = frameY *9/10;
     }else{
-        
+
         [penguin runAction:[SKAction moveToY:frameY - accelerate duration:0.1]];
         
     }

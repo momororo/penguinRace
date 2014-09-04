@@ -58,6 +58,9 @@
     SKLabelNode *retryButtonLiteral;
     SKSpriteNode *dummyRetryButton;
     
+    //パーティクル（スパーク）
+    SKEmitterNode *_particleSpark;
+    
     
     //ゴール用のカウント
     int goalCount;
@@ -672,6 +675,8 @@
 {
     
     
+    [self makeSparkParticle:contact.contactPoint];
+
     
     //スタートラベルがある時は処理を飛ばす
     
@@ -1352,8 +1357,22 @@
 //広告非表示
 - (void) dismissInterstitialAdSample {
     [[NADInterstitial sharedInstance] dismissAd];
+    
 }
 
+
+//スパークパーティクルの作成
+-(void)makeSparkParticle:(CGPoint)point{
+    if (_particleSpark == nil) {
+        NSString *path = [[NSBundle mainBundle]pathForResource:@"Spark" ofType:@"sks"];
+        _particleSpark = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        _particleSpark.numParticlesToEmit = 50;
+        [self addChild:_particleSpark];
+    }else{
+        [_particleSpark resetSimulation];
+    }
+    _particleSpark.position = point;
+}
 
 
 

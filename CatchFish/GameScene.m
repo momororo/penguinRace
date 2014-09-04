@@ -217,22 +217,6 @@
         
         
         
-        /*
-         
-         //障害物の作成
-         
-         SKAction *makeSabotage = [SKAction sequence:
-         
-         @[[SKAction performSelector:@selector(addSabotage) onTarget:self],
-         
-         [SKAction waitForDuration:1.5 withRange:1.0]]];
-         
-         [self runAction: [SKAction repeatActionForever:makeSabotage]];
-         
-         
-         
-         */
-        
         
         
         //ゴールのカウントの設定
@@ -323,49 +307,6 @@
     iconCell8 = [[MrdIconCell alloc]initWithFrame:frame8];
     iconCell8.titleTextColor =[UIColor blackColor];
     
-/*
-    
-    //アイコン1つめ
-    CGRect frame1 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
-    iconCell1 = [[MrdIconCell alloc]initWithFrame:frame1];
-    iconCell1.titleTextColor =[UIColor blackColor];
-    
-    //アイコン2つめ
-    CGRect frame2 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
-    iconCell2 = [[MrdIconCell alloc]initWithFrame:frame2];
-    iconCell2.titleTextColor =[UIColor blackColor];
-    
-    //アイコン3つめ
-    CGRect frame3 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
-    iconCell3 = [[MrdIconCell alloc]initWithFrame:frame3];
-    iconCell3.titleTextColor =[UIColor blackColor];
-    
-    //アイコン4つめ
-    CGRect frame4 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
-    iconCell4 = [[MrdIconCell alloc]initWithFrame:frame4];
-    iconCell4.titleTextColor =[UIColor blackColor];
-    
-    
-    //アイコン5つめ
-    CGRect frame5 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
-    iconCell5 = [[MrdIconCell alloc]initWithFrame:frame5];
-    iconCell5.titleTextColor =[UIColor blackColor];
-    
-    //アイコン6つめ
-    CGRect frame6 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
-    iconCell6 = [[MrdIconCell alloc]initWithFrame:frame6];
-    iconCell6.titleTextColor =[UIColor blackColor];
-    
-    //アイコン7つめ
-    CGRect frame7 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
-    iconCell7 = [[MrdIconCell alloc]initWithFrame:frame7];
-    iconCell7.titleTextColor =[UIColor blackColor];
-    
-    //アイコン8つめ
-    CGRect frame8 = CGRectMake(-self.frame.size.width, -self.frame.size.height,75,75);
-    iconCell8 = [[MrdIconCell alloc]initWithFrame:frame8];
-    iconCell8.titleTextColor =[UIColor blackColor];
-*/
     
     //アイコンの追加
     [iconLoader addIconCell:iconCell1];
@@ -1172,37 +1113,6 @@
     
     
     
-    
-    
-    //MARK:ペンギンのテクスチャ動作(直せたらなおす)
-    /*
-    if ([Penguin getAccelerate] == 1 || [Penguin getAccelerate] == 100) {
-     
-     [Penguin runActionSpeed:1];
-     
-     NSLog(@"SPEED:1");
-     
-     }else if ([Penguin getAccelerate] == 101 || [Penguin getAccelerate] == 249){
-     
-     [Penguin runActionSpeed:2];
-     
-     NSLog(@"SPEED:2");
-     
-     }else if ([Penguin getAccelerate] == 250){
-     
-     [Penguin runActionSpeed:3];
-     
-     NSLog(@"SPEED:3");
-     
-     }else if ([Penguin getAccelerate] == 0 ){
-         [Penguin runActionSpeed:4];
-     }
-    */
-    
-    
-    
-    
-    
     if ([Penguin getAccelerate] > 0 && [Penguin getAccelerate] <= 100 ) {
         
         
@@ -1270,96 +1180,7 @@
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    if ([Penguin getPenguin].position.y < self.frame.size.height *9 / 10 && [Penguin getPenguin].position.y > self.frame.size.height *2/3) {
-        
-        
-        if (walkFlag == YES) {
-            
-            return;
-            
-        }
-        
-        
-        
-        walkFlag = YES;
-        
-        runFlag = NO;
-        
-        fastRunFlag = NO;
-        
-        [Penguin runActionSpeed:1];
-        
-        
-        
-    }else if ([Penguin getPenguin].position.y < self.frame.size.height *2/3 && [Penguin getPenguin].position.y > self.frame.size.height/2) {
-        
-        
-        
-        if (runFlag == YES) {
-            
-            return;
-            
-        }
-        
-        
-        
-        runFlag = YES;
-        
-        walkFlag = NO;
-        
-        fastRunFlag = NO;
-        
-        [Penguin runActionSpeed:2];
-        
-        
-        
-    }else if ([Penguin getPenguin].position.y <= self.frame.size.height / 2) {
-        
-        
-        
-        if (fastRunFlag == YES) {
-            
-            return;
-            
-        }
-        
-        
-        
-        fastRunFlag = YES;
-        
-        walkFlag = NO;
-        
-        fastRunFlag = NO;
-        
-        [Penguin runActionSpeed:3];
-        
-        
-        
-    }*/
-    
+
     
     
 }

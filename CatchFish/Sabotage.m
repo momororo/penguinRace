@@ -67,7 +67,6 @@
         stone.physicsBody.collisionBitMask = 0;
         stone.physicsBody.contactTestBitMask = 0;
         
-        NSLog(@"stone:%f",stone.physicsBody.mass);
     
         [sabotages addObject:stone];
     
@@ -85,7 +84,6 @@
         iceWall.physicsBody.contactTestBitMask = 0;
         [sabotages addObject:iceWall];
         
-        NSLog(@"iceWall%f",iceWall.physicsBody.mass);
         
     }
 

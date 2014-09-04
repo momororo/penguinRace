@@ -71,11 +71,9 @@ BOOL collisionFlag;
     }else if(speed == 2){
         SKAction *runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.1];
         [penguin runAction:[SKAction repeatActionForever:runPenguin]];
-        NSLog(@"スピード2が実装！");
     }else if (speed == 3){
         SKAction *runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.05];
         [penguin runAction:[SKAction repeatActionForever:runPenguin]];
-        NSLog(@"スピード3が実装！");
     }
     
 }

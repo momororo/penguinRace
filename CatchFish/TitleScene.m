@@ -293,8 +293,6 @@ BOOL showTutorialFlag;
                 [startBt runAction:[SKAction moveToY:kstartBt.position.y duration:0]];
                 [_delegate sceneEscape:self identifier:nil];
             
-                //画面遷移を遅延実行する
-               // [self performSelector:@selector(delayStartMethod) withObject:nil afterDelay:0.1];
 
             }
     
@@ -323,9 +321,6 @@ BOOL showTutorialFlag;
             [tutorialBt runAction:[SKAction moveToY:ktutorialBt.position.y duration:0]];
             
             [self showTutorial];
-            
-            //画面遷移を遅延実行する
-            //[self performSelector:@selector(delayTutorialMethod) withObject:nil afterDelay:0.1];
             
             startFlag = NO;
             rankingFlag = NO;
@@ -358,9 +353,6 @@ BOOL showTutorialFlag;
             [self showGameCenter];
 
             
-            //画面遷移を遅延実行する
-            //[self performSelector:@selector(delayRankingMethod) withObject:nil afterDelay:0.1];
-            
             startFlag = YES;
             tutorialFlag = YES;
             
@@ -385,9 +377,6 @@ BOOL showTutorialFlag;
         if (tutorial.position.y <= CGRectGetMidY(self.frame) - 10) {
             
             [tutorial runAction:[SKAction moveToY:CGRectGetMidY(self.frame)+10 duration:0]];
-            
-            //画面遷移を遅延実行する
-            //[self performSelector:@selector(deleteTutorialMethod) withObject:nil afterDelay:0.1];
             
             //チュートリアル削除
             [tutorial removeFromParent];
@@ -486,7 +475,6 @@ BOOL showTutorialFlag;
 -(void)showAuthenticationDialogWhenReasonable:(UIViewController *)controller
 {
     [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentViewController:controller animated:YES completion:nil];
-    NSLog(@"成功");
 
 }
 
@@ -494,14 +482,12 @@ BOOL showTutorialFlag;
 -(void)authenticatedPlayer:(GKLocalPlayer *)player
 {
     player = localPlayer;
-    NSLog(@"成功");
 
 }
 
 // GameCenter認証NG
 -(void)disableGameCenter
 {
-    NSLog(@"失敗");
 }
 
 // Leader Boardの表示
@@ -511,7 +497,6 @@ BOOL showTutorialFlag;
     float score = [userDefaults integerForKey:@"score"];
     
     
-    NSLog(@"%lld",(int64_t)score);
     
     //スコアが0じゃない場合に限り送信
     if(score != 0){
@@ -525,7 +510,6 @@ BOOL showTutorialFlag;
                      *  何もせず終了
                      */
                     
-                    NSLog(@"エラーでした、、、");
                     
                 }
             }];

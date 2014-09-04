@@ -14,7 +14,7 @@
 {
     // Override point for customization after application launch.
     
-    [[NADInterstitial sharedInstance] loadAdWithApiKey:@"308c2499c75c4a192f03c02b2fcebd16dcb45cc9" spotId:@"213208"];
+    [[NADInterstitial sharedInstance] loadAdWithApiKey:@"72d0f4335d9fc46b5d44d22e87a411eee93f9b09" spotId:@"226677"];
     
     return YES;
 }

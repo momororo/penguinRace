@@ -268,8 +268,8 @@
     self.nadView.isOutputLog = NO;
     
     //setapiKey
-    [self.nadView setNendApiKey:@"a6eca9dd074372c898dd1df549301f277c53f2b9"];
-    [self.nadView setNendSpotID:@"3172"];
+    [self.nadView setNendApiKey:@"9cb335fb30407346b92feaf4bdaf930d82cfb6b2"];
+    [self.nadView setNendSpotID:@"226540"];
     [self.nadView setDelegate:self];
     [self.nadView load];
     
@@ -447,7 +447,7 @@
         
         //スタートラベルがタップされた時に行う処理
 #pragma mark スタートのカウントダウン処理
-        if ([startLabel containsPoint:location] && startCountFrag == NO) {
+        if (startCountFrag == NO) {
             
             
             startCountFrag = YES;

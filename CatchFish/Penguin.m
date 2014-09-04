@@ -101,11 +101,6 @@ CGFloat penguinVectorY;
         SKAction *runPenguin = [SKAction animateWithTextures:@[runPenguins[0],runPenguins[1]] timePerFrame:0.05];
         [penguin runAction:[SKAction repeatActionForever:runPenguin]];
         NSLog(@"スピード3が実装！");
-    }else if (speed == 4){
-        
-        penguin = [SKSpriteNode spriteNodeWithTexture:stopPenguinTexture];
-
-    
     }
     
     //NSLog(@"%f",(accelete*2/(1000+accelete)));
@@ -193,7 +188,7 @@ CGFloat penguinVectorY;
     zRotationX = sin(penguin.zRotation);
     zRotationY = cos(penguin.zRotation);
     
-    accelerate -= 50;
+    accelerate -= 40;
     
     if (accelerate < 0) {
         accelerate = 0;
